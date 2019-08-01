@@ -1,7 +1,7 @@
 package poker;
 
-import javax.swing.*;
-import java.awt.*;
+import javax.swing.UIManager;
+import java.awt.EventQueue;
 
 public class Main {
     public static void main(String[] args) {
