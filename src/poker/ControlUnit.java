@@ -4,10 +4,10 @@ import java.util.ArrayList;
 
 public class ControlUnit {
     private Baraja baraja;
-    private ArrayList barajaJugador;
+    private ArrayList<Carta> barajaJugador;
     ControlUnit(){
         baraja = new Baraja();
-        barajaJugador = baraja.getDiamonds();
+        barajaJugador = baraja.repartirBaraja();
         baraja.print(barajaJugador);
     }
 }

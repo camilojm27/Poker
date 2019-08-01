@@ -6,12 +6,14 @@ import java.util.Random;
 
 public class Baraja {
     private Carta carta;
-    private ArrayList<Carta> clubs, diamonds, hearts, spades;
+    private ArrayList<Carta> clubs, diamonds, hearts, spades, all;
     private String tipo, valor;
     private Random random;
 
 
+
     Baraja() {
+        all = new ArrayList<>();
         clubs = new ArrayList<>();
         diamonds = new ArrayList<>();
         hearts = new ArrayList<>();
@@ -47,7 +49,7 @@ public class Baraja {
                     tipo = "S";
                     spades.add(new Carta(valor, tipo));
                 }
-
+                all.add(new Carta(valor, tipo));
 
             }
 
@@ -55,19 +57,28 @@ public class Baraja {
         }
 
     }
-/*
-    public ArrayList<Carta> darBarajaJugador(){
+
+    public ArrayList<Carta> repartirBaraja(){
+        ArrayList<Carta> todos = all;
+        ArrayList<Carta> repartir = new ArrayList<>();
         random = new Random();
+        int cualCarta, tamañoFichas;
 
-        int valor = random.nextInt(5);
+
         for (int i =0; i < 5; i++){
-
+            tamañoFichas = todos.size();
+            cualCarta = random.nextInt(tamañoFichas);
+            repartir.add(todos.get(cualCarta));
+            todos.remove(cualCarta);
         }
+        return repartir;
     }
-*/
+
     public void print(ArrayList<Carta> arrayList) {
-        for (int i = 0; i < arrayList.size(); i++) {
-            System.out.println(arrayList.get(i).getImagen());
+        int f =1;
+        for (Carta value : arrayList) {
+            System.out.println(value.getImagen() + f);
+            f++;
         }
     }
 
@@ -86,6 +97,9 @@ public class Baraja {
 
     public ArrayList<Carta> getClubs() {
         return clubs;
+    }
+    public ArrayList<Carta> getAll() {
+        return all;
     }
 
 }
