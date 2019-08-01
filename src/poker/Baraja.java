@@ -5,12 +5,14 @@ import java.util.Random;
 
 
 public class Baraja {
-    private Carta carta;
+    private static Carta carta;
     private ArrayList<Carta> clubs, diamonds, hearts, spades, all;
     private String tipo, valor;
     private Random random;
 
+    public enum Royal{
 
+    }
 
     Baraja() {
         all = new ArrayList<>();
@@ -23,13 +25,13 @@ public class Baraja {
 
             if (carta >= 11) {
                 if (carta == 11) {
-                    valor = "A";
-                } else if (carta == 12) {
                     valor = "J";
+                } else if (carta == 12) {
+                    valor = "Q";
                 } else if (carta == 13) {
                     valor = "K";
                 } else if (carta == 14) {
-                    valor = "Q";
+                    valor = "A";
                 }
             } else {
                 valor = String.valueOf(carta);
@@ -77,7 +79,7 @@ public class Baraja {
     public void print(ArrayList<Carta> arrayList) {
         int f =1;
         for (Carta value : arrayList) {
-            System.out.println(value.getImagen() + f);
+            System.out.println(value.getImagen() + " " + f);
             f++;
         }
     }
