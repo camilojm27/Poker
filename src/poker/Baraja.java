@@ -1,24 +1,17 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.Random;
 
 
 public class Baraja {
     private Carta carta;
-    private ArrayList<Carta> clubs;
-    private ArrayList<Carta> diamonds;
-    private ArrayList<Carta> hearts;
-    private ArrayList<Carta> spades;
-
-    public ArrayList<Carta> getClubs() {
-        return clubs;
-    }
-
-    private String tipo;
+    private ArrayList<Carta> clubs, diamonds, hearts, spades;
+    private String tipo, valor;
+    private Random random;
 
 
     Baraja() {
-
         clubs = new ArrayList<>();
         diamonds = new ArrayList<>();
         hearts = new ArrayList<>();
@@ -28,31 +21,31 @@ public class Baraja {
 
             if (carta >= 11) {
                 if (carta == 11) {
-                    tipo = "A";
+                    valor = "A";
                 } else if (carta == 12) {
-                    tipo = "J";
+                    valor = "J";
                 } else if (carta == 13) {
-                    tipo = "K";
+                    valor = "K";
                 } else if (carta == 14) {
-                    tipo = "Q";
+                    valor = "Q";
                 }
             } else {
-                tipo = String.valueOf(carta);
+                valor = String.valueOf(carta);
             }
 
             for (int type = 0; type < 4; type++) {
                 if (type == 0) {
                     tipo = "C";
-                    clubs.add(new Carta(tipo, tipo));
+                    clubs.add(new Carta(valor, tipo));
                 } else if (type == 1) {
                     tipo = "D";
-                    diamonds.add(new Carta(tipo, tipo));
+                    diamonds.add(new Carta(valor, tipo));
                 } else if (type == 2) {
                     tipo = "H";
-                    hearts.add(new Carta(tipo, tipo));
+                    hearts.add(new Carta(valor, tipo));
                 } else if (type == 3) {
                     tipo = "S";
-                    spades.add(new Carta(tipo, tipo));
+                    spades.add(new Carta(valor, tipo));
                 }
 
 
@@ -62,11 +55,37 @@ public class Baraja {
         }
 
     }
+/*
+    public ArrayList<Carta> darBarajaJugador(){
+        random = new Random();
 
+        int valor = random.nextInt(5);
+        for (int i =0; i < 5; i++){
+
+        }
+    }
+*/
     public void print(ArrayList<Carta> arrayList) {
-        for (int i=0; i < arrayList.size(); i++){
+        for (int i = 0; i < arrayList.size(); i++) {
             System.out.println(arrayList.get(i).getImagen());
         }
+    }
+
+    //Getters
+    public ArrayList<Carta> getDiamonds() {
+        return diamonds;
+    }
+
+    public ArrayList<Carta> getHearts() {
+        return hearts;
+    }
+
+    public ArrayList<Carta> getSpades() {
+        return spades;
+    }
+
+    public ArrayList<Carta> getClubs() {
+        return clubs;
     }
 
 }

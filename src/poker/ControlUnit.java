@@ -7,7 +7,7 @@ public class ControlUnit {
     private ArrayList barajaJugador;
     ControlUnit(){
         baraja = new Baraja();
-        barajaJugador = baraja.getClubs();
+        barajaJugador = baraja.getDiamonds();
         baraja.print(barajaJugador);
     }
 }
