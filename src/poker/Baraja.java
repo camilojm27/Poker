@@ -5,10 +5,10 @@ import java.util.Random;
 
 
 public class Baraja {
-    private static Carta carta;
-    private ArrayList<Carta> clubs, diamonds, hearts, spades, all;
+    private ArrayList<Carta> clubs, diamonds, hearts, spades, repartir, all;
     private String tipo, valor;
     private Random random;
+
 
     public enum Royal{
 
@@ -62,7 +62,7 @@ public class Baraja {
 
     public ArrayList<Carta> repartirBaraja(){
         ArrayList<Carta> todos = all;
-        ArrayList<Carta> repartir = new ArrayList<>();
+        repartir = new ArrayList<>();
         random = new Random();
         int cualCarta, tamañoFichas;
 
