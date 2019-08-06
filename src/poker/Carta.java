@@ -9,18 +9,14 @@ public class Carta {
     private boolean turned = true;
 
 
-    Carta(String id, String baraja, boolean turned){
+    Carta(String id, String baraja){
         this.id = id;
         this.tipo = baraja;
         this.turned = turned;
 
-        if(turned == true){
 
-            imagen = "imagenes/BK.png";
 
-        }
-
-        imagen = id + tipo + ".png";
+        imagen = "imagenes/" + id + tipo + ".png";
     }
 
     public String getId() {
