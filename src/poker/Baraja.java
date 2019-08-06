@@ -10,11 +10,9 @@ public class Baraja {
     private Random random;
 
 
-    public enum Royal{
 
-    }
 
-    Baraja() {
+            Baraja() {
         all = new ArrayList<>();
         clubs = new ArrayList<>();
         diamonds = new ArrayList<>();
@@ -83,6 +81,8 @@ public class Baraja {
             f++;
         }
     }
+
+
 
     //Getters
     public ArrayList<Carta> getDiamonds() {
