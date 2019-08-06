@@ -1,8 +1,9 @@
 package poker;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
-public class ControlUnit {
+public class ControlUnit  {
     private Baraja baraja;
     private ArrayList<Carta> barajaPc;
     private ArrayList<Carta> barajaJugador;
@@ -16,7 +17,8 @@ public class ControlUnit {
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
-
+        ranking(baraja.getClubs());
+        ranking(barajaJugador);
 
     }
 
@@ -35,7 +37,16 @@ public class ControlUnit {
             & cartas.toString().contains("Q") & cartas.toString().contains("K") & cartas.toString().contains("A")){
                 return 10;
             }else{
+                for (Carta carta : mano) {
 
+                    System.out.println(carta.getId());
+                }
+                System.out.println("-----------------");
+                Collections.sort(mano);
+                for (Carta carta : mano) {
+
+                    System.out.println(carta.getId());
+                }
             }
 
         }
@@ -43,9 +54,14 @@ public class ControlUnit {
     }
     private boolean sameType(ArrayList<Carta> mano){
         boolean same = false;
+        int sameValue = 0; //Si el valor da el tamaño del array -1 todas son iguales
         for (int i =0; i < mano.size()-1 ; i++){
-            same = mano.get(i).getTipo() == mano.get(i + 1).getTipo();
+            if (mano.get(i).getTipo() == mano.get(i + 1).getTipo())
+                sameValue++;
+
         }
+        if (sameValue == mano.size()-1)
+            same = true;
         return  same;
     }
 
