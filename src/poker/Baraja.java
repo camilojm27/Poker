@@ -5,14 +5,14 @@ import java.util.Random;
 
 
 public class Baraja {
+    private Escaleras escaleras;
     private ArrayList<Carta> clubs, diamonds, hearts, spades, repartir, all;
     private String tipo, valor;
     private Random random;
 
 
-
-
-            Baraja() {
+    Baraja() {
+        escaleras = new Escaleras();
         all = new ArrayList<>();
         clubs = new ArrayList<>();
         diamonds = new ArrayList<>();
@@ -58,14 +58,14 @@ public class Baraja {
 
     }
 
-    public ArrayList<Carta> repartirBaraja(){
+    public ArrayList<Carta> repartirBaraja() {
         ArrayList<Carta> todos = all;
         repartir = new ArrayList<>();
         random = new Random();
         int cualCarta, tamañoFichas;
 
 
-        for (int i =0; i < 5; i++){
+        for (int i = 0; i < 5; i++) {
             tamañoFichas = todos.size();
             cualCarta = random.nextInt(tamañoFichas);
             repartir.add(todos.get(cualCarta));
@@ -75,13 +75,14 @@ public class Baraja {
     }
 
     public void print(ArrayList<Carta> arrayList) {
-        int f =1;
+        int f = 1;
+        System.out.println("-----Imprimiendo Baraja------");
         for (Carta value : arrayList) {
             System.out.println(value.getImagen() + " " + f);
             f++;
         }
+        System.out.println("-----------------");
     }
-
 
 
     //Getters
@@ -100,6 +101,7 @@ public class Baraja {
     public ArrayList<Carta> getClubs() {
         return clubs;
     }
+
     public ArrayList<Carta> getAll() {
         return all;
     }
