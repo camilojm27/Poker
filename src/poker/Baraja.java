@@ -5,14 +5,16 @@ import java.util.Random;
 
 
 public class Baraja {
-    private Escaleras escaleras;
     private ArrayList<Carta> clubs, diamonds, hearts, spades, repartir, all;
     private String tipo, valor;
     private Random random;
 
 
+    public enum Royal{
+
+    }
+
     Baraja() {
-        escaleras = new Escaleras();
         all = new ArrayList<>();
         clubs = new ArrayList<>();
         diamonds = new ArrayList<>();
@@ -38,18 +40,18 @@ public class Baraja {
             for (int type = 0; type < 4; type++) {
                 if (type == 0) {
                     tipo = "C";
-                    clubs.add(new Carta(valor, tipo));
+                    clubs.add(new Carta(valor, tipo,false));
                 } else if (type == 1) {
                     tipo = "D";
-                    diamonds.add(new Carta(valor, tipo));
+                    diamonds.add(new Carta(valor, tipo,false));
                 } else if (type == 2) {
                     tipo = "H";
-                    hearts.add(new Carta(valor, tipo));
+                    hearts.add(new Carta(valor, tipo,false));
                 } else if (type == 3) {
                     tipo = "S";
-                    spades.add(new Carta(valor, tipo));
+                    spades.add(new Carta(valor, tipo,false));
                 }
-                all.add(new Carta(valor, tipo));
+                all.add(new Carta(valor, tipo,false));
 
             }
 
@@ -58,16 +60,16 @@ public class Baraja {
 
     }
 
-    public ArrayList<Carta> repartirBaraja() {
+    public ArrayList<Carta> repartirBaraja(){
         ArrayList<Carta> todos = all;
         repartir = new ArrayList<>();
         random = new Random();
-        int cualCarta, tamaÃ±oFichas;
+        int cualCarta, tamañoFichas;
 
 
-        for (int i = 0; i < 5; i++) {
-            tamaÃ±oFichas = todos.size();
-            cualCarta = random.nextInt(tamaÃ±oFichas);
+        for (int i =0; i < 5; i++){
+            tamañoFichas = todos.size();
+            cualCarta = random.nextInt(tamañoFichas);
             repartir.add(todos.get(cualCarta));
             todos.remove(cualCarta);
         }
@@ -75,15 +77,12 @@ public class Baraja {
     }
 
     public void print(ArrayList<Carta> arrayList) {
-        int f = 1;
-        System.out.println("-----Imprimiendo Baraja------");
+        int f =1;
         for (Carta value : arrayList) {
             System.out.println(value.getImagen() + " " + f);
             f++;
         }
-        System.out.println("-----------------");
     }
-
 
     //Getters
     public ArrayList<Carta> getDiamonds() {
@@ -101,7 +100,6 @@ public class Baraja {
     public ArrayList<Carta> getClubs() {
         return clubs;
     }
-
     public ArrayList<Carta> getAll() {
         return all;
     }
