@@ -44,13 +44,13 @@ public class ControlUnit {
             }
         }
         else {
-              if (fourOfaKind(mano)){
+            if (fourOfaKind(mano)){
                 System.out.println("FOUR_OF_A_KIND");
                 return 8;
             }
-              else if (fullHouse(mano)){
-                  System.out.println("FULL_HOUSE");
-              }
+            else if (fullHouse(mano)){
+                System.out.println("FULL_HOUSE");
+            }
         }
 
         return 0;
