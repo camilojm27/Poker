@@ -18,6 +18,7 @@ public class GUIPrincipal extends JFrame {
 	public static ControlUnit controlUnit;
     private PanelCentral panelCentral;
     private PanelLateral panelLateral;
+    public static MenuInicio menuInicio;
     private JButton boton;
     
     
@@ -25,6 +26,7 @@ public class GUIPrincipal extends JFrame {
     	tamañoJuego = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
         panelCentral = new PanelCentral();
+        menuInicio = new MenuInicio();
         panelLateral = new PanelLateral();
         
         barajaPc = controlUnit.getBarajaPc();
@@ -45,27 +47,39 @@ public class GUIPrincipal extends JFrame {
         
         
     }
-
-    private void initGUI() {
-    	add(panelCentral,BorderLayout.CENTER);
-    	add(panelLateral,BorderLayout.WEST);
-    	
-    	panelCentral.addButton();
-    	panelCentral.updateUI();
-    	
-    	panelLateral.updateUI();
-    	
-    	
-    	
-    	boton = new JButton("Sup");
-    	
-    	panelLateral.add(boton);
-    	
-    	
+    
+    private void startMenu() {
+    	add(menuInicio);
+    	menuInicio.setVisible(true);
+    	menuInicio.addButton();
+    	menuInicio.updateUI();
     	
     	
     }
+    
+  
+	public void startGame() {
+		
+		add(panelCentral,BorderLayout.CENTER);
+	    add(panelLateral,BorderLayout.WEST);
+	    	
+	    panelCentral.addButton();
+	    panelCentral.updateUI();
+	    panelLateral.updateUI();
+	    	
+	    boton = new JButton("Sup");
+	    	
+	    panelLateral.add(boton);
+			
+    }
 
+	private void initGUI() {
+
+		startMenu();
+		//startGame();
+		
+    }
+	
 	public ArrayList<Carta> getBarajaPc() {
 		return barajaPc;
 	}

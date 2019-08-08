@@ -32,11 +32,11 @@ public class PanelCentral extends JPanel {
 		JButton b2 = new JButton();
 		
 		Dimension size = b1.getPreferredSize();
-		b1.setBounds(0 + insets.left, 0 + insets.top,120,180);
+		b1.setBounds(0 + insets.left, 700-190 + insets.top,120,180);
 		b1.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
 		
 		size = b2.getPreferredSize();
-		b2.setBounds(0+120+10 + insets.left, 0 + insets.top,
+		b2.setBounds(0+120 + insets.left, 700-190 + insets.top,
 		             120,180);
 		b2.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
 		
