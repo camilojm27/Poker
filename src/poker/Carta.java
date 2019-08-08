@@ -1,11 +1,11 @@
 package poker;
 
-
+import javax.swing.ImageIcon;
 
 public class Carta implements Comparable{
     private String id;
     private String tipo;
-    private String imagen;
+    private ImageIcon imagen;
     private boolean turned = true;
     private int idValue;
 
@@ -17,7 +17,7 @@ public class Carta implements Comparable{
         this.idValue= getIdValue();
 
 
-        imagen = "imagenes/" + id + tipo + ".png";
+        imagen = new ImageIcon("src/imagenes/" + id + tipo + ".png");
     }
 
     public String getId() {
@@ -38,7 +38,7 @@ public class Carta implements Comparable{
         return tipo;
     }
 
-    public String getImagen() {
+    public ImageIcon getImagen() {
         return imagen;
     }
 
