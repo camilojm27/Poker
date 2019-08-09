@@ -5,8 +5,8 @@ import java.util.Collections;
 
 public class ControlUnit {
     private Baraja baraja;
-    private ArrayList<Carta> barajaPc;
-    private ArrayList<Carta> barajaJugador;
+    public ArrayList<Carta> barajaPc;
+    public ArrayList<Carta> barajaJugador;
 
 
     ControlUnit() {
@@ -16,16 +16,27 @@ public class ControlUnit {
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
-        ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
+        
+    }
+
+    public ArrayList<Carta> getBarajaPc() {
+		return barajaPc;
+	}
+
+	public ArrayList<Carta> getBarajaJugador() {
+		return barajaJugador;
+	}
+	
+	public void compararJugadas() {
+		
+		ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
         ranking(Escaleras.FLUSH_STRAIGHT);
         ranking(Escaleras.FOUR_OF_A_KIND);
         ranking(Escaleras.FULL_HOUSE);
         ranking(barajaJugador);
+	}
 
-
-    }
-
-    public int ranking(ArrayList<Carta> mano) {
+	public int ranking(ArrayList<Carta> mano) {
         boolean sameType;
         //Comprueba si es del mismo tipo
         sameType = sameType(mano);
