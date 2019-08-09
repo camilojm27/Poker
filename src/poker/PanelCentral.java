@@ -26,7 +26,8 @@ public class PanelCentral extends JPanel {
 
 	public void turnCards(String who){
 	    if(who.equals("player")){
-	        c1Ju.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
+	        c1Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+	        c2Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
         }
     }
 

@@ -3,9 +3,7 @@ package poker;
 import java.awt.*;
 import java.util.ArrayList;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.SwingUtilities;
+import javax.swing.*;
 
 //import com.sun.glass.ui.Window;
 
@@ -70,6 +68,10 @@ public class GUIPrincipal extends JFrame {
 
 	    panelCentral.addCartasComunitarias();
         panelCentral.addCartasJugador();
+
+        JOptionPane.showMessageDialog(null, "First Round Starts");
+
+        panelCentral.turnCards("player");
 
 			
     }
