@@ -13,8 +13,8 @@ public class Main {
 
         EventQueue.invokeLater(new Runnable() {public void run() {
 
-            GUIPrincipal myWindow =
-                    new GUIPrincipal();
+            MenuInicio myWindow =
+                    new MenuInicio();
 
         }});
 
