@@ -55,11 +55,10 @@ public class GUIPrincipal extends JFrame {
 	    panelCentral.addCartas();
 	    panelCentral.addFichas();
 	    panelCentral.updateUI();
+	    panelLateral.addButtons();
 	    panelLateral.updateUI();
-	    	
-	    boton = new JButton("Sup");
-	    	
-	    panelLateral.add(boton);
+
+
 			
     }
 

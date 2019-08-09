@@ -19,21 +19,41 @@ public class PanelLateral extends JPanel  {
     private boolean gano, perdio, rendirse;
     private ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/leftPanel.png"));
     private  JPanel lateralPane = this;
-    private  ImageIcon plusButton;    
+    private  ImageIcon plusButton;
+    private JButton giveup;
     private EscuchaRestantes escuchaRestantes = new EscuchaRestantes();
+
+
     public PanelLateral(){
 
+        this.setLayout(null);
         this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(200,1000));
         plusButton = new ImageIcon("src/imagenes/plus2.png");
         lateralPane.addMouseListener(escuchaRestantes);
     }
-    
+
+    public void addButtons(){
+
+        giveup = new JButton("RETIRARSE");
+
+        Insets insets = this.getInsets();
+
+        Dimension size = giveup.getPreferredSize();
+        giveup.setBounds(40+ insets.left, 600 + insets.top, 120,40);
+        // giveup.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
+
+
+        this.add(giveup);
+    }
+
+
+
     public void paintComponent(Graphics g){
         super.paintComponent(g);
-        
+
         Dimension height = getSize();
-    	g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+        g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
         g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
         g.setColor(Color.WHITE);
         g.drawString(computadorUP, 50, 60);
@@ -54,7 +74,7 @@ public class PanelLateral extends JPanel  {
         public void mousePressed(MouseEvent e) {
 
         }
-        
+
         @Override
         public void mouseReleased(MouseEvent e) {
 
@@ -70,13 +90,13 @@ public class PanelLateral extends JPanel  {
 
         }
     }
-    
-   
-    
-  
-    	
-    	 
-    	
-    	
+
+
+
+
+
+
+
+
 
 }

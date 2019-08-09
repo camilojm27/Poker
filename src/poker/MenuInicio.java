@@ -21,7 +21,7 @@ public class MenuInicio extends JFrame {
 	MenuInicio(){
 
 		panelInicio = new PanelInicio();
-		setResizable(true);
+		setResizable(false);
 		setTitle("Bienvenido Al Poker");
 		setSize(300, 500);
 		setLocationRelativeTo(null);
@@ -53,11 +53,10 @@ public class MenuInicio extends JFrame {
 			b2 = new JButton("EXIT");
 
 			Dimension size = b1.getPreferredSize();
-			b1.setBounds(500 + insets.left, 260  + insets.top,200,100);
+			b1.setBounds(100 + insets.left, 150  + insets.top,100,50);
 
 			size = b2.getPreferredSize();
-			b2.setBounds(500 + insets.left, 380 + insets.top,
-					200,100);
+			b2.setBounds(100 + insets.left, 350 + insets.top, 100,50);
 
 			this.add(b1);
 			this.add(b2);
