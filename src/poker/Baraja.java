@@ -62,12 +62,12 @@ public class Baraja {
         ArrayList<Carta> todos = all;
         repartir = new ArrayList<>();
         random = new Random();
-        int cualCarta, tamañoFichas;
+        int cualCarta, sizeFichas;
 
 
         for (int i = 0; i < 5; i++) {
-            tamañoFichas = todos.size();
-            cualCarta = random.nextInt(tamañoFichas);
+            sizeFichas = todos.size();
+            cualCarta = random.nextInt(sizeFichas);
             repartir.add(todos.get(cualCarta));
             todos.remove(cualCarta);
         }

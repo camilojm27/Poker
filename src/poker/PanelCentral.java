@@ -4,13 +4,10 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Insets;
-import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 
@@ -25,7 +22,7 @@ public class PanelCentral extends JPanel {
 		
 		this.setLayout(null);
 		this.setBackground(Color.lightGray);
-		this.setPreferredSize(GUIPrincipal.tamañoJuego);
+		this.setPreferredSize(GUIPrincipal.sizeGame);
 	
 	}
 	

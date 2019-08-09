@@ -2,14 +2,13 @@ package poker;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.Insets;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
-import com.sun.glass.ui.Window;
+//import com.sun.glass.ui.Window;
 
 
 public class GUIPrincipal extends JFrame {
@@ -17,7 +16,7 @@ public class GUIPrincipal extends JFrame {
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador;
     
-    public static Dimension tamañoJuego;
+    public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
     private PanelCentral panelCentral;
     private PanelLateral panelLateral;
@@ -27,7 +26,7 @@ public class GUIPrincipal extends JFrame {
     
     GUIPrincipal(){
     	
-    	tamañoJuego = new Dimension(1200,720);
+    	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
         panelCentral = new PanelCentral();
         menuInicio = new MenuInicio();
@@ -42,7 +41,7 @@ public class GUIPrincipal extends JFrame {
         setTitle("Poker");
         setResizable(false);
         //pack();
-        setSize(tamañoJuego);
+        setSize(sizeGame);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

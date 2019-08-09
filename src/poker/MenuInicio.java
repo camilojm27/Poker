@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import com.sun.glass.ui.Window;
+//import com.sun.glass.ui.Window;
 
 
 
@@ -27,7 +27,7 @@ public class MenuInicio extends JPanel {
 		
 		this.setLayout(null);
 		this.setBackground(Color.lightGray);
-		this.setPreferredSize(GUIPrincipal.tamañoJuego);
+		this.setPreferredSize(GUIPrincipal.sizeGame);
 	
 	}
 	
