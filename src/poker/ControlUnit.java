@@ -7,15 +7,19 @@ public class ControlUnit {
     private Baraja baraja;
     public ArrayList<Carta> barajaPc;
     public ArrayList<Carta> barajaJugador;
+    public ArrayList<Carta> cartasComunitarias;
 
 
     ControlUnit() {
         baraja = new Baraja();
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
+        cartasComunitarias = baraja.repartirCartasComunitarias();
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
+        System.out.println("      ");
+        baraja.print(cartasComunitarias);
         
     }
 
@@ -26,6 +30,8 @@ public class ControlUnit {
 	public ArrayList<Carta> getBarajaJugador() {
 		return barajaJugador;
 	}
+
+	public ArrayList<Carta> getCartasComunitarias(){return cartasComunitarias;}
 	
 	public void compararJugadas() {
 		

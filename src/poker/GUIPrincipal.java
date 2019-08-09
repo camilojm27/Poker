@@ -1,7 +1,6 @@
 package poker;
 
-import java.awt.BorderLayout;
-import java.awt.Dimension;
+import java.awt.*;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -15,16 +14,19 @@ public class GUIPrincipal extends JFrame {
 	
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador;
+    private static ArrayList<Carta> cartasComunitarias;
     
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
     private PanelCentral panelCentral;
     private PanelLateral panelLateral;
     private JButton boton;
+    public static Window vprincipal;
     
     
     GUIPrincipal(){
-    	
+
+        vprincipal = this;
     	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
         panelCentral = new PanelCentral();
@@ -48,16 +50,26 @@ public class GUIPrincipal extends JFrame {
 
    
 	public void startGame() {
-		
+
+		/////////////////////////////////////////
+        //ADD PANELES
 		add(panelCentral,BorderLayout.CENTER);
 	    add(panelLateral,BorderLayout.WEST);
-	    	
-	    panelCentral.addCartas();
-	    panelCentral.addFichas();
-	    panelCentral.updateUI();
-	    panelLateral.addButtons();
-	    panelLateral.updateUI();
 
+	    ////////////////////////////////////////
+        //ADD GRAFICAL INTERFASE
+	    panelCentral.addFichas();
+        panelCentral.addButtons();
+        panelLateral.addButtons();
+
+        panelCentral.updateUI();
+        panelLateral.updateUI();
+
+        ////////////////////////////////////////
+        //REPARTICION DE CARTAS
+
+	    panelCentral.addCartasComunitarias();
+        panelCentral.addCartasJugador();
 
 			
     }

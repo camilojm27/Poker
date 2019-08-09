@@ -50,13 +50,13 @@ public class MenuInicio extends JFrame {
 			Insets insets = this.getInsets();
 
 			b1 = new JButton("START GAME");
-			b2 = new JButton("EXIT");
+			b2 = new JButton("EXIT GAME");
 
 			Dimension size = b1.getPreferredSize();
-			b1.setBounds(100 + insets.left, 150  + insets.top,100,50);
+			b1.setBounds(50 + insets.left, 150  + insets.top,200,50);
 
 			size = b2.getPreferredSize();
-			b2.setBounds(100 + insets.left, 350 + insets.top, 100,50);
+			b2.setBounds(50 + insets.left, 350 + insets.top, 200,50);
 
 			this.add(b1);
 			this.add(b2);
@@ -86,14 +86,16 @@ public class MenuInicio extends JFrame {
 
 				if(arg0.getSource() == b1) {
 
-					JOptionPane.showMessageDialog(null, "Clicked START");
+
 					window.dispose();
+					JOptionPane.showMessageDialog(null, "WELCOME");
+
 					guiPrincipal = new GUIPrincipal();
 				}
 
 				if(arg0.getSource() == b2) {
 
-					JOptionPane.showMessageDialog(null, "Clicked EXIT");
+					JOptionPane.showMessageDialog(null, "Bye bye");
 					window.dispose();
 
 				}

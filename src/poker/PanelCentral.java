@@ -13,10 +13,8 @@ import javax.swing.JPanel;
 
 public class PanelCentral extends JPanel {
 
-	private ArrayList<Carta> barajaPc;
-	private ArrayList<Carta> barajaJugador = GUIPrincipal.getBarajaJugador();
-	private int c1x, c2x, c1y, c2y;
-	private JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc, pasar,apostar,igualar;
+	private int c1x, c2x, c1y, c2y,ccx,ccy;
+	private JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc, pasar,apostar,igualar, cc1, cc2,cc3,cc4,cc5;
 
 	PanelCentral(){
 
@@ -26,58 +24,106 @@ public class PanelCentral extends JPanel {
 
 	}
 
-	public void addCartas() {
+	public void turnCards(String who){
+	    if(who.equals("player")){
+	        c1Ju.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
+        }
+    }
+
+	public void addCartasJugador() {
 
 		c1x = 180;
 		c1y = 495;
-
+		////////////////////////////////////////
 		c2x= 545;
 		c2y = 15;
-
+        ///////////////////////////////////////
 		Insets insets = this.getInsets();
 
 		c1Ju = new JButton();
-		c1Pc = new JButton();
-
 		Dimension size = c1Ju.getPreferredSize();
 		c1Ju.setBounds(c1x + insets.left, c1y + insets.top,120,180);
 		c1Ju.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
-
-		size = c1Pc.getPreferredSize();
-		c1Pc.setBounds(c2x + insets.left, c2y + insets.top,
-				120,180);
-		c1Pc.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
-
-		this.add(c1Ju);
-		this.add(c1Pc);
-
-		pasar = new JButton("PASAR");
-		apostar = new JButton("SUBIR");
-		igualar = new JButton("IGUALAR");
-
-		size = pasar.getPreferredSize();
-		pasar.setBounds(490+ insets.left, 640 + insets.top, 100,40);
-		// jugar .setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
-
-		size = apostar.getPreferredSize();
-		apostar.setBounds(490 + insets.left,  590 + insets.top,100,40);
-		//apostar.setIcon(new ImageIcon(getClass().getResource("/imagenes/bill.png")));
-
-
-
-		size = igualar.getPreferredSize();
-		igualar.setBounds(490 + insets.left,  540 + insets.top,100,40);
-		//  apostar.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
-
-		pasar.setBackground(Color.white);
-		igualar.setBackground(Color.white);
-		apostar.setBackground(Color.WHITE);
-
-		this.add(pasar);
-		this.add(apostar);
-		this.add(igualar);
-
+        this.add(c1Ju);
+		///////////////////////////////////////////////////////////////////////////////////
+        c2Ju = new JButton();
+		size = c2Ju.getPreferredSize();
+        c2Ju.setBounds(c2x + insets.left, c2y + insets.top, 120,180);
+        c2Ju.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
+		this.add(c2Ju);
+		///////////////////////////////////////////////////////////////////////////////////
 	}
+
+	public void addCartasComunitarias(){
+
+	    int cas = 125;
+        ccx = 180;
+        ccy = 250;
+        //////////////////////////////////
+        Insets insets = this.getInsets();
+        cc1 = new JButton();
+        Dimension size = cc1.getPreferredSize();
+        cc1.setBounds(ccx + insets.left, ccy + insets.top,120,180);
+        cc1.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(0).getImagen());
+        this.add(cc1);
+        //////////////////////////////////////////////////////////////////////////////////
+        cc2 = new JButton();
+        size = cc2.getPreferredSize();
+        cc2.setBounds(ccx+cas + insets.left, ccy + insets.top,120,180);
+        cc2.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(1).getImagen());
+        this.add(cc2);
+        ///////////////////////////////////////////////////////////////////////////////////
+        cc3 = new JButton();
+        size = cc3.getPreferredSize();
+        cc3.setBounds(ccx+(cas*2) + insets.left, ccy + insets.top,120,180);
+        cc3.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(2).getImagen());
+        this.add(cc3);
+        ////////////////////////////////////////////////////////////////////////////////////
+        cc4 = new JButton();
+        size = cc4.getPreferredSize();
+        cc4.setBounds(ccx+(cas*3) + insets.left, ccy + insets.top,120,180);
+        cc4.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(3).getImagen());
+        this.add(cc4);
+        /////////////////////////////////////////////////////////////////////////////////////
+        cc5 = new JButton();
+        size = cc5.getPreferredSize();
+        cc5.setBounds(ccx+(cas*4) + insets.left, ccy + insets.top,120,180);
+        cc5.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(4).getImagen());
+        this.add(cc5);
+
+    }
+
+	public void addButtons(){
+
+        Insets insets = this.getInsets();
+
+        pasar = new JButton("PASAR");
+        apostar = new JButton("SUBIR");
+        igualar = new JButton("IGUALAR");
+
+        Dimension size = pasar.getPreferredSize();
+        pasar.setBounds(490+ insets.left, 640 + insets.top, 100,40);
+        // jugar .setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
+
+        size = apostar.getPreferredSize();
+        apostar.setBounds(490 + insets.left,  590 + insets.top,100,40);
+        //apostar.setIcon(new ImageIcon(getClass().getResource("/imagenes/bill.png")));
+
+
+
+        size = igualar.getPreferredSize();
+        igualar.setBounds(490 + insets.left,  540 + insets.top,100,40);
+        //  apostar.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
+
+        pasar.setBackground(Color.white);
+        igualar.setBackground(Color.white);
+        apostar.setBackground(Color.WHITE);
+
+        this.add(pasar);
+        this.add(apostar);
+        this.add(igualar);
+
+    }
 
 	public void addFichas() {
 
@@ -98,9 +144,6 @@ public class PanelCentral extends JPanel {
 
 		this.add(fJu);
 		this.add(fPc);
-
-
-
 	}
 
 	public void paintComponent(Graphics g){

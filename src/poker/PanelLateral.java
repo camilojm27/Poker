@@ -30,7 +30,6 @@ public class PanelLateral extends JPanel  {
         this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(200,1000));
         plusButton = new ImageIcon("src/imagenes/plus2.png");
-        lateralPane.addMouseListener(escuchaRestantes);
     }
 
     public void addButtons(){
@@ -45,6 +44,8 @@ public class PanelLateral extends JPanel  {
 
 
         this.add(giveup);
+
+        giveup.addMouseListener(escuchaRestantes);
     }
 
 
@@ -65,7 +66,18 @@ public class PanelLateral extends JPanel  {
         @Override
         public void mouseClicked(MouseEvent e) {
 
-            JOptionPane.showMessageDialog(null, "Se ha agregado una nueva ficha a tu mazo");
+            int dialogButton = JOptionPane.YES_NO_OPTION;
+            int dialogResult = JOptionPane.showConfirmDialog(null,"Estas Seguro?", "QUITTING", dialogButton);
+
+            if(dialogResult == 0){
+
+                JOptionPane.showMessageDialog(null,"さようなら");
+                GUIPrincipal.vprincipal.dispose();
+            }
+
+            else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");
+
+
             lateralPane.updateUI();
 
 
