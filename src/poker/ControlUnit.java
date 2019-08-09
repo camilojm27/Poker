@@ -16,27 +16,29 @@ public class ControlUnit {
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
-        
+        compararJugadas();
+
     }
 
     public ArrayList<Carta> getBarajaPc() {
-		return barajaPc;
-	}
+        return barajaPc;
+    }
 
-	public ArrayList<Carta> getBarajaJugador() {
-		return barajaJugador;
-	}
-	
-	public void compararJugadas() {
+    public ArrayList<Carta> getBarajaJugador() {
+        return barajaJugador;
+    }
+
+    public void compararJugadas() {
 		
-		ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
+		/*ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
         ranking(Escaleras.FLUSH_STRAIGHT);
         ranking(Escaleras.FOUR_OF_A_KIND);
-        ranking(Escaleras.FULL_HOUSE);
+        ranking(Escaleras.FULL_HOUSE);*/
+        ranking(Escaleras.COLOR_FLUSH);
         ranking(barajaJugador);
-	}
+    }
 
-	public int ranking(ArrayList<Carta> mano) {
+    public int ranking(ArrayList<Carta> mano) {
         boolean sameType;
         //Comprueba si es del mismo tipo
         sameType = sameType(mano);
@@ -49,22 +51,56 @@ public class ControlUnit {
                 System.out.println("ROYAL_FLUSH_STRAIGHT");
                 return 10;
                 //Comprueba si hay FLUSH_STRAIGHT
-            } else if (flushStraight(mano)){
+            } else if (flushStraight(mano)) {
                 System.out.println("FLUSH_STRAIGHT");
                 return 9;
+            } else if (colorFlush(mano)) {
+                System.out.println("COLOR_FLUSH");
+                return 7;
             }
-        }
-        else {
-            if (fourOfaKind(mano)){
+        } else {
+            if (fourOfaKind(mano)) {
                 System.out.println("FOUR_OF_A_KIND");
                 return 8;
-            }
-            else if (fullHouse(mano)){
+            } else if (fullHouse(mano)) {
                 System.out.println("FULL_HOUSE");
             }
+            else if (escaleraStraight(mano)){
+                System.out.println("ESCALERA_STRAIGHT");
+            }
+            else if (threeOfaKind(mano)){
+
+            }
+
         }
 
         return 0;
+    }
+
+    private boolean threeOfaKind(ArrayList<Carta> mano) {
+        Collections.sort(mano);
+        return false;
+    }
+
+    private boolean escaleraStraight(ArrayList<Carta> mano) {
+        int escaleraStraightValue = 0;
+        Collections.sort(mano);
+
+        for (int i = 0; i < mano.size() -1; i++) {
+            if (mano.get(i).getIdValue() == mano.get(i+1).getIdValue() - 1){
+                escaleraStraightValue++;
+            }
+            if (escaleraStraightValue == mano.size()-1){
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    private boolean colorFlush(ArrayList<Carta> mano) {
+        //Collections.sort(mano);
+        return true;
     }
 
     private boolean fullHouse(ArrayList<Carta> mano) {
@@ -73,19 +109,17 @@ public class ControlUnit {
         Carta threeCardsType;
         boolean threeCards = false;
 //Si las tres cartas son iguales
-        if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId()){
+        if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId()) {
             threeCards = true;
-        }
-        else if (mano.get(1).getId() == mano.get(2).getId() & mano.get(2).getId() == mano.get(3).getId()){
+        } else if (mano.get(1).getId() == mano.get(2).getId() & mano.get(2).getId() == mano.get(3).getId()) {
             threeCards = true;
-        }
-        else if (mano.get(2).getId() == mano.get(3).getId() & mano.get(3).getId() == mano.get(4).getId()) {
+        } else if (mano.get(2).getId() == mano.get(3).getId() & mano.get(3).getId() == mano.get(4).getId()) {
             threeCards = true;
         }
         //Si las tres cartas son iguales buscalas otras 2
-        if (threeCards){
+        if (threeCards) {
             for (int i = 0; i < mano.size() - 1; i++) {
-                if (mano.get(i).getId() == mano.get(i++).getId()){
+                if (mano.get(i).getId() == mano.get(i++).getId()) {
                     return true;
                 }
             }
@@ -95,20 +129,21 @@ public class ControlUnit {
     }
 
     private boolean fourOfaKind(ArrayList<Carta> mano) {
-        boolean fourOfaKind = false;
+
         Collections.sort(mano);
         if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId() &
-                mano.get(2).getId() == mano.get(3).getId() ){
-            fourOfaKind = true;
+                mano.get(2).getId() == mano.get(3).getId()) {
+
             System.out.println("FOUR_OF_A_KIND - Primera");
+            return true;
         }
         else if (mano.get(1).getId() == mano.get(2).getId() & mano.get(2).getId() == mano.get(3).getId() &
-                mano.get(3).getId() == mano.get(4).getId()){
-            fourOfaKind = true;
+                mano.get(3).getId() == mano.get(4).getId()) {
             System.out.println("FOUR_OF_A_KIND - Segunda");
+            return true;
         }
 
-        return fourOfaKind;
+        return false;
     }
 
     private boolean royalFlushStraight(ArrayList<Carta> mano) {
@@ -124,7 +159,6 @@ public class ControlUnit {
     }
 
     private boolean flushStraight(ArrayList<Carta> mano) {
-        boolean flushStraight = false;
         int flushStraightValue = 0;
 
         Collections.sort(mano);
@@ -133,8 +167,9 @@ public class ControlUnit {
                 flushStraightValue++;
         }
         if (flushStraightValue == mano.size() - 1)
-            flushStraight = true;
-        return flushStraight;
+            return true;
+
+        return false;
     }
 
     private boolean sameType(ArrayList<Carta> mano) {
