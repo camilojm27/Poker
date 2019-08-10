@@ -11,6 +11,7 @@ public class ControlUnit {
 
 
     ControlUnit() {
+    	Jugador jugador = new Jugador();
         baraja = new Baraja();
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
@@ -20,10 +21,10 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-
         compararJugadas();
 
     }
+    
 
     public ArrayList<Carta> getBarajaPc() {
         return barajaPc;
@@ -41,8 +42,8 @@ public class ControlUnit {
         ranking(Escaleras.FLUSH_STRAIGHT);
         ranking(Escaleras.FOUR_OF_A_KIND);
         ranking(Escaleras.FULL_HOUSE);*/
-        ranking(Escaleras.COLOR_FLUSH);
-        ranking(barajaJugador);
+       // ranking(Escaleras.COLOR_FLUSH);
+       // ranking(barajaJugador);
     }
 
     public int ranking(ArrayList<Carta> mano) {

@@ -16,7 +16,7 @@ public class GUIPrincipal extends JFrame {
     
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
-    private PanelCentral panelCentral;
+    private static PanelCentral panelCentral;
     private PanelLateral panelLateral;
     private JButton boton;
     public static Window vprincipal;
@@ -27,7 +27,7 @@ public class GUIPrincipal extends JFrame {
         vprincipal = this;
     	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
-        panelCentral = new PanelCentral();
+        setPanelCentral(new PanelCentral());
         panelLateral = new PanelLateral();
         
         barajaPc = controlUnit.getBarajaPc();
@@ -51,38 +51,42 @@ public class GUIPrincipal extends JFrame {
 
 		/////////////////////////////////////////
         //ADD PANELES
-		add(panelCentral,BorderLayout.CENTER);
+		add(getPanelCentral(),BorderLayout.CENTER);
 	    add(panelLateral,BorderLayout.WEST);
 
 	    ////////////////////////////////////////
         //ADD GRAFICAL INTERFASE
-	    panelCentral.addFichas();
-        panelCentral.addButtons();
+	    getPanelCentral().addFichas();
+        getPanelCentral().addButtons();
         panelLateral.addButtons();
 
-        panelCentral.updateUI();
+        getPanelCentral().updateUI();
         panelLateral.updateUI();
 
         ////////////////////////////////////////
         //REPARTICION DE CARTAS
-
-	    panelCentral.addCartasComunitarias();
-        panelCentral.addCartasJugador();
-
-        JOptionPane.showMessageDialog(null, "First Round Starts");
-
-        panelCentral.turnCards("player");
+        
+        PanelCentral.getJugador();
+		Jugador.realizarApuesta();
+        
+	    getPanelCentral().addCartasComunitarias();
+	    getPanelCentral().addCartasJugador();
+	    getPanelCentral().addCartasPC();
+	    
+	    JOptionPane.showMessageDialog(null, "GAME START");
+	    getPanelCentral().turnCards("player");
+	    getPanelCentral().turnCards("pc");
 
 			
     }
 
 	private void initGUI() {
 
-		//startMenu();
 		startGame();
-		
 
     }
+	
+	
 
 	
 	public ArrayList<Carta> getBarajaPc() {
@@ -91,6 +95,16 @@ public class GUIPrincipal extends JFrame {
 
 	public static ArrayList<Carta> getBarajaJugador() {
 		return barajaJugador;
+	}
+
+
+	public static PanelCentral getPanelCentral() {
+		return panelCentral;
+	}
+
+
+	public void setPanelCentral(PanelCentral panelCentral) {
+		this.panelCentral = panelCentral;
 	}
     
     
