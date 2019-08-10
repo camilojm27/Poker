@@ -84,6 +84,22 @@ public class Baraja {
         System.out.println("-----------------");
     }
 
+    public ArrayList<Carta> repartirCartasComunitarias(){
+        ArrayList<Carta> todos = all;
+        repartir = new ArrayList<>();
+        random = new Random();
+        int cualCarta, sizeFichas;
+
+        for (int i = 0; i < 5; i++) {
+            sizeFichas = todos.size();
+            cualCarta = random.nextInt(sizeFichas);
+            repartir.add(todos.get(cualCarta));
+            todos.remove(cualCarta);
+        }
+        return repartir;
+
+    }
+
 
     //Getters
     public ArrayList<Carta> getDiamonds() {

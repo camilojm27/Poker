@@ -4,11 +4,7 @@ import java.awt.*;
 
 
 import java.awt.event.MouseListener;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.ImageIcon;
-import javax.swing.JOptionPane;
+import javax.swing.*;
 //import com.sun.glass.ui.Window;
 
 
@@ -28,41 +24,39 @@ public class MenuInicio extends JFrame {
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
-		panelInicio.addButton();
+
 		add(panelInicio);
 	}
 
 	private class PanelInicio extends JPanel {
 
-		 private JButton b1;
-		 private JButton b2;
-
+		private JTextField username;
+		 private JButton start;
+		 private JButton exit;
 		PanelInicio(){
 
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
+			username = new JTextField();
+			start = new JButton("START");
+			exit = new JButton("EXIT");
+			initGUI();
 
 		}
 
-		public void addButton() {
+		private void initGUI() {
 
 			Insets insets = this.getInsets();
+			username.setBounds(70 + insets.left, 50  + insets.top,150,30);
+			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
+			exit.setBounds(100 + insets.left, 350 + insets.top, 100,50);
+			this.add(start);
+			this.add(exit);
+			this.add(username);
 
-			b1 = new JButton("START GAME");
-			b2 = new JButton("EXIT");
-
-			Dimension size = b1.getPreferredSize();
-			b1.setBounds(100 + insets.left, 150  + insets.top,100,50);
-
-			size = b2.getPreferredSize();
-			b2.setBounds(100 + insets.left, 350 + insets.top, 100,50);
-
-			this.add(b1);
-			this.add(b2);
-
-			b1.addMouseListener(new mouseAction());
-			b2.addMouseListener(new mouseAction());
+			start.addMouseListener(new mouseAction());
+			exit.addMouseListener(new mouseAction());
 
 		}
 
@@ -84,16 +78,22 @@ public class MenuInicio extends JFrame {
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
-				if(arg0.getSource() == b1) {
+				if(arg0.getSource() == start) {
 
 					JOptionPane.showMessageDialog(null, "Clicked START");
-					window.dispose();
-					guiPrincipal = new GUIPrincipal();
+					if (username.isValid()){
+						window.dispose();
+						JOptionPane.showMessageDialog(null, "WELCOME");
+
+						guiPrincipal = new GUIPrincipal();
+					}
+
+
 				}
 
-				if(arg0.getSource() == b2) {
+				if(arg0.getSource() == exit) {
 
-					JOptionPane.showMessageDialog(null, "Clicked EXIT");
+					JOptionPane.showMessageDialog(null, "Bye bye");
 					window.dispose();
 
 				}
