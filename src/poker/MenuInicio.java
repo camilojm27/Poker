@@ -39,7 +39,7 @@ public class MenuInicio extends JFrame {
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
 			username = new JTextField();
-			start = new JButton("START GAME");
+			start = new JButton("START");
 			exit = new JButton("EXIT");
 			initGUI();
 
@@ -82,15 +82,13 @@ public class MenuInicio extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
-
 						window.dispose();
+						JOptionPane.showMessageDialog(null, "WELCOME");
+
 						guiPrincipal = new GUIPrincipal();
 					}
 
-					window.dispose();
-					JOptionPane.showMessageDialog(null, "WELCOME");
 
-					guiPrincipal = new GUIPrincipal();
 				}
 
 				if(arg0.getSource() == exit) {
