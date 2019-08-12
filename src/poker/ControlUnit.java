@@ -189,8 +189,6 @@ public class ControlUnit {
         Collections.sort(mano);
         Carta threeCardsType;
         boolean threeCards = false;
-//Si las tres cartas son iguales
-
 
         Collections.sort(mano);
 
@@ -207,16 +205,6 @@ public class ControlUnit {
             }
 
         }
-
-
-        /*if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId()) {
-            threeCards = true;
-        } else if (mano.get(1).getId() == mano.get(2).getId() & mano.get(2).getId() == mano.get(3).getId()) {
-            threeCards = true;
-        } else if (mano.get(2).getId() == mano.get(3).getId() & mano.get(3).getId() == mano.get(4).getId()) {
-            threeCards = true;
-        }*/
-        //Si las tres cartas son iguales buscalas otras 2
 
         return false;
     }
@@ -265,7 +253,7 @@ public class ControlUnit {
     }
 
     private boolean sameType(ArrayList<Carta> mano) {
-        boolean same = false;
+
         int sameValue = 0; //Si el valor da el tamaño del array -1 todas son iguales
         for (int i = 0; i < mano.size() - 1; i++) {
             if (mano.get(i).getTipo() == mano.get(i + 1).getTipo())
@@ -273,8 +261,8 @@ public class ControlUnit {
 
         }
         if (sameValue == mano.size() - 1)
-            same = true;
-        return same;
+            return true;
+        return false;
     }
 
 
