@@ -71,7 +71,7 @@ public class PanelLateral extends JPanel  {
 
             if(dialogResult == 0){
 
-                JOptionPane.showMessageDialog(null,"さようなら");
+                JOptionPane.showMessageDialog(null,"Sayonara");
                 GUIPrincipal.vprincipal.dispose();
             }
 
