@@ -86,6 +86,11 @@ public class ControlUnit {
 
     private boolean threeOfaKind(ArrayList<Carta> mano) {
         Collections.sort(mano);
+/*
+        for (int i = 0; i < mano.size() - 1; i++) {
+            if (mano.get(i).getId())
+        }
+*/
         return false;
     }
 

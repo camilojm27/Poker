@@ -2,7 +2,6 @@ package poker;
 
 import java.awt.*;
 
-
 import java.awt.event.MouseListener;
 import javax.swing.*;
 //import com.sun.glass.ui.Window;
@@ -21,8 +20,10 @@ public class MenuInicio extends JFrame {
 		setTitle("Bienvenido Al Poker");
 		setSize(300, 500);
 		setLocationRelativeTo(null);
+		setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
 
 
 		add(panelInicio);
@@ -33,6 +34,8 @@ public class MenuInicio extends JFrame {
 		private JTextField username;
 		 private JButton start;
 		 private JButton exit;
+		 private JLabel titleBar;
+
 		PanelInicio(){
 
 			this.setLayout(null);
@@ -54,6 +57,8 @@ public class MenuInicio extends JFrame {
 			this.add(start);
 			this.add(exit);
 			this.add(username);
+			username.setOpaque(true);
+
 
 			start.addMouseListener(new mouseAction());
 			exit.addMouseListener(new mouseAction());
