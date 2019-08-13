@@ -251,7 +251,7 @@ public class PanelCentral extends JPanel {
 
 			if(arg0.getSource() == igualar) {
 
-				JOptionPane.showMessageDialog(null, "Clicked igualar");
+				
 			}
 			
 			if(arg0.getSource() == apostar) {
