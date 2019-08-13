@@ -18,7 +18,7 @@ public class PanelCentral extends JPanel {
 	private int c1x, c2x, c1y, c2y,ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy;
 	public static JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc;
 	private static JButton pasar;
-	private static JButton apostar;
+	private static JButton subir;
 	private static JButton igualar;
 	private JButton cc1;
 	private JButton cc2;
@@ -175,35 +175,35 @@ public class PanelCentral extends JPanel {
         Insets insets = this.getInsets();
 
         pasar = new JButton("PASAR");
-        apostar = new JButton("APOSTAR");
         igualar = new JButton("IGUALAR");
+        subir = new JButton("SUBIR");
 
         Dimension size = pasar.getPreferredSize();
         pasar.setBounds(490+ insets.left, 640 + insets.top, 100,40);
         // jugar .setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagen());
 
-        size = apostar.getPreferredSize();
-        apostar.setBounds(490 + insets.left,  590 + insets.top,100,40);
+        size = igualar.getPreferredSize();
+        igualar.setBounds(490 + insets.left,  590 + insets.top,100,40);
         //apostar.setIcon(new ImageIcon(getClass().getResource("/imagenes/bill.png")));
 
 
 
-        size = igualar.getPreferredSize();
-        igualar.setBounds(490 + insets.left,  540 + insets.top,100,40);
+        size = subir.getPreferredSize();
+        subir.setBounds(490 + insets.left,  540 + insets.top,100,40);
         //  apostar.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
 
         pasar.setBackground(Color.white);
         igualar.setBackground(Color.white);
-        apostar.setBackground(Color.WHITE);
+        subir.setBackground(Color.WHITE);
         
         pasar.addMouseListener(mouse);
         igualar.addMouseListener(mouse);
-        apostar.addMouseListener(mouse);
+        subir.addMouseListener(mouse);
         
 
         this.add(pasar);
-        this.add(apostar);
         this.add(igualar);
+        this.add(subir);
 
     }
 
@@ -246,15 +246,22 @@ public class PanelCentral extends JPanel {
 
 			if(arg0.getSource() == pasar) {
 
-				JOptionPane.showMessageDialog(null, "Clicked pasar");
+				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
+            	GUIPrincipal.getJugador().setDinero
+            	((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());
+            	
+            	GUIPrincipal.controlUnit.newRound();
+            	GUIPrincipal.getJugador().turnCards("player");
 			}
 
-			if(arg0.getSource() == igualar) {
-
+			if(arg0.getSource() == subir) {
+				
+				jugador.realizarApuesta(3);
+				GUIPrincipal.getPanelLateral().updateUI();
 				
 			}
 			
-			if(arg0.getSource() == apostar) {
+			if(arg0.getSource() == igualar) {
 				
 				jugador.realizarApuesta(2);
 				GUIPrincipal.getPanelLateral().updateUI();

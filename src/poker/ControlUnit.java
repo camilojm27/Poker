@@ -5,11 +5,14 @@ package poker;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.JOptionPane;
+
 public class ControlUnit {
-    private Baraja baraja;
-    public ArrayList<Carta> barajaPc;
-    public ArrayList<Carta> barajaJugador;
-    public ArrayList<Carta> cartasComunitarias;
+    private static Baraja baraja;
+    public static ArrayList<Carta> barajaPc;
+    public static ArrayList<Carta> barajaJugador;
+    public static ArrayList<Carta> cartasComunitarias;
+   
 
 
     ControlUnit() {
@@ -27,6 +30,26 @@ public class ControlUnit {
         compararJugadas();
 
     }
+    
+    public static void newRound() {
+    	
+    	JOptionPane.showMessageDialog(null, "Nueva Ronda");
+        baraja = new Baraja();
+        barajaPc = baraja.repartirBaraja();
+        barajaJugador = baraja.repartirBaraja();
+        cartasComunitarias = baraja.repartirCartasComunitarias();
+        baraja.print(barajaJugador);
+        System.out.println("      ");
+        baraja.print(barajaPc);
+        System.out.println("      ");
+        baraja.print(cartasComunitarias);
+        
+        
+    	
+    }
+    
+   
+  
 
 
     public ArrayList<Carta> getBarajaPc() {
@@ -64,10 +87,14 @@ public class ControlUnit {
         System.out.println("-------HIGH_CARD-------");
         ranking(Escaleras.HIGH_CARD);
 
+<<<<<<< HEAD
+        //ranking(barajaJugador);
+=======
         // ranking(barajaJugador);
 
 
  */
+
     }
 
     public int ranking(ArrayList<Carta> mano) {

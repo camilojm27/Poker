@@ -50,32 +50,6 @@ public class GUIPrincipal extends JFrame {
         
     }
 
-   
-	public void startGame() {
-
-        ////////////////////////////////////////
-        //REPARTICION DE CARTAS
-        
-        PanelCentral.getJugador();
-		jugador.realizarApuesta(1);
-		pc.apuestaPc(jugador.getApuesta());
-            
-	    getPanelCentral().addCartasJugador();
-	    getPanelCentral().addCartasPC();
-	    
-	    
-	    
-	   
-	    getPanelCentral().turnCards("player");
-	    getPanelCentral().turnCards("pc");
-	    JOptionPane.showMessageDialog(null, "GAME START");
-	    
-	    getPanelCentral().addCartasComunitarias();
-	    getPanelCentral().updateUI();
-			
-    }
-
-
 	public void initGUI() {
 
 		/////////////////////////////////////////
@@ -94,6 +68,55 @@ public class GUIPrincipal extends JFrame {
 		vprincipal.setVisible(true);
 
     }
+	
+	public void startGame() {
+		
+			JOptionPane.showMessageDialog(null, "REPARTO");
+			gameStage(1);
+			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
+
+			
+			
+
+  	
+    	}
+
+	
+	 public static void gameStage(int ronda) {
+	    	
+	    	switch(ronda) {
+	    	
+	    	case 1:
+	    		
+	    		 ////////////////////////////////////////
+	            //REPARTICION DE CARTAS
+	            
+	            PanelCentral.getJugador();
+	           
+	    		jugador.realizarApuesta(1);
+	    		pc.apuestaPc(jugador.getApuesta());
+	                
+	    	    getPanelCentral().addCartasJugador();
+	    	    getPanelCentral().addCartasPC();
+	    	    
+	    	    getPanelCentral().turnCards("player");
+	    	    getPanelCentral().turnCards("pc");
+	    	    getPanelCentral().updateUI();
+	    	    
+	    	case 2:
+	    		
+	    		//getPanelCentral().addCartasComunitarias();
+	    	
+	    	case 9:
+	    		
+	    		
+	    	    
+	    	    
+	    		
+	    		
+	    	}
+	  
+	 }
 	
 	
 

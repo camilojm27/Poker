@@ -22,7 +22,8 @@ public class PanelLateral extends JPanel  {
     private  ImageIcon plusButton;
     private JButton giveup;
     private EscuchaRestantes escuchaRestantes = new EscuchaRestantes();
-    private static int apuestaJugador,apuestaPC,apuestaActual;
+    private static int apuestaJugador,apuestaPC,apuestaActual,apuestaAnterior;
+    private static int cashJugador;
 
 	public PanelLateral(){
 
@@ -65,9 +66,11 @@ public class PanelLateral extends JPanel  {
         apuestaPC = GUIPrincipal.getPc().getApuestaPC();
         GUIPrincipal.getJugador();
 		apuestaActual = Jugador.getApuestaActual();
-      
+		cashJugador = GUIPrincipal.getJugador().getDinero();
+		
+		g.drawString("Mi dinero: " + String.valueOf(cashJugador), 10, 330);
         g.drawString("La apuesta actual ",10,350);
-        g.drawString("es de   =  " + apuestaActual, 10 ,370);
+        g.drawString("es de:  " + apuestaActual, 10 ,370);
         repaint();
         
     }
@@ -83,9 +86,19 @@ public class PanelLateral extends JPanel  {
             int dialogResult = JOptionPane.showConfirmDialog(null,"Estas Seguro?", "QUITTING", dialogButton);
 
             if(dialogResult == 0){
+            	
+            	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
+            	GUIPrincipal.getJugador().setDinero
+            	((GUIPrincipal.getJugador().getDinero()) - apuestaActual);
+            	
+            	GUIPrincipal.controlUnit.newRound();
+            	GUIPrincipal.getJugador().turnCards("player");
+            	
+            	
+            	
 
-                JOptionPane.showMessageDialog(null,"Sayonara");
-                GUIPrincipal.vprincipal.dispose();
+              //  JOptionPane.showMessageDialog(null,"Sayonara");
+              //  GUIPrincipal.vprincipal.dispose();
             }
 
             else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");

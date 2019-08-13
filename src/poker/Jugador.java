@@ -145,6 +145,64 @@ public class Jugador extends JOptionPane {
 			
 			}
 		
+		if(stage == 3) {
+			
+			if(dinero > apuestaActual) {
+				
+				String inApuesta = JOptionPane.showInputDialog(
+						GUIPrincipal.vprincipal, 
+				        "¿Cuanto desea apostar?", 
+				        "Ciega", 
+				        JOptionPane.WARNING_MESSAGE
+				    );
+				
+				
+					if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
+					{
+						
+						JOptionPane.showMessageDialog(null, "Debes aumentar la apuesta actual");
+						realizarApuesta(3);
+						//System.exit(1);
+					}
+					
+					if(Integer.parseInt(inApuesta) <= apuestaActual) {
+						
+						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
+						realizarApuesta(3);
+						
+					}
+				   
+				   else {
+					   
+					   apuesta = Integer.parseInt(inApuesta);
+					   
+					 
+						 if(getApuesta() > dinero) {
+							 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente, tu pierdes");
+							 System.exit(1);
+							
+						 }
+						 
+						 if(getApuesta() < dinero) {
+							 apuestaActual = apuestaActual + getApuesta();
+							 dinero = dinero - getApuesta();
+							 JOptionPane.showMessageDialog(null, "tu dinero es " + dinero);
+						 }	
+				   }
+				
+			}
+			
+			else JOptionPane.showMessageDialog(null, "no tienes dinero para seguir apostando, tu pierdes");
+				// System.exit(1);
+			
+			
+     
+		
+			
+			}
+			
+		
+		
 		
 		return dinero;	
 	}
@@ -199,6 +257,22 @@ public class Jugador extends JOptionPane {
 
 	}
 
+
+	public int getDinero() {
+		return dinero;
+	}
+
+	public static void setDinero(int dinero) {
+		Jugador.dinero = dinero;
+	}
+
+	public static int getDineroPC() {
+		return dineroPC;
+	}
+
+	public static void setDineroPC(int dineroPC) {
+		Jugador.dineroPC = dineroPC;
+	}
 
 	public void turnCards(String who){
 	    if(who.equals("player")){
