@@ -16,7 +16,7 @@ import java.awt.event.MouseListener;
 
 public class PanelLateral extends JPanel  {
 
-    private String username = "Camilo y Santiago", computadorUP = "TABLA DE", computadorDown = "PUNTAJES ";
+    private String  computadorUP = "TABLA DE", computadorDown = "PUNTAJES ";
     private int puntaje=0;
     private boolean gano, perdio, rendirse;
     private ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/leftPanel.png"));
@@ -63,6 +63,7 @@ public class PanelLateral extends JPanel  {
         g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
         g.setFont(bit8);
         g.setColor(Color.WHITE);
+
         g.drawString(computadorUP, 50, 60);
         g.drawString(computadorDown, 60, 80);
         

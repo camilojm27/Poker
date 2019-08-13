@@ -47,9 +47,6 @@ public class ControlUnit {
         
     	
     }
-    
-   
-  
 
 
     public ArrayList<Carta> getBarajaPc() {

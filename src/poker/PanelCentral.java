@@ -4,7 +4,6 @@ import Fonts.Fuentes;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
-import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -13,6 +12,8 @@ import javax.swing.JPanel;
 
 
 public class PanelCentral extends JPanel {
+
+	private String username = Jugador.getUsername();
 
 	private int c1x, c2x, c1y, c2y,ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy;
 	public static JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc;
@@ -243,9 +244,11 @@ public class PanelCentral extends JPanel {
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 
+
 		Dimension height = getSize();
 		ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/Background_final.png"));
 		g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
+		g.drawString(username, 100, 200);
 		setOpaque(false);
 
 	}
@@ -256,7 +259,6 @@ public class PanelCentral extends JPanel {
 		public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
 			if(arg0.getSource() == pasar) {
-
 				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
             	GUIPrincipal.getJugador().setDinero
             	((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());

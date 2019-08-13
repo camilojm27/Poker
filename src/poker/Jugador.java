@@ -11,7 +11,10 @@ public class Jugador extends JOptionPane {
 	 * The apuesta valida.
 	 */
 	static boolean apuestaValida = true;
-	
+	private static String username;
+
+
+
 	/** The dinero. */
 	private static int dinero = 50000;
 	
@@ -320,6 +323,11 @@ public class Jugador extends JOptionPane {
 		return apuestaActual;
 	}
 
-	
+	public static void setUsername(String username) {
+		Jugador.username = username;
+	}
+	public static String getUsername() {
+		return Jugador.username;
+	}
 
 }

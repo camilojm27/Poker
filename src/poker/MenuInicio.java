@@ -7,6 +7,7 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
+import java.util.Random;
 import javax.swing.*;
 //import com.sun.glass.ui.Window;
 
@@ -40,23 +41,27 @@ public class MenuInicio extends JFrame {
 		 private JButton start;
 		 private JButton exit;
 		 private JLabel titleBar;
+		 private Random random  = new Random();;
+		 private Sonidos sonidos;
 
 		PanelInicio(){
 
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
+
+			initGUI();
+
+		}
+
+		private void initGUI() {
+			sonidos.pop();
 			username = new JTextFieldHint();
 			//username.setFont();
 			//username.setHint("Nombre de usuario");
 			start = new JButton("START");
 			exit = new JButton("EXIT");
 			titleBar = new JLabel(new ImageIcon("src/imagenes/tittle-bar.gif"));
-			initGUI();
-
-		}
-
-		private void initGUI() {
 
 			Insets insets = this.getInsets();
 			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
@@ -68,6 +73,7 @@ public class MenuInicio extends JFrame {
 			this.add(username);
 			this.add(titleBar);
 			username.setFont(bit8);
+			titleBar.setBackground(Color.BLACK);
 
 			username.setText("Username");
 			username.setForeground(Color.black);
@@ -86,7 +92,7 @@ public class MenuInicio extends JFrame {
 			super.paintComponent(g);
 
 			Dimension height = getSize();
-			ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/MenuInicio3.jpeg"));
+			ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/MenuInicio" +  random.nextInt(5) + ".jpeg"));
 			g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
 			setOpaque(false);
 
@@ -102,7 +108,8 @@ public class MenuInicio extends JFrame {
 
 					JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
-						window.dispose();
+                        Jugador.setUsername(username.getText());
+                        window.dispose();
 
 						JOptionPane.showMessageDialog(null, "WELCOME");
 
