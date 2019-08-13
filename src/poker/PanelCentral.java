@@ -271,7 +271,7 @@ public class PanelCentral extends JPanel {
 				jugador.realizarApuesta(3);
 				GUIPrincipal.getPanelLateral().updateUI();
 				GUIPrincipal.gameStage(2);
-				GUIPrincipal.controlUnit.compararJugadas();
+
 				
 			}
 			
@@ -282,7 +282,8 @@ public class PanelCentral extends JPanel {
 				GUIPrincipal.gameStage(2);
 
 			}
-			
+
+
 
 			
 			

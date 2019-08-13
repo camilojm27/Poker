@@ -6,6 +6,7 @@ public class Escaleras {
     public static  ArrayList<Carta> FLUSH_STRAIGHT = new ArrayList<>();
     public static  ArrayList<Carta> ROYAL_FLUSH_STRAIGHT = new ArrayList<>();
     public static  ArrayList<Carta> FOUR_OF_A_KIND = new ArrayList<>();
+    public static  ArrayList<Carta> FOUR_OF_A_KIND2 = new ArrayList<>();
     public static  ArrayList<Carta> FULL_HOUSE = new ArrayList<>();
     public static  ArrayList<Carta> COLOR_FLUSH = new ArrayList<>();
     public static  ArrayList<Carta> ESCALERA_STRAIGHT = new ArrayList<>();
@@ -34,6 +35,15 @@ public class Escaleras {
         FOUR_OF_A_KIND.add(new Carta("1","H"));
         FOUR_OF_A_KIND.add(new Carta("8","H"));
         FOUR_OF_A_KIND.add(new Carta("8","S"));
+
+
+
+        FOUR_OF_A_KIND2.add(new Carta("8","C"));
+        FOUR_OF_A_KIND2.add(new Carta("8","S"));
+        FOUR_OF_A_KIND2.add(new Carta("2","H"));
+        FOUR_OF_A_KIND2.add(new Carta("8","H"));
+        FOUR_OF_A_KIND2.add(new Carta("8","S"));
+
 
         FULL_HOUSE.add(new Carta("9", "H"));
         FULL_HOUSE.add(new Carta("9", "C"));

@@ -27,8 +27,8 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        compararJugadas();
-
+        //compararJugadas();
+    compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
     }
     
     public static void newRound() {
@@ -43,7 +43,7 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        
+
         
     	
     }
@@ -64,8 +64,39 @@ public class ControlUnit {
         return cartasComunitarias;
     }
 
-    public void compararJugadas() {
+    private int cartaMayor(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2){
+        Collections.sort(jugador1);
+        Collections.sort(jugador2);
+        if (jugador1.get(4).getIdValue() > jugador2.get(4).getIdValue()){
+            //return "El jugador 1 tiene una mejor jugada por la carta" + jugador1.get(4).getId() + jugador1.get(4).getTipo();
+            return 1;
+        }
+        else {
+            //return "El jugador 2 tiene una mejor jugada por la carta" + jugador2.get(4).getId() + jugador1.get(4).getTipo();
+            return 2;
+        }
 
+    }
+
+    public int compararJugadas(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2) {
+
+if (ranking(jugador1) > ranking(jugador2)){
+    System.out.println("El jugador jugador 1 tiene una mejor jugada que el jugador 2");
+}else if (ranking(jugador1) < ranking(jugador2)){
+    System.out.println("El jugador jugador 2 tiene una mejor jugada que el jugador 1");
+}
+else{
+    System.out.println("Empate, se elegira la ultima carta de la mano (La mayor) = " );
+    if (1 == cartaMayor(jugador1, jugador2)) {
+
+
+        System.out.print("El jugador 1 tiene mejor jugada");
+    }else{
+        System.out.print("El jugador 2 tiene mejor jugada");
+    }
+
+    return cartaMayor(jugador1, jugador2);
+}
 
 /*
         System.out.println("-------ROYAL_FLUSH_STRAIGHT-------");
@@ -89,14 +120,9 @@ public class ControlUnit {
         System.out.println("-------HIGH_CARD-------");
         ranking(Escaleras.HIGH_CARD);
 
-<<<<<<< HEAD
-        //ranking(barajaJugador);
-=======
-        // ranking(barajaJugador);
-
-
  */
 
+        return 0;
     }
 
     public int ranking(ArrayList<Carta> mano) {

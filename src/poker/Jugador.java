@@ -58,7 +58,7 @@ public class Jugador extends JOptionPane {
 		if(stage == 1) {
 			String inApuesta = JOptionPane.showInputDialog(
 					GUIPrincipal.vprincipal, 
-			        "�Cuanto desea apostar?", 
+			        "Cuanto desea apostar?",
 			        "Ciega", 
 			        JOptionPane.WARNING_MESSAGE
 			    );
