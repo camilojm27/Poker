@@ -251,13 +251,15 @@ public class PanelCentral extends JPanel {
             	((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());
             	
             	GUIPrincipal.controlUnit.newRound();
-            	GUIPrincipal.getJugador().turnCards("player");
+            	//GUIPrincipal.getJugador().turnCards("player");
+				GUIPrincipal.getJugador().setApuestaActual();
 			}
 
 			if(arg0.getSource() == subir) {
 				
 				jugador.realizarApuesta(3);
 				GUIPrincipal.getPanelLateral().updateUI();
+				GUIPrincipal.gameStage(2);
 				
 			}
 			
@@ -265,13 +267,11 @@ public class PanelCentral extends JPanel {
 				
 				jugador.realizarApuesta(2);
 				GUIPrincipal.getPanelLateral().updateUI();
+				GUIPrincipal.gameStage(2);
+
 			}
 			
-			if(arg0.getSource() == c1Ju || arg0.getSource() == c2Ju) {
-				
-				jugador.turnCards("pNormal");
-				GUIPrincipal.getPanelCentral().repaint();
-			}
+
 			
 			
 			
@@ -283,12 +283,22 @@ public class PanelCentral extends JPanel {
 
 		@Override
 		public void mouseEntered(java.awt.event.MouseEvent arg0) {
-			// TODO Auto-generated method stub
+
+			if(arg0.getSource() == c1Ju || arg0.getSource() == c2Ju) {
+
+				jugador.turnCards("pNormal");
+				GUIPrincipal.getPanelCentral().repaint();
+			}
 		}
 
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent arg0) {
-			// TODO Auto-generated method stub
+
+			if(arg0.getSource() == c1Ju || arg0.getSource() == c2Ju) {
+
+				jugador.turnCards("player");
+				GUIPrincipal.getPanelCentral().repaint();
+			}
 		}
 
 		@Override

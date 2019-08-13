@@ -59,10 +59,10 @@ public class MenuInicio extends JFrame {
 		private void initGUI() {
 
 			Insets insets = this.getInsets();
-			username.setBounds(70 + insets.left, 50  + insets.top,150,30);
+			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 350 + insets.top, 100,50);
-			titleBar.setBounds(30 + insets.left, 0  + insets.top,254,57);
+			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
 			this.add(start);
 			this.add(exit);
 			this.add(username);
@@ -70,8 +70,8 @@ public class MenuInicio extends JFrame {
 			username.setFont(bit8);
 
 			username.setText("Username");
-			username.setForeground(Color.WHITE);
-			username.setOpaque(false);
+			username.setForeground(Color.black);
+			username.setOpaque(true);
 
 
 
@@ -86,7 +86,7 @@ public class MenuInicio extends JFrame {
 			super.paintComponent(g);
 
 			Dimension height = getSize();
-			ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/MenuInicio1.jpeg"));
+			ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/MenuInicio3.jpeg"));
 			g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
 			setOpaque(false);
 

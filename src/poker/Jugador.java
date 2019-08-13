@@ -58,10 +58,11 @@ public class Jugador extends JOptionPane {
 		if(stage == 1) {
 			String inApuesta = JOptionPane.showInputDialog(
 					GUIPrincipal.vprincipal, 
-			        "¿Cuanto desea apostar?", 
+			        "ï¿½Cuanto desea apostar?", 
 			        "Ciega", 
 			        JOptionPane.WARNING_MESSAGE
 			    );
+
 				if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
 				{
 					JOptionPane.showMessageDialog(null, "Sin ciega no hay juego");
@@ -70,9 +71,19 @@ public class Jugador extends JOptionPane {
 				}
 			   
 			   else {
-				   
-				   apuesta = Integer.parseInt(inApuesta);
-				   
+
+					while(apuestaValida) {
+						try {
+
+							apuesta = Integer.parseInt(inApuesta);
+							apuestaValida = false;
+						} catch (NumberFormatException e) {
+							JOptionPane.showMessageDialog(null, "Ingresa un valor valido");
+							realizarApuesta(1);
+						}
+					}
+
+
 				 
 					 if(getApuesta() > dinero) {
 						 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente");
@@ -95,7 +106,7 @@ public class Jugador extends JOptionPane {
 				
 				String inApuesta = JOptionPane.showInputDialog(
 						GUIPrincipal.vprincipal, 
-				        "¿Cuanto desea apostar?", 
+				        "ï¿½Cuanto desea apostar?", 
 				        "Ciega", 
 				        JOptionPane.WARNING_MESSAGE
 				    );
@@ -151,7 +162,7 @@ public class Jugador extends JOptionPane {
 				
 				String inApuesta = JOptionPane.showInputDialog(
 						GUIPrincipal.vprincipal, 
-				        "¿Cuanto desea apostar?", 
+				        "Ingrese su apuesta",
 				        "Ciega", 
 				        JOptionPane.WARNING_MESSAGE
 				    );
@@ -183,7 +194,7 @@ public class Jugador extends JOptionPane {
 							
 						 }
 						 
-						 if(getApuesta() < dinero) {
+						 if(getApuesta() <= dinero) {
 							 apuestaActual = apuestaActual + getApuesta();
 							 dinero = dinero - getApuesta();
 							 JOptionPane.showMessageDialog(null, "tu dinero es " + dinero);
@@ -231,7 +242,7 @@ public class Jugador extends JOptionPane {
 		
 
 	public static void realizarApuesta() {
-		String inApuesta = JOptionPane.showInputDialog(null, "Â¿Cuanto desea apostar?");
+		String inApuesta = JOptionPane.showInputDialog(null, "Ingrese su apuesta");
 
 		while (apuestaValida) {
 			try {
@@ -249,7 +260,7 @@ public class Jugador extends JOptionPane {
 			 realizarApuesta();
 		 }
 
-		 if(apuesta < dinero) {
+		 if(apuesta <= dinero) {
 			 dinero = dinero - apuesta;
 			 JOptionPane.showMessageDialog(null, "tu dinero es " + dinero);
 
@@ -303,7 +314,12 @@ public class Jugador extends JOptionPane {
 	public static int getApuestaActual() {
 		return apuestaActual;
 	}
-	
+
+	public static int setApuestaActual(){
+		apuestaActual = 0;
+		return apuestaActual;
+	}
+
 	
 
 }

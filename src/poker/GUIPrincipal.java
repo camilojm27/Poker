@@ -102,10 +102,15 @@ public class GUIPrincipal extends JFrame {
 	    	    getPanelCentral().turnCards("player");
 	    	    getPanelCentral().turnCards("pc");
 	    	    getPanelCentral().updateUI();
+	    	    break;
 	    	    
 	    	case 2:
+
+				//GUIPrincipal.getJugador().setApuestaActual();
+				GUIPrincipal.getPanelCentral().updateUI();
+				getPanelCentral().addCartasComunitarias();
 	    		
-	    		//getPanelCentral().addCartasComunitarias();
+
 	    	
 	    	case 9:
 	    		

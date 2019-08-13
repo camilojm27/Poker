@@ -4,6 +4,8 @@
  */
 package poker;
 
+import Fonts.Fuentes;
+
 import javax.swing.*;
 //https://stackoverflow.com/questions/19125707/simplest-way-to-set-image-as-jpanel-background
 import java.awt.*;
@@ -14,7 +16,7 @@ import java.awt.event.MouseListener;
 
 public class PanelLateral extends JPanel  {
 
-    private String username = "Camilo y Santiago", computadorUP = "TABLA DE", computadorDown = "PUNTAJES";
+    private String username = "Camilo y Santiago", computadorUP = "TABLA DE", computadorDown = "PUNTAJES ";
     private int puntaje=0;
     private boolean gano, perdio, rendirse;
     private ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/leftPanel.png"));
@@ -24,6 +26,8 @@ public class PanelLateral extends JPanel  {
     private EscuchaRestantes escuchaRestantes = new EscuchaRestantes();
     private static int apuestaJugador,apuestaPC,apuestaActual,apuestaAnterior;
     private static int cashJugador;
+    private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 12);
+    private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
 
 	public PanelLateral(){
 
@@ -36,6 +40,7 @@ public class PanelLateral extends JPanel  {
     public void addButtons(){
 
         giveup = new JButton("RETIRARSE");
+        giveup.setFont(bit8_2);
 
         Insets insets = this.getInsets();
 
@@ -56,10 +61,10 @@ public class PanelLateral extends JPanel  {
 
         Dimension height = getSize();
         g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
-        g.setFont(new Font(Font.SANS_SERIF, Font.PLAIN, 20));
+        g.setFont(bit8);
         g.setColor(Color.WHITE);
         g.drawString(computadorUP, 50, 60);
-        g.drawString(computadorDown, 50, 80);
+        g.drawString(computadorDown, 60, 80);
         
         plusButton = new ImageIcon("src/imagenes/plus2.png");
         apuestaJugador = GUIPrincipal.getJugador().getApuesta();
@@ -68,9 +73,9 @@ public class PanelLateral extends JPanel  {
 		apuestaActual = Jugador.getApuestaActual();
 		cashJugador = GUIPrincipal.getJugador().getDinero();
 		
-		g.drawString("Mi dinero: " + String.valueOf(cashJugador), 10, 330);
-        g.drawString("La apuesta actual ",10,350);
-        g.drawString("es de:  " + apuestaActual, 10 ,370);
+		g.drawString("Dinero:" + String.valueOf(cashJugador), 8, 120);
+        g.drawString("Bote =  " + apuestaActual,10,350);
+      //  g.drawString("es de:  " + apuestaActual, 10 ,370);
         repaint();
         
     }
@@ -90,6 +95,7 @@ public class PanelLateral extends JPanel  {
             	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
             	GUIPrincipal.getJugador().setDinero
             	((GUIPrincipal.getJugador().getDinero()) - apuestaActual);
+                GUIPrincipal.getJugador().setApuestaActual();
             	
             	GUIPrincipal.controlUnit.newRound();
             	GUIPrincipal.getJugador().turnCards("player");
