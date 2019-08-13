@@ -1,9 +1,8 @@
 package poker;
 
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Graphics;
-import java.awt.Insets;
+import Fonts.Fuentes;
+
+import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
 
@@ -20,6 +19,8 @@ public class PanelCentral extends JPanel {
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
+	private static JButton jugar;
+	private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
 	private JButton cc1;
 	private JButton cc2;
 	private JButton cc3;
@@ -177,6 +178,7 @@ public class PanelCentral extends JPanel {
         pasar = new JButton("PASAR");
         igualar = new JButton("IGUALAR");
         subir = new JButton("SUBIR");
+        jugar = new JButton("JUGAR");
 
         Dimension size = pasar.getPreferredSize();
         pasar.setBounds(490+ insets.left, 640 + insets.top, 100,40);
@@ -186,24 +188,33 @@ public class PanelCentral extends JPanel {
         igualar.setBounds(490 + insets.left,  590 + insets.top,100,40);
         //apostar.setIcon(new ImageIcon(getClass().getResource("/imagenes/bill.png")));
 
-
-
         size = subir.getPreferredSize();
         subir.setBounds(490 + insets.left,  540 + insets.top,100,40);
         //  apostar.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagen());
 
+		size = jugar.getPreferredSize();
+		jugar.setBounds(10 + insets.left,  350+ insets.top,100,40);
+
         pasar.setBackground(Color.white);
         igualar.setBackground(Color.white);
         subir.setBackground(Color.WHITE);
+        jugar.setBackground(Color.white);
+
+        pasar.setFont(bit8_2);
+        igualar.setFont(bit8_2);
+        subir.setFont(bit8_2);
+        jugar.setFont(bit8_2);
         
         pasar.addMouseListener(mouse);
         igualar.addMouseListener(mouse);
         subir.addMouseListener(mouse);
+        jugar.addMouseListener(mouse);
         
 
         this.add(pasar);
         this.add(igualar);
         this.add(subir);
+        this.add(jugar);
 
     }
 
@@ -260,6 +271,7 @@ public class PanelCentral extends JPanel {
 				jugador.realizarApuesta(3);
 				GUIPrincipal.getPanelLateral().updateUI();
 				GUIPrincipal.gameStage(2);
+				GUIPrincipal.controlUnit.compararJugadas();
 				
 			}
 			
