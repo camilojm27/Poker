@@ -12,12 +12,12 @@ public class GUIPrincipal extends JFrame {
 	
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador;
-    private static ArrayList<Carta> cartasComunitarias;
+    private static Jugador jugador,pc;
     
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
     private static PanelCentral panelCentral;
-    private PanelLateral panelLateral;
+    private static PanelLateral panelLateral;
     private JButton boton;
     public static Window vprincipal;
     
@@ -32,6 +32,8 @@ public class GUIPrincipal extends JFrame {
         
         barajaPc = controlUnit.getBarajaPc();
         barajaJugador = controlUnit.getBarajaJugador();
+        jugador = new Jugador();
+        pc = new Jugador();
         
         initGUI();
 
@@ -43,46 +45,52 @@ public class GUIPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        startGame();
         
     }
 
    
 	public void startGame() {
 
-		/////////////////////////////////////////
-        //ADD PANELES
-		add(getPanelCentral(),BorderLayout.CENTER);
-	    add(panelLateral,BorderLayout.WEST);
-
-	    ////////////////////////////////////////
-        //ADD GRAFICAL INTERFASE
-	    getPanelCentral().addFichas();
-        getPanelCentral().addButtons();
-        panelLateral.addButtons();
-
-        getPanelCentral().updateUI();
-        panelLateral.updateUI();
-
         ////////////////////////////////////////
         //REPARTICION DE CARTAS
         
         PanelCentral.getJugador();
-		Jugador.realizarApuesta();
-        
-	    getPanelCentral().addCartasComunitarias();
+		jugador.realizarApuesta(1);
+		pc.apuestaPc(jugador.getApuesta());
+            
 	    getPanelCentral().addCartasJugador();
 	    getPanelCentral().addCartasPC();
 	    
-	    JOptionPane.showMessageDialog(null, "GAME START");
+	    
+	    
+	   
 	    getPanelCentral().turnCards("player");
 	    getPanelCentral().turnCards("pc");
-
+	    JOptionPane.showMessageDialog(null, "GAME START");
+	    
+	    getPanelCentral().addCartasComunitarias();
+	    getPanelCentral().updateUI();
 			
     }
 
-	private void initGUI() {
 
-		startGame();
+	public void initGUI() {
+
+		/////////////////////////////////////////
+		//ADD PANELES
+		add(getPanelCentral(),BorderLayout.CENTER);
+		add(panelLateral,BorderLayout.WEST);
+
+		////////////////////////////////////////
+		//ADD GRAFICAL INTERFASE
+		getPanelCentral().addFichas();
+		getPanelCentral().addButtons();
+		panelLateral.addButtons();
+
+		getPanelCentral().updateUI();
+		panelLateral.updateUI();
+		vprincipal.setVisible(true);
 
     }
 	
@@ -105,6 +113,19 @@ public class GUIPrincipal extends JFrame {
 
 	public void setPanelCentral(PanelCentral panelCentral) {
 		this.panelCentral = panelCentral;
+	}
+	
+	public static Jugador getJugador() {
+		return jugador;
+	}
+
+
+	public static Jugador getPc() {
+		return pc;
+	}
+	
+	public static PanelLateral getPanelLateral() {
+		return panelLateral;
 	}
     
     

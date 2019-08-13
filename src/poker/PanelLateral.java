@@ -22,14 +22,14 @@ public class PanelLateral extends JPanel  {
     private  ImageIcon plusButton;
     private JButton giveup;
     private EscuchaRestantes escuchaRestantes = new EscuchaRestantes();
+    private static int apuestaJugador,apuestaPC,apuestaActual;
 
-
-    public PanelLateral(){
+	public PanelLateral(){
 
         this.setLayout(null);
         this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(200,1000));
-        plusButton = new ImageIcon("src/imagenes/plus2.png");
+        
     }
 
     public void addButtons(){
@@ -59,7 +59,20 @@ public class PanelLateral extends JPanel  {
         g.setColor(Color.WHITE);
         g.drawString(computadorUP, 50, 60);
         g.drawString(computadorDown, 50, 80);
+        
+        plusButton = new ImageIcon("src/imagenes/plus2.png");
+        apuestaJugador = GUIPrincipal.getJugador().getApuesta();
+        apuestaPC = GUIPrincipal.getPc().getApuestaPC();
+        GUIPrincipal.getJugador();
+		apuestaActual = Jugador.getApuestaActual();
+      
+        g.drawString("La apuesta actual ",10,350);
+        g.drawString("es de   =  " + apuestaActual, 10 ,370);
+        repaint();
+        
     }
+    
+    
 
     private class EscuchaRestantes implements MouseListener{
 
@@ -102,6 +115,8 @@ public class PanelLateral extends JPanel  {
 
         }
     }
+    
+    
 
 
 

@@ -11,7 +11,7 @@ public class ControlUnit {
 
 
     ControlUnit() {
-    	Jugador jugador = new Jugador();
+    	
         baraja = new Baraja();
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();

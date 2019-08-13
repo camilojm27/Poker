@@ -84,7 +84,6 @@ public class MenuInicio extends JFrame {
 					if (username.isValid()){
 						window.dispose();
 						JOptionPane.showMessageDialog(null, "WELCOME");
-
 						guiPrincipal = new GUIPrincipal();
 					}
 

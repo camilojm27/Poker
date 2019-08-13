@@ -256,7 +256,8 @@ public class PanelCentral extends JPanel {
 			
 			if(arg0.getSource() == apostar) {
 				
-				jugador.realizarApuesta();
+				jugador.realizarApuesta(2);
+				GUIPrincipal.getPanelLateral().updateUI();
 			}
 			
 			if(arg0.getSource() == c1Ju || arg0.getSource() == c2Ju) {
