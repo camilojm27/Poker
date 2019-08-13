@@ -1,7 +1,11 @@
 package poker;
 
+import Fonts.Fuentes;
+
 import java.awt.*;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
 import javax.swing.*;
 //import com.sun.glass.ui.Window;
@@ -9,7 +13,8 @@ import javax.swing.*;
 
 
 public class MenuInicio extends JFrame {
-
+	private Fuentes fuentes;
+	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 18);
 	private PanelInicio panelInicio;
 	private Window window = this;
 	private GUIPrincipal guiPrincipal;
@@ -31,7 +36,7 @@ public class MenuInicio extends JFrame {
 
 	private class PanelInicio extends JPanel {
 
-		private JTextField username;
+		private JTextFieldHint username;
 		 private JButton start;
 		 private JButton exit;
 		 private JLabel titleBar;
@@ -41,9 +46,12 @@ public class MenuInicio extends JFrame {
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
-			username = new JTextField();
+			username = new JTextFieldHint();
+			//username.setFont();
+			//username.setHint("Nombre de usuario");
 			start = new JButton("START");
 			exit = new JButton("EXIT");
+			titleBar = new JLabel(new ImageIcon("src/imagenes/tittle-bar.gif"));
 			initGUI();
 
 		}
@@ -54,10 +62,17 @@ public class MenuInicio extends JFrame {
 			username.setBounds(70 + insets.left, 50  + insets.top,150,30);
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 350 + insets.top, 100,50);
+			titleBar.setBounds(30 + insets.left, 0  + insets.top,254,57);
 			this.add(start);
 			this.add(exit);
 			this.add(username);
-			username.setOpaque(true);
+			this.add(titleBar);
+			username.setFont(bit8);
+
+			username.setText("Username");
+			username.setForeground(Color.WHITE);
+			username.setOpaque(false);
+
 
 
 			start.addMouseListener(new mouseAction());
@@ -141,7 +156,61 @@ public class MenuInicio extends JFrame {
 		}
 
 	}
-}
+	private class JTextFieldHint extends JTextField  {
+
+		private final Font fontLost = new Font("Monaco", Font.ITALIC, 10);
+		private final Font fontGained = new Font("Monaco", Font.PLAIN, 12);
+		private final Color colorLost = Color.LIGHT_GRAY;
+		private final Color colorGained = Color.BLACK;
+		private String hint;
+
+
+
+	public JTextFieldHint(){
+		//addFocusListener(this);
+	}
+	public void setHint(String hint){
+		setForeground(colorLost);
+		setFont(bit8);
+		setText(this.hint);
+		this.hint = this.hint;
+	}
+
+		public String getHint() {
+			return hint;
+		}
+
+		/**@Override
+		public void focusGained(FocusEvent e) {
+			if (getText().equals(getHint())) {
+				setText("");
+				setFont(fontGained);
+				setForeground(colorGained);
+			} else {
+				setForeground(colorGained);
+				setFont(fontGained);
+				setText(getText());
+			}
+		}
+
+		@Override
+		public void focusLost(FocusEvent e) {
+			if (getText().length() <= 0) {
+				setHint(getHint());
+			} else {
+				setForeground(colorGained);
+				setFont(fontGained);
+				setText(getText());
+			}
+		}
+
+
+
+		*/
+	}}
+
+
+
 
 
 

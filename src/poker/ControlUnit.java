@@ -42,7 +42,7 @@ public class ControlUnit {
     }
 
     public void compararJugadas() {
-
+/*
         System.out.println("-------ROYAL_FLUSH_STRAIGHT-------");
         ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
         System.out.println("-------FLUSH_STRAIGHT-------");
@@ -65,6 +65,9 @@ public class ControlUnit {
         ranking(Escaleras.HIGH_CARD);
 
         // ranking(barajaJugador);
+
+
+ */
     }
 
     public int ranking(ArrayList<Carta> mano) {
