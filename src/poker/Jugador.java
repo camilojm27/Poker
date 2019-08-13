@@ -6,9 +6,11 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class Jugador extends JOptionPane {
-	
-	/** The lector. */
-	Scanner lector = new Scanner(System.in);
+
+	/**
+	 * The apuesta valida.
+	 */
+	static boolean apuestaValida = true;
 	
 	/** The dinero. */
 	private static int dinero = 50000;
@@ -21,10 +23,17 @@ public class Jugador extends JOptionPane {
 	private static int apuestaPC = 0;
 	
 	/** The plantarse. */
+
 	private static boolean plantarseJugador, plantarsePC;
 	
 	/** The apuesta valida. */
-	static boolean  apuestaValida = false;
+	
+
+	private static boolean plantarse;
+	/**
+	 * The lector.
+	 */
+	private Scanner lector = new Scanner(System.in);
 	
 	PanelCentral p = GUIPrincipal.getPanelCentral();
 
@@ -43,6 +52,7 @@ public class Jugador extends JOptionPane {
 	/**
 	 * Realizar apuesta.
 	 */
+
 	public int realizarApuesta(int stage) {
 		
 		if(stage == 1) {
@@ -159,14 +169,44 @@ public class Jugador extends JOptionPane {
 		}
 		
 		return dineroPC;
-		
 	}
-	
+		
+
+	public static void realizarApuesta() {
+		String inApuesta = JOptionPane.showInputDialog(null, "¿Cuanto desea apostar?");
+
+		while (apuestaValida) {
+			try {
+				apuesta = Integer.parseInt(inApuesta);
+				apuestaValida = false;
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Ingresa un valor valido");
+				realizarApuesta();
+			}
+		}
+
+
+		if (apuesta > dinero) {
+			 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente");
+			 realizarApuesta();
+		 }
+
+		 if(apuesta < dinero) {
+			 dinero = dinero - apuesta;
+			 JOptionPane.showMessageDialog(null, "tu dinero es " + dinero);
+
+		 }
+
+	}
+
+
 	public void turnCards(String who){
 	    if(who.equals("player")){
 	        p.c1Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 	        p.c2Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
-        }
+
+
+		}
 	    
 	    if(who.equals("pNormal")) {
 	    	

@@ -20,6 +20,7 @@ public class GUIPrincipal extends JFrame {
     private static PanelLateral panelLateral;
     private JButton boton;
     public static Window vprincipal;
+
     
     
     GUIPrincipal(){
