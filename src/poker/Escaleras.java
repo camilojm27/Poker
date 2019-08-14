@@ -2,6 +2,8 @@ package poker;
 
 import java.util.ArrayList;
 
+//Clase de ayuda, o pruebas para verificar y se cumplen las escaleras
+
 public class Escaleras {
     public static  ArrayList<Carta> FLUSH_STRAIGHT = new ArrayList<>();
     public static  ArrayList<Carta> ROYAL_FLUSH_STRAIGHT = new ArrayList<>();
@@ -86,10 +88,6 @@ public class Escaleras {
         HIGH_CARD.add(new Carta("Q", "H"));
         HIGH_CARD.add(new Carta("3", "C"));
         HIGH_CARD.add(new Carta("5", "S"));
-
-
-
-
 
     }
 }
