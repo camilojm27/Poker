@@ -17,16 +17,13 @@ import java.awt.event.MouseListener;
 public class PanelLateral extends JPanel  {
 
     private String  computadorUP = "TABLA DE", computadorDown = "PUNTAJES ";
-    private int puntaje=0;
-    private boolean gano, perdio, rendirse;
     private ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/leftPanel.png"));
-    private  JPanel lateralPane = this;
-    private  ImageIcon plusButton;
+    private  JPanel lateralPane = this;;
     private JButton giveup;
     private EscuchaRestantes escuchaRestantes = new EscuchaRestantes();
-    private static int apuestaJugador,apuestaPC,apuestaActual,apuestaAnterior;
-    private static int cashJugador;
-    private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 12);
+    private static int apuestaJugador,apuestaPC,apuestaActual;
+    private static int cashJugador,cashPC;
+    private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8_2, Font.BOLD, 24);
     private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
 
 	public PanelLateral(){
@@ -37,10 +34,12 @@ public class PanelLateral extends JPanel  {
         
     }
 
+
     public void addButtons(){
 
         giveup = new JButton("RETIRARSE");
         giveup.setFont(bit8_2);
+        giveup.setBackground(Color.white);
 
         Insets insets = this.getInsets();
 
@@ -66,15 +65,15 @@ public class PanelLateral extends JPanel  {
 
         g.drawString(computadorUP, 50, 60);
         g.drawString(computadorDown, 60, 80);
-        
-        plusButton = new ImageIcon("src/imagenes/plus2.png");
+
         apuestaJugador = GUIPrincipal.getJugador().getApuesta();
         apuestaPC = GUIPrincipal.getPc().getApuestaPC();
-        GUIPrincipal.getJugador();
 		apuestaActual = Jugador.getApuestaActual();
 		cashJugador = GUIPrincipal.getJugador().getDinero();
+		cashPC = GUIPrincipal.getPc().getDineroPC();
 		
-		g.drawString("Dinero:" + String.valueOf(cashJugador), 8, 120);
+		g.drawString(Jugador.getUsername()+ ": " + String.valueOf(cashJugador), 8, 120);
+        g.drawString("Cortana: " + String.valueOf(cashPC), 8, 150);
         g.drawString("Bote =  " + apuestaActual,10,350);
       //  g.drawString("es de:  " + apuestaActual, 10 ,370);
         repaint();
@@ -136,15 +135,5 @@ public class PanelLateral extends JPanel  {
 
         }
     }
-    
-    
-
-
-
-
-
-
-
-
 
 }

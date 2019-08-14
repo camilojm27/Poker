@@ -68,6 +68,8 @@ public class MenuInicio extends JFrame {
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 350 + insets.top, 100,50);
 			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
+			start.setBackground(Color.white);
+			exit.setBackground(Color.white);
 			this.add(start);
 			this.add(exit);
 			this.add(username);

@@ -147,38 +147,46 @@ public class PanelCentral extends JPanel {
         cc3.setBounds(ccx+(cas*2) + insets.left, ccy + insets.top,120,180);
         cc3.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(2).getImagen());
         this.add(cc3);
+		////////////////////////////////////////////////////////////////////////////////////
+		cc4 = new JButton();
+		size = cc4.getPreferredSize();
+		cc4.setBounds(ccx+(cas*3) + insets.left, ccy + insets.top,120,180);
+		cc4.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(3).getImagen());
+		this.add(cc4);
+		/////////////////////////////////////////////////////////////////////////////////////
+		cc5 = new JButton();
+		size = cc5.getPreferredSize();
+		cc5.setBounds(ccx+(cas*4) + insets.left, ccy + insets.top,120,180);
+		cc5.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(4).getImagen());
+		this.add(cc5);
+		cc1.setVisible(false);
+		cc2.setVisible(false);
+		cc3.setVisible(false);
+		cc4.setVisible(false);
+		cc5.setVisible(false);
        
 
     }
-	
-	public void add4carta() {
-		int cas = 125;
-        ccx = 180;
-        ccy = 250;
-        //////////////////////////////////
-        Insets insets = this.getInsets();
-		 ////////////////////////////////////////////////////////////////////////////////////
-        cc4 = new JButton();
-        Dimension size = cc4.getPreferredSize();
-        cc4.setBounds(ccx+(cas*3) + insets.left, ccy + insets.top,120,180);
-        cc4.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(3).getImagen());
-        this.add(cc4);
+
+    public void showNextCard(int cual){
+		if(cual == 1){cc1.setVisible(true);}
+		if(cual == 2){cc2.setVisible(true);}
+		if(cual == 3){cc3.setVisible(true);}
+		if(cual == 4){cc4.setVisible(true);}
+		if(cual == 5){cc5.setVisible(true);}
 	}
-	
-	public void add5carta() {
-		int cas = 125;
-        ccx = 180;
-        ccy = 250;
-        //////////////////////////////////
-        Insets insets = this.getInsets();
-		
-		 /////////////////////////////////////////////////////////////////////////////////////
-        cc5 = new JButton();
-        Dimension size = cc5.getPreferredSize();
-        cc5.setBounds(ccx+(cas*4) + insets.left, ccy + insets.top,120,180);
-        cc5.setIcon(GUIPrincipal.controlUnit.getCartasComunitarias().get(4).getImagen());
-        this.add(cc5);
-		
+
+
+
+	public void removeCartasComunitarias(){
+
+		this.remove(cc1);
+		this.remove(cc2);
+		this.remove(cc3);
+		this.remove(cc4);
+		this.remove(cc5);
+		this.updateUI();
+
 	}
 
 	public static Jugador getJugador() {
@@ -281,11 +289,17 @@ public class PanelCentral extends JPanel {
 				elegirCartas = false;
 				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
             	GUIPrincipal.getJugador().setDinero
-            	((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());
-            	
+						((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());
+
+				GUIPrincipal.getPc().setDineroPC
+						((GUIPrincipal.getPc().getDineroPC()) + GUIPrincipal.getJugador().getApuestaActual());
+
             	GUIPrincipal.controlUnit.newRound();
-            	//GUIPrincipal.getJugador().turnCards("player");
 				GUIPrincipal.getJugador().setApuestaActual();
+				GUIPrincipal.getJugador().realizarApuesta(1);
+
+
+
 			}
 
 			if(arg0.getSource() == subir) {

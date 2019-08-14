@@ -22,7 +22,6 @@ public class GUIPrincipal extends JFrame {
     public static Window vprincipal;
 
     
-    
     GUIPrincipal(){
 
         vprincipal = this;
@@ -55,7 +54,7 @@ public class GUIPrincipal extends JFrame {
 		/////////////////////////////////////////
 		//ADD PANELES
 		add(getPanelCentral(),BorderLayout.CENTER);
-		add(panelLateral,BorderLayout.WEST);
+		add(getPanelLateral(),BorderLayout.WEST);
 
 		////////////////////////////////////////
 		//ADD GRAFICAL INTERFASE
@@ -70,54 +69,41 @@ public class GUIPrincipal extends JFrame {
     }
 	
 	public void startGame() {
-		
-			JOptionPane.showMessageDialog(null, "REPARTO");
 			gameStage(1);
 			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
-
-			
-			
-
-  	
     	}
 
 	
 	 public static void gameStage(int ronda) {
 	    	panelCentral.infoPanelCentral();
 	    	switch(ronda) {
-	    	
-	    	case 1:
-	    		
-	    		 ////////////////////////////////////////
-	            //REPARTICION DE CARTAS
-	            
-	            PanelCentral.getJugador();
-	           
-	    		jugador.realizarApuesta(1);
-	    		pc.apuestaPc(jugador.getApuesta());
-	                
-	    	    getPanelCentral().addCartasJugador();
-	    	    getPanelCentral().addCartasPC();
-	    	    
-	    	    getPanelCentral().turnCards("player");
-	    	    getPanelCentral().turnCards("pc");
-	    	    getPanelCentral().updateUI();
-	    	    break;
-	    	    
-	    	case 2:
+				case 1:
 
-				//GUIPrincipal.getJugador().setApuestaActual();
-				GUIPrincipal.getPanelCentral().updateUI();
-				getPanelCentral().addCartasComunitarias();
+					////////////////////////////////////////
+					//REPARTICION DE CARTAS
+
+					PanelCentral.getJugador();
+
+					jugador.realizarApuesta(1);
+					pc.apuestaPc(jugador.getApuesta());
+
+					getPanelCentral().addCartasJugador();
+					getPanelCentral().addCartasPC();
+					getPanelCentral().addCartasComunitarias();
+
+					getPanelCentral().turnCards("player");
+					getPanelCentral().turnCards("pc");
+					getPanelCentral().updateUI();
+					break;
 	    		
 
-	    	
-	    	case 9:
-	    		
-	    		
-	    	    
-	    	    
-	    		
+
+				case 2:
+					getPanelCentral().showNextCard(1);
+					getPanelCentral().showNextCard(2);
+					getPanelCentral().showNextCard(3);
+
+
 	    		
 	    	}
 	  

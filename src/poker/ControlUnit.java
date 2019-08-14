@@ -43,6 +43,10 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
+        GUIPrincipal.getJugador().setApuestaActual();
+        GUIPrincipal.getPanelCentral().removeCartasComunitarias();
+        GUIPrincipal.getPanelCentral().updateUI();
+
 
         
     	
