@@ -99,6 +99,7 @@ public class PanelLateral extends JPanel  {
                 GUIPrincipal.getJugador().setApuestaActual();
             	
             	GUIPrincipal.controlUnit.newRound();
+
             	GUIPrincipal.getJugador().turnCards("player");
             	
             	

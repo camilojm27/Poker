@@ -4,6 +4,7 @@ import Fonts.Fuentes;
 
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
@@ -271,11 +272,13 @@ public class PanelCentral extends JPanel {
 	}
 
 	private class MouseAction  implements MouseListener {
-
+	private ArrayList<Carta> jugada;
+	private boolean elegirCartas;
 		@Override
 		public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
 			if(arg0.getSource() == pasar) {
+				elegirCartas = false;
 				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
             	GUIPrincipal.getJugador().setDinero
             	((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.getJugador().getApuestaActual());
@@ -286,7 +289,8 @@ public class PanelCentral extends JPanel {
 			}
 
 			if(arg0.getSource() == subir) {
-				
+				elegirCartas = false;
+
 				jugador.realizarApuesta(3);
 				GUIPrincipal.getPanelLateral().updateUI();
 				GUIPrincipal.gameStage(2);
@@ -295,20 +299,19 @@ public class PanelCentral extends JPanel {
 			}
 			
 			if(arg0.getSource() == igualar) {
-				
+				elegirCartas = false;
 				jugador.realizarApuesta(2);
 				GUIPrincipal.getPanelLateral().updateUI();
 				GUIPrincipal.gameStage(2);
 
 			}
+			if(arg0.getSource() == jugar) {
+
+				elegirCartas = true;
+				GUIPrincipal.getPanelLateral().updateUI();
 
 
-
-			
-			
-			
-			
-			
+			}
 			
 
 		}
@@ -335,7 +338,9 @@ public class PanelCentral extends JPanel {
 
 		@Override
 		public void mousePressed(java.awt.event.MouseEvent arg0) {
-			// TODO Auto-generated method stub
+			if (elegirCartas){
+				//System.out.println(arg0.getComponent().createImage().getSource());
+			}
 		}
 
 		@Override
