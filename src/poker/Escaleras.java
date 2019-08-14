@@ -32,7 +32,7 @@ public class Escaleras {
 
         FOUR_OF_A_KIND.add(new Carta("8","C"));
         FOUR_OF_A_KIND.add(new Carta("8","S"));
-        FOUR_OF_A_KIND.add(new Carta("1","H"));
+        FOUR_OF_A_KIND.add(new Carta("4","H"));
         FOUR_OF_A_KIND.add(new Carta("8","H"));
         FOUR_OF_A_KIND.add(new Carta("8","S"));
 

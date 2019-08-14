@@ -6,7 +6,7 @@ import java.net.URL;
 
 public class Sonidos {
 
-private URL url;
+    private URL url;
     private Clip clip;
     public static String secondSong = "Music/Psycho (8 bits).wav", firstSong = "Music/Supermassive black hole (8 bits fusion).wav";
     private AudioInputStream audioIn;

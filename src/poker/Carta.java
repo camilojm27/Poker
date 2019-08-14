@@ -1,23 +1,25 @@
 package poker;
 
 import javax.swing.ImageIcon;
+import java.net.URL;
 
 public class Carta implements Comparable{
+    private URL url;
     private String id;
     private String tipo;
     private ImageIcon imagen;
-    private boolean turned = true;
     private int idValue;
 
 
     Carta(String id, String baraja){
         this.id = id;
         this.tipo = baraja;
-        this.turned = turned;
         this.idValue= getIdValue();
+        url = this.getClass().getClassLoader().getResource("imagenes/" + id + tipo + ".png");
+        //System.out.println(url.toString());
 
 
-        imagen = new ImageIcon("src/imagenes/" + id + tipo + ".png");
+        imagen = new ImageIcon(url);
     }
 
     public String getId() {
