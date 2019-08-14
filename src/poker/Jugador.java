@@ -55,6 +55,12 @@ public class Jugador extends JOptionPane {
 	/**
 	 * Realizar apuesta.
 	 */
+	
+	public static void realizarApuestaFija() {
+		apuesta = getApuestaActual();
+		apuestaActual= apuesta + getApuesta();
+		dinero = dinero - apuesta;
+	}
 
 	public int realizarApuesta(int stage) {
 
@@ -210,8 +216,10 @@ public class Jugador extends JOptionPane {
 				
 			}
 			
-			else JOptionPane.showMessageDialog(null, "no tienes dinero para seguir apostando, tu pierdes");
-				// System.exit(1);
+			else {
+				JOptionPane.showMessageDialog(null, "no tienes dinero para seguir apostando, tu pierdes");
+				System.exit(1);
+				}
 
 			}
 
@@ -220,25 +228,28 @@ public class Jugador extends JOptionPane {
 	
 	public int apuestaPc(int apuesta) {
 		
-		if(apuesta < dineroPC) {
-			
-			apuestaPC = (2*apuesta);
-			dineroPC = dineroPC - getApuestaPC();
-			apuestaActual = apuesta + apuestaPC;
-			JOptionPane.showMessageDialog(null, "Cortana apuesta " + getApuestaPC());
-
-			
-			
-		}
-		
 		if(apuesta > dineroPC) {
 			
 			JOptionPane.showMessageDialog(null, "El contrincante se ha quedado sin dinero, tu ganas");
 			System.exit(1);
-		
-			
+
 		}
 		
+		if(apuesta < dineroPC && apuesta <= 25000) {
+			
+			apuestaPC = (apuesta + apuesta);
+			dineroPC = dineroPC - getApuestaPC();
+			apuestaActual = apuesta + apuestaPC;
+			JOptionPane.showMessageDialog(null, "Cortana apuesta " + getApuestaPC());
+		}
+		
+		else {
+			apuestaPC = apuesta+1000;
+			dineroPC = dineroPC - apuestaPC;
+			apuestaActual = apuesta + apuestaPC;
+			JOptionPane.showMessageDialog(null, "Cortana apuesta " + getApuestaPC());
+		}
+
 		return dineroPC;
 	}
 		
@@ -278,7 +289,7 @@ public class Jugador extends JOptionPane {
 	
 	}
 
-	public int getApuesta() {
+	public static int getApuesta() {
 		return apuesta;
 	}
 	
@@ -290,10 +301,7 @@ public class Jugador extends JOptionPane {
 		return apuestaActual;
 	}
 
-	public static int setApuestaActual(){
-		apuestaActual = 0;
-		return apuestaActual;
-	}
+	
 
 	public static void setUsername(String username) {
 		Jugador.username = username;
@@ -301,5 +309,19 @@ public class Jugador extends JOptionPane {
 	public static String getUsername() {
 		return Jugador.username;
 	}
+
+	public static void setApuesta(int apuesta) {
+		Jugador.apuesta = apuesta;
+	}
+
+	public static void setApuestaActual(int apuestaActual) {
+		Jugador.apuestaActual = apuestaActual;
+	}
+
+	public static void setApuestaPC(int apuestaPC) {
+		Jugador.apuestaPC = apuestaPC;
+	}
+	
+	
 
 }

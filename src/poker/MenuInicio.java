@@ -64,10 +64,10 @@ public class MenuInicio extends JFrame {
 			titleBar = new JLabel(new ImageIcon("src/imagenes/tittle-bar.gif"));
 
 			Insets insets = this.getInsets();
-			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
+			username.setBounds(70 + insets.left, 270  + insets.top,160,30);
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
-			exit.setBounds(100 + insets.left, 350 + insets.top, 100,50);
-			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
+			exit.setBounds(100 + insets.left, 320 + insets.top, 100,50);
+			titleBar.setBounds(25 + insets.left, 205  + insets.top,250,50);
 			start.setBackground(Color.white);
 			exit.setBackground(Color.white);
 			this.add(start);
@@ -108,7 +108,7 @@ public class MenuInicio extends JFrame {
 
 				if(arg0.getSource() == start) {
 
-					JOptionPane.showMessageDialog(null, "Clicked START");
+				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                         Jugador.setUsername(username.getText());
                         window.dispose();

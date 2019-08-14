@@ -18,6 +18,7 @@ public class GUIPrincipal extends JFrame {
 	public static ControlUnit controlUnit;
     private static PanelCentral panelCentral;
     private static PanelLateral panelLateral;
+    private static int ronda;
     private JButton boton;
     public static Window vprincipal;
 
@@ -76,11 +77,13 @@ public class GUIPrincipal extends JFrame {
 	
 	 public static void gameStage(int ronda) {
 	    	panelCentral.infoPanelCentral();
+	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
 				case 1:
 
 					////////////////////////////////////////
 					//REPARTICION DE CARTAS
+					
 
 					PanelCentral.getJugador();
 
@@ -102,9 +105,21 @@ public class GUIPrincipal extends JFrame {
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
-
-
-	    		
+					pc.apuestaPc(jugador.getApuesta());
+					getPanelCentral().updateUI();
+					break;
+					
+				case 3:
+					getPanelCentral().showNextCard(4);
+					pc.apuestaPc(jugador.getApuesta());
+					getPanelCentral().updateUI();
+					break;
+				case 4:
+					getPanelCentral().showNextCard(5);
+					pc.apuestaPc(jugador.getApuesta());
+					getPanelCentral().updateUI();
+					break;
+				
 	    	}
 	  
 	 }
@@ -142,6 +157,15 @@ public class GUIPrincipal extends JFrame {
 	public static PanelLateral getPanelLateral() {
 		return panelLateral;
 	}
-    
+	
+	public static int getRonda() {
+		return ronda;
+	}
+
+	public static void setRonda(int ronda) {
+		GUIPrincipal.ronda = ronda;
+	}
+	
+	
     
 }

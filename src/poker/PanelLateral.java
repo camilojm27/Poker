@@ -24,7 +24,7 @@ public class PanelLateral extends JPanel  {
     private static int apuestaJugador,apuestaPC,apuestaActual;
     private static int cashJugador,cashPC;
     private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8_2, Font.BOLD, 24);
-    private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
+    private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 
 	public PanelLateral(){
 
@@ -93,19 +93,8 @@ public class PanelLateral extends JPanel  {
             if(dialogResult == 0){
             	
             	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
-            	GUIPrincipal.getJugador().setDinero
-            	((GUIPrincipal.getJugador().getDinero()) - apuestaActual);
-                GUIPrincipal.getJugador().setApuestaActual();
-            	
-            	GUIPrincipal.controlUnit.newRound();
-
-            	GUIPrincipal.getJugador().turnCards("player");
-            	
-            	
-            	
-
-              //  JOptionPane.showMessageDialog(null,"Sayonara");
-              //  GUIPrincipal.vprincipal.dispose();
+            	ControlUnit.newRound();
+          
             }
 
             else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");

@@ -19,7 +19,7 @@ public class PanelCentral extends JPanel {
 	private static JButton subir;
 	private static JButton igualar;
 	private static JButton jugar;
-	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
+	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private JButton cc1;
 	private JButton cc2;
@@ -232,7 +232,6 @@ public class PanelCentral extends JPanel {
         subir.addMouseListener(mouse);
         jugar.addMouseListener(mouse);
         
-
         this.add(pasar);
         this.add(igualar);
         this.add(subir);
@@ -258,10 +257,6 @@ public class PanelCentral extends JPanel {
 		fPc.setIcon(new ImageIcon(getClass().getResource("/imagenes/fichas2.png")));
 		fPc.setBorderPainted(false);
 
-
-
-
-
 		this.add(fJu);
 		this.add(fPc);
 	}
@@ -278,10 +273,19 @@ public class PanelCentral extends JPanel {
 
 
 	}
+	
+	public void removeAL() {
+		
+		subir.removeMouseListener(mouse);
+		igualar.removeMouseListener(mouse);
+		subir.setBorder(null);
+		igualar.setBorder(null);
+	}
 
 	private class MouseAction  implements MouseListener {
 	private ArrayList<Carta> jugada;
 	private boolean elegirCartas;
+		@SuppressWarnings("static-access")
 		@Override
 		public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
@@ -295,7 +299,6 @@ public class PanelCentral extends JPanel {
 						((GUIPrincipal.getPc().getDineroPC()) + GUIPrincipal.getJugador().getApuestaActual());
 
             	GUIPrincipal.controlUnit.newRound();
-				GUIPrincipal.getJugador().setApuestaActual();
 				GUIPrincipal.getJugador().realizarApuesta(1);
 
 
@@ -303,26 +306,15 @@ public class PanelCentral extends JPanel {
 			}
 
 			if(arg0.getSource() == subir) {
-				elegirCartas = false;
-
-				jugador.realizarApuesta(3);
-				GUIPrincipal.getPanelLateral().updateUI();
-				GUIPrincipal.gameStage(2);
-
-				
+				ControlUnit.checkSubir();
 			}
 			
 			if(arg0.getSource() == igualar) {
-				elegirCartas = false;
-				jugador.realizarApuesta(2);
-				GUIPrincipal.getPanelLateral().updateUI();
-				GUIPrincipal.gameStage(2);
+				ControlUnit.checkIgualar();
+				
 
 			}
 			if(arg0.getSource() == jugar) {
-
-				elegirCartas = true;
-				GUIPrincipal.getPanelLateral().updateUI();
 
 
 			}

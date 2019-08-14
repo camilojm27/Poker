@@ -17,7 +17,7 @@ public class ControlUnit {
 
     ControlUnit() {
 
-        Jugador jugador = new Jugador();
+        
         baraja = new Baraja();
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
@@ -33,7 +33,24 @@ public class ControlUnit {
     
     public static void newRound() {
     	
+    	
+    	GUIPrincipal.getJugador();
+    	if(Jugador.getApuestaActual() <= GUIPrincipal.getJugador().getDinero()) {
+    		Jugador.setDinero((GUIPrincipal.getJugador().getDinero()) - Jugador.getApuestaActual());
+    	}
+    	else { 
+    		JOptionPane.showMessageDialog(null, "Te has quedado sin dinero, no puedes seguir jugando");
+    			System.exit(1);
+    	}
+        GUIPrincipal.getJugador();
+		Jugador.setApuestaActual(0);
+		Jugador.setApuesta(0);
+		Jugador.setApuestaPC(0);
+    	GUIPrincipal.getJugador().turnCards("player");
     	JOptionPane.showMessageDialog(null, "Nueva Ronda");
+    	GUIPrincipal.getPanelCentral().removeCartasComunitarias();
+        GUIPrincipal.getPanelCentral().updateUI();
+    	
         baraja = new Baraja();
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
@@ -43,13 +60,7 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        GUIPrincipal.getJugador().setApuestaActual();
-        GUIPrincipal.getPanelCentral().removeCartasComunitarias();
-        GUIPrincipal.getPanelCentral().updateUI();
 
-
-        
-    	
     }
 
 
@@ -65,7 +76,8 @@ public class ControlUnit {
         return cartasComunitarias;
     }
 
-    private int cartaMayor(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2){
+    @SuppressWarnings("unchecked")
+	private int cartaMayor(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2){
         Collections.sort(jugador1);
         Collections.sort(jugador2);
         if (jugador1.get(4).getIdValue() > jugador2.get(4).getIdValue()){
@@ -176,7 +188,8 @@ else{
         return 0;
     }
 
-    private boolean pair(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean pair(ArrayList<Carta> mano) {
         Collections.sort(mano);
         if (mano.get(0).getId().equals(mano.get(1).getId())) {
             return true;
@@ -192,7 +205,8 @@ else{
         return false;
     }
 
-    private boolean twoPair(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean twoPair(ArrayList<Carta> mano) {
         Collections.sort(mano);
 
         if (mano.get(0).getId() == mano.get(1).getId() & mano.get(2).getId() == mano.get(3).getId()
@@ -204,7 +218,8 @@ else{
         return false;
     }
 
-    private boolean threeOfaKind(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean threeOfaKind(ArrayList<Carta> mano) {
         Collections.sort(mano);
 
         if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId() &
@@ -222,7 +237,8 @@ else{
         return false;
     }
 
-    private boolean escaleraStraight(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean escaleraStraight(ArrayList<Carta> mano) {
         int escaleraStraightValue = 0;
         Collections.sort(mano);
 
@@ -244,7 +260,8 @@ else{
         return true;
     }
 
-    private boolean fullHouse(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean fullHouse(ArrayList<Carta> mano) {
         //No se utiliza bucle for, porque se deborda del arraylist en ciertos casos
         Collections.sort(mano);
         Carta threeCardsType;
@@ -269,7 +286,8 @@ else{
         return false;
     }
 
-    private boolean fourOfaKind(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean fourOfaKind(ArrayList<Carta> mano) {
 
         Collections.sort(mano);
         if (mano.get(0).getId() == mano.get(1).getId() & mano.get(1).getId() == mano.get(2).getId() &
@@ -286,7 +304,8 @@ else{
         return false;
     }
 
-    private boolean royalFlushStraight(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean royalFlushStraight(ArrayList<Carta> mano) {
 
         Collections.sort(mano);
         if (mano.get(0).getId() == "10" & mano.get(1).getId() == "J" &
@@ -298,7 +317,8 @@ else{
         return false;
     }
 
-    private boolean flushStraight(ArrayList<Carta> mano) {
+    @SuppressWarnings("unchecked")
+	private boolean flushStraight(ArrayList<Carta> mano) {
         int flushStraightValue = 0;
 
         Collections.sort(mano);
@@ -323,6 +343,73 @@ else{
         if (sameValue == mano.size() - 1)
             return true;
         return false;
+    }
+    
+    public static void checkSubir() {
+    	if(GUIPrincipal.getRonda() == 2) {
+			
+			GUIPrincipal.getJugador().realizarApuesta(3);
+			GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(2);
+			GUIPrincipal.setRonda(3);
+			return;
+		}
+    	
+    	if(GUIPrincipal.getRonda() == 3) {
+			
+    		GUIPrincipal.getJugador().realizarApuesta(3);
+			GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(3);
+			GUIPrincipal.setRonda(4);
+			return;
+		}
+    	
+    	if(GUIPrincipal.getRonda() == 4) {
+			
+    		GUIPrincipal.getJugador().realizarApuesta(3);
+			GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(4);
+			GUIPrincipal.getPanelCentral().removeAL();
+			return;
+		}
+    }
+    
+    public static void checkIgualar() {
+    	
+    	if(GUIPrincipal.getRonda() == 2) {
+			
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		Jugador.realizarApuestaFija();
+        	GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(2);
+			GUIPrincipal.setRonda(3);
+			return;
+		}
+    	
+    	if(GUIPrincipal.getRonda() == 3) {
+			
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		Jugador.realizarApuestaFija();
+        	GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(3);
+			GUIPrincipal.setRonda(4);
+			return;
+		}
+    	
+    	if(GUIPrincipal.getRonda() == 4) {
+			
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		Jugador.realizarApuestaFija();
+        	GUIPrincipal.getPanelLateral().updateUI();
+			GUIPrincipal.gameStage(4);
+			GUIPrincipal.getPanelCentral().removeAL();
+			return;
+		}
+    	
+    }
+    
+    public static void cortanaDecidirJugada() {
+    	
     }
 
 
