@@ -6,16 +6,19 @@ import java.net.URL;
 
 public class Sonidos {
 
-    Sonidos(){
-
-    }
-
-    public static void pop(){
+private URL url;
+    private Clip clip;
+    public static String secondSong = "Music/Psycho (8 bits).wav", firstSong = "Music/Supermassive black hole (8 bits fusion).wav";
+    private AudioInputStream audioIn;
+    Sonidos(String relativePath){
         try {
-            URL url = Sonidos.class.getResource("pop.flac");
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(url);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
+            // Open an audio input stream.
+             url = this.getClass().getClassLoader().getResource(relativePath);
+             audioIn = AudioSystem.getAudioInputStream(url);
+            // Get a sound clip resource.
+             clip = AudioSystem.getClip();
+            // Open audio clip and load samples from the audio input stream.
+            clip.open(audioIn);
             clip.start();
         } catch (UnsupportedAudioFileException e) {
             e.printStackTrace();
@@ -25,4 +28,17 @@ public class Sonidos {
             e.printStackTrace();
         }
     }
-}
+
+    public void stop(){
+        clip.stop();
+        clip.close();
+    }
+
+
+    public  void start(){
+
+        clip.start();
+    }
+
+    }
+

@@ -45,7 +45,7 @@ public class MenuInicio extends JFrame {
 		 private Sonidos sonidos;
 
 		PanelInicio(){
-
+            sonidos = new Sonidos(Sonidos.firstSong);
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
@@ -55,7 +55,7 @@ public class MenuInicio extends JFrame {
 		}
 
 		private void initGUI() {
-			//sonidos.pop();
+
 			username = new JTextFieldHint();
 			//username.setFont();
 			//username.setHint("Nombre de usuario");
@@ -67,7 +67,7 @@ public class MenuInicio extends JFrame {
 			username.setBounds(70 + insets.left, 270  + insets.top,160,30);
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 320 + insets.top, 100,50);
-			titleBar.setBounds(25 + insets.left, 205  + insets.top,250,50);
+			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
 			start.setBackground(Color.white);
 			exit.setBackground(Color.white);
 			this.add(start);
@@ -107,7 +107,7 @@ public class MenuInicio extends JFrame {
 			public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
 				if(arg0.getSource() == start) {
-
+					sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                         Jugador.setUsername(username.getText());
@@ -119,6 +119,7 @@ public class MenuInicio extends JFrame {
 
 
 						guiPrincipal = new GUIPrincipal();
+
 					}
 
 

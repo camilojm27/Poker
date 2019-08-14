@@ -21,6 +21,7 @@ public class GUIPrincipal extends JFrame {
     private static int ronda;
     private JButton boton;
     public static Window vprincipal;
+	private Sonidos sonidos;
 
     
     GUIPrincipal(){
@@ -70,6 +71,7 @@ public class GUIPrincipal extends JFrame {
     }
 	
 	public void startGame() {
+		sonidos = new Sonidos(Sonidos.secondSong);
 			gameStage(1);
 			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
     	}
