@@ -83,7 +83,7 @@ public class GUIPrincipal extends JFrame {
 
 	
 	 public static void gameStage(int ronda) {
-	    	
+	    	panelCentral.infoPanelCentral();
 	    	switch(ronda) {
 	    	
 	    	case 1:

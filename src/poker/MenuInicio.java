@@ -55,7 +55,7 @@ public class MenuInicio extends JFrame {
 		}
 
 		private void initGUI() {
-			sonidos.pop();
+			//sonidos.pop();
 			username = new JTextFieldHint();
 			//username.setFont();
 			//username.setHint("Nombre de usuario");

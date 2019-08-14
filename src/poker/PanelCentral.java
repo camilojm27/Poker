@@ -5,15 +5,12 @@ import Fonts.Fuentes;
 import java.awt.*;
 import java.awt.event.MouseListener;
 
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
+import javax.swing.*;
 
 
 public class PanelCentral extends JPanel {
 
-	private String username = Jugador.getUsername();
+	private JLabel username = new JLabel(Jugador.getUsername()), player2 = new JLabel("Cortana");
 
 	private int c1x, c2x, c1y, c2y,ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy;
 	public static JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc;
@@ -21,7 +18,8 @@ public class PanelCentral extends JPanel {
 	private static JButton subir;
 	private static JButton igualar;
 	private static JButton jugar;
-	private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
+	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 9);
+	private final Font decored = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private JButton cc1;
 	private JButton cc2;
 	private JButton cc3;
@@ -32,12 +30,26 @@ public class PanelCentral extends JPanel {
 	public static JPanel pcentral;
 
 
+
 	PanelCentral(){
 		pcentral = this;
 		this.setLayout(null);
 		this.setBackground(Color.lightGray);
 		this.setPreferredSize(GUIPrincipal.sizeGame);
 
+	}
+
+	public void infoPanelCentral(){
+
+		Insets insets = this.getInsets();
+		player2.setFont(decored);
+		player2.setBounds(850 + insets.left, 150 + insets.top,420,161);
+		player2.setForeground(Color.CYAN);
+		username.setFont(decored);
+		username.setBounds(20 + insets.left, 370 + insets.top,400,161);
+		username.setForeground(Color.ORANGE);
+		add(player2);
+		add(username);
 	}
 
 	public void turnCards(String who){
@@ -201,10 +213,10 @@ public class PanelCentral extends JPanel {
         subir.setBackground(Color.WHITE);
         jugar.setBackground(Color.white);
 
-        pasar.setFont(bit8_2);
-        igualar.setFont(bit8_2);
-        subir.setFont(bit8_2);
-        jugar.setFont(bit8_2);
+        pasar.setFont(bit8);
+        igualar.setFont(bit8);
+        subir.setFont(bit8);
+        jugar.setFont(bit8);
         
         pasar.addMouseListener(mouse);
         igualar.addMouseListener(mouse);
@@ -237,6 +249,10 @@ public class PanelCentral extends JPanel {
 		fPc.setIcon(new ImageIcon(getClass().getResource("/imagenes/fichas2.png")));
 		fPc.setBorderPainted(false);
 
+
+
+
+
 		this.add(fJu);
 		this.add(fPc);
 	}
@@ -248,8 +264,9 @@ public class PanelCentral extends JPanel {
 		Dimension height = getSize();
 		ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/Background_final.png"));
 		g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
-		g.drawString(username, 100, 200);
 		setOpaque(false);
+
+
 
 	}
 
