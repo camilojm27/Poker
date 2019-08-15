@@ -20,8 +20,8 @@ public class ControlUnit {
 
         
         baraja = new Baraja();
-        barajaPc = baraja.repartirBaraja();
-        barajaJugador = baraja.repartirBaraja();
+        barajaPc = baraja.repartirBarajaJugadores();
+        barajaJugador = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
         
         /*
@@ -58,8 +58,8 @@ public class ControlUnit {
         GUIPrincipal.getPanelCentral().updateUI();
     	
         baraja = new Baraja();
-        barajaPc = baraja.repartirBaraja();
-        barajaJugador = baraja.repartirBaraja();
+        barajaPc = baraja.repartirBarajaJugadores();
+        barajaJugador = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
         GUIPrincipal.getPanelCentral().addCartasComunitarias();
         baraja.print(barajaJugador);

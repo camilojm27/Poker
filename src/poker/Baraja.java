@@ -3,7 +3,7 @@ package poker;
 import java.util.ArrayList;
 import java.util.Random;
 
-
+//Clase de transicion o ayuda para repartir cartas
 public class Baraja {
     private Escaleras escaleras;
     private ArrayList<Carta> clubs, diamonds, hearts, spades, repartir, all;
@@ -58,14 +58,14 @@ public class Baraja {
 
     }
 
-    public ArrayList<Carta> repartirBaraja() {
+    public ArrayList<Carta> repartirBarajaJugadores() {
         ArrayList<Carta> todos = all;
         repartir = new ArrayList<>();
         random = new Random();
         int cualCarta, sizeFichas;
 
 
-        for (int i = 0; i < 5; i++) {
+        for (int i = 0; i < 2; i++) {
             sizeFichas = todos.size();
             cualCarta = random.nextInt(sizeFichas);
             repartir.add(todos.get(cualCarta));
