@@ -120,8 +120,17 @@ public class GUIPrincipal extends JFrame {
 					getPanelCentral().showNextCard(5);
 					pc.apuestaPc(jugador.getApuesta());
 					getPanelCentral().updateUI();
+					ronda++;
 					break;
-				
+                case 5:
+                	if (controlUnit.winner() == Jugador.getUsername()){
+                		JOptionPane.showMessageDialog(null, "Ganaste!");
+					}
+                	else {
+                		JOptionPane.showMessageDialog(null, "Perdiste :(");
+					}
+
+                    break;
 	    	}
 	  
 	 }

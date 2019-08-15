@@ -3,7 +3,7 @@ package poker;
 import javax.swing.UIManager;
 import java.awt.EventQueue;
 
-//Compilar con Java 8 JDK  de oracle y no con openJDK para que funcione la musica
+//Compilar con la ultima version de JDK para que funcione la musica :D
 
 public class Main {
     public static void main(String[] args) {

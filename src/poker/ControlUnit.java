@@ -12,9 +12,10 @@ public class ControlUnit {
     public static ArrayList<Carta> barajaPc;
     public static ArrayList<Carta> barajaJugador;
     public static ArrayList<Carta> cartasComunitarias;
-    
-   
 
+
+    private ArrayList<Integer>puntajeJugador = new ArrayList<>();
+    private ArrayList<Integer>puntajeCortana = new ArrayList<>();
 
     ControlUnit() {
 
@@ -84,6 +85,9 @@ public class ControlUnit {
     }
 
     @SuppressWarnings("unchecked")
+
+
+
 	private int cartaMayor(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2){
         Collections.sort(jugador1);
         Collections.sort(jugador2);
@@ -98,6 +102,52 @@ public class ControlUnit {
 
     }
 
+    private boolean mayorPuntaje(){
+        int playerScore = 0, cortanaScore=0;
+        for (int puntaje = 0; puntaje < puntajeJugador.size(); puntaje++) {
+            playerScore += puntajeJugador.get(puntaje);
+            cortanaScore += puntajeCortana.get(puntaje);
+        }
+        if (playerScore <= cortanaScore){
+            return false;
+        }else return true;
+    }
+
+    public String winner(){
+         //Jugador2
+        Carta aux;
+        /*Collections.sort(barajaJugador);
+        Collections.sort(barajaPc);
+        Collections.sort(cartasComunitarias);
+         */
+
+        for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
+            aux = cartasComunitarias.get(cartaComunitaria);
+            cartasComunitarias.remove(cartaComunitaria);
+
+            for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
+                cartasComunitarias.add(barajaJugador.get(cartaJugador));
+                puntajeJugador.add(ranking(cartasComunitarias));
+                cartasComunitarias.add(cartaComunitaria, aux);
+            }
+        }
+        for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
+            aux = cartasComunitarias.get(cartaComunitaria);
+            cartasComunitarias.remove(cartaComunitaria);
+
+            for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
+                cartasComunitarias.add(barajaPc.get(cartaJugador));
+                puntajeCortana.add(ranking(cartasComunitarias));
+                cartasComunitarias.add(cartaComunitaria, aux);
+            }
+        }
+        if (mayorPuntaje()){
+            return "Cortana";
+        }
+
+        else return Jugador.getUsername();
+    }
+/*
     public int compararJugadas(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2) {
 
 if (ranking(jugador1) > ranking(jugador2)){
@@ -127,7 +177,9 @@ else{
     return cartaMayor(jugador1, jugador2);
 }
 
-/*
+
+        return 0;
+
         System.out.println("-------ROYAL_FLUSH_STRAIGHT-------");
         ranking(Escaleras.ROYAL_FLUSH_STRAIGHT);
         System.out.println("-------FLUSH_STRAIGHT-------");
@@ -149,10 +201,8 @@ else{
         System.out.println("-------HIGH_CARD-------");
         ranking(Escaleras.HIGH_CARD);
 
- */
-
-        return 0;
     }
+ */
 
     public int ranking(ArrayList<Carta> mano) {
         boolean sameType;
@@ -419,8 +469,7 @@ else{
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
-			GUIPrincipal.controlUnit.compararJugadas
-			(GUIPrincipal.getBarajaJugador(),GUIPrincipal.getBarajaPc());
+
 			return;
 		}
     	
