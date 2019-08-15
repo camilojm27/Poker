@@ -142,10 +142,11 @@ public class ControlUnit {
             }
         }
         if (mayorPuntaje()){
-            return "Cortana";
+            return "Cortana" ;
         }
 
-        else return Jugador.getUsername();
+        else return GUIPrincipal.getJugador().getName();
+        		
     }
 /*
     public int compararJugadas(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2) {
@@ -436,6 +437,21 @@ else{
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
+			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername()) {
+				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
+				GUIPrincipal.getPanelCentral().turnCards("pNormal");
+				GUIPrincipal.getPanelCentral().turnCards("cNormal");
+				victoria(1);
+				
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Cortana gana");
+				GUIPrincipal.getPanelCentral().turnCards("pNormal");
+				GUIPrincipal.getPanelCentral().turnCards("cNormal");
+				victoria(2);
+				
+			}
+			
 			return;
 		}
     }
@@ -469,6 +485,24 @@ else{
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
+			GUIPrincipal.controlUnit.winner();
+			if(GUIPrincipal.controlUnit.winner() == GUIPrincipal.getJugador().getName()) {
+				
+				GUIPrincipal.getPanelCentral().turnCards("pNormal");
+				GUIPrincipal.getPanelCentral().turnCards("cNormal");
+				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
+				GUIPrincipal.getPanelCentral().turnCards("pc");
+				victoria(1);
+				
+			}
+			else {
+				
+				GUIPrincipal.getPanelCentral().turnCards("pNormal");
+				GUIPrincipal.getPanelCentral().turnCards("cNormal");
+				JOptionPane.showMessageDialog(null, "Cortana gana");
+				GUIPrincipal.getPanelCentral().turnCards("pc");
+				victoria(2);
+			}
 
 			return;
 		}

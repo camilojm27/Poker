@@ -71,6 +71,12 @@ public class PanelCentral extends JPanel {
 	    	c2Pc.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 	    	
 	    }
+	    
+	    if(who.equals("cNormal")) {
+	    	
+	    	c1Pc.setIcon(GUIPrincipal.controlUnit.getBarajaPc().get(0).getImagen());
+	    	c2Pc.setIcon(GUIPrincipal.controlUnit.getBarajaPc().get(1).getImagen());
+	    }
     }
 
 	public void addCartasJugador() {
