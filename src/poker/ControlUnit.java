@@ -12,6 +12,7 @@ public class ControlUnit {
     public static ArrayList<Carta> barajaPc;
     public static ArrayList<Carta> barajaJugador;
     public static ArrayList<Carta> cartasComunitarias;
+    
    
 
 
@@ -22,13 +23,16 @@ public class ControlUnit {
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
+        
+        /*
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        //compararJugadas();
-    compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
+        */
+        
+        //compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
     }
     
     public static void newRound() {
@@ -48,6 +52,8 @@ public class ControlUnit {
 		Jugador.setApuestaPC(0);
     	GUIPrincipal.getJugador().turnCards("player");
     	JOptionPane.showMessageDialog(null, "Nueva Ronda");
+    	
+    	GUIPrincipal.getPanelCentral().addAL();
     	GUIPrincipal.getPanelCentral().removeCartasComunitarias();
         GUIPrincipal.getPanelCentral().updateUI();
     	
@@ -55,6 +61,7 @@ public class ControlUnit {
         barajaPc = baraja.repartirBaraja();
         barajaJugador = baraja.repartirBaraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
+        GUIPrincipal.getPanelCentral().addCartasComunitarias();
         baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
@@ -95,17 +102,26 @@ public class ControlUnit {
 
 if (ranking(jugador1) > ranking(jugador2)){
     System.out.println("El jugador jugador 1 tiene una mejor jugada que el jugador 2");
+    JOptionPane.showMessageDialog(null, "El jugador 1 gana");
+    victoria(1);
 }else if (ranking(jugador1) < ranking(jugador2)){
     System.out.println("El jugador jugador 2 tiene una mejor jugada que el jugador 1");
+    JOptionPane.showMessageDialog(null, "El jugador 2 gana");
+    victoria(2);
 }
 else{
+	JOptionPane.showMessageDialog(null, "Empate, se elegira la ultima carta de la mano");
     System.out.println("Empate, se elegira la ultima carta de la mano (La mayor) = " );
     if (1 == cartaMayor(jugador1, jugador2)) {
 
 
         System.out.print("El jugador 1 tiene mejor jugada");
+        JOptionPane.showMessageDialog(null, "El jugador 1 gana");
+        victoria(1);
     }else{
         System.out.print("El jugador 2 tiene mejor jugada");
+        JOptionPane.showMessageDialog(null, "El jugador 2 gana");
+        victoria(2);
     }
 
     return cartaMayor(jugador1, jugador2);
@@ -378,7 +394,7 @@ else{
     	
     	if(GUIPrincipal.getRonda() == 2) {
 			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(2);
@@ -388,7 +404,7 @@ else{
     	
     	if(GUIPrincipal.getRonda() == 3) {
 			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(3);
@@ -398,17 +414,39 @@ else{
     	
     	if(GUIPrincipal.getRonda() == 4) {
 			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuesta());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
+			GUIPrincipal.controlUnit.compararJugadas
+			(GUIPrincipal.getBarajaJugador(),GUIPrincipal.getBarajaPc());
 			return;
 		}
     	
     }
     
     public static void cortanaDecidirJugada() {
+    	
+    }
+    
+    public static void victoria(int quien) {
+    	if(quien == 1) {
+    		GUIPrincipal.getJugador();
+			Jugador.setDinero
+    		(Jugador.getDinero() + Jugador.getApuestaActual());
+			GUIPrincipal.getPanelLateral().updateUI();
+			ControlUnit.newRound();
+    		
+    	}
+    	else {
+    		GUIPrincipal.getPc();
+    		Jugador.setDineroPC
+    		(Jugador.getDineroPC() + Jugador.getApuestaActual());
+    		GUIPrincipal.getPanelLateral().updateUI();
+    		ControlUnit.newRound();
+    		
+    	}
     	
     }
 

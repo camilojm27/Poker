@@ -235,7 +235,7 @@ public class PanelCentral extends JPanel {
         this.add(pasar);
         this.add(igualar);
         this.add(subir);
-        this.add(jugar);
+        //this.add(jugar);
 
     }
 
@@ -278,8 +278,13 @@ public class PanelCentral extends JPanel {
 		
 		subir.removeMouseListener(mouse);
 		igualar.removeMouseListener(mouse);
-		subir.setBorder(null);
-		igualar.setBorder(null);
+		
+	}
+	
+	public void addAL() {
+		subir.addMouseListener(mouse);
+		igualar.addMouseListener(mouse);
+		
 	}
 
 	private class MouseAction  implements MouseListener {

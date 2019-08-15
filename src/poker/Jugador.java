@@ -244,7 +244,7 @@ public class Jugador extends JOptionPane {
 		}
 		
 		else {
-			apuestaPC = apuesta+1000;
+			apuestaPC = apuesta+apuesta;
 			dineroPC = dineroPC - apuestaPC;
 			apuestaActual = apuesta + apuestaPC;
 			JOptionPane.showMessageDialog(null, "Cortana apuesta " + getApuestaPC());
@@ -254,7 +254,7 @@ public class Jugador extends JOptionPane {
 	}
 		
 
-	public int getDinero() {
+	public static int getDinero() {
 		return dinero;
 	}
 

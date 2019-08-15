@@ -21,10 +21,10 @@ public class GUIPrincipal extends JFrame {
     private static int ronda;
     private JButton boton;
     public static Window vprincipal;
-	private Sonidos sonidos;
+	private static Sonidos sonidos;
 
     
-    GUIPrincipal(){
+	GUIPrincipal(){
 
         vprincipal = this;
     	sizeGame = new Dimension(1200,720);
@@ -71,7 +71,7 @@ public class GUIPrincipal extends JFrame {
     }
 	
 	public void startGame() {
-		sonidos = new Sonidos(Sonidos.secondSong);
+			sonidos = new Sonidos(Sonidos.secondSong);
 			gameStage(1);
 			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
     	}
@@ -129,7 +129,7 @@ public class GUIPrincipal extends JFrame {
 	
 
 	
-	public ArrayList<Carta> getBarajaPc() {
+	public static ArrayList<Carta> getBarajaPc() {
 		return barajaPc;
 	}
 
@@ -168,6 +168,10 @@ public class GUIPrincipal extends JFrame {
 		GUIPrincipal.ronda = ronda;
 	}
 	
+	 public static Sonidos getSonidos() {
+			return sonidos;
+		}
+
 	
     
 }
