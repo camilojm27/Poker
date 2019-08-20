@@ -1,3 +1,8 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 //import org.jetbrains.annotations.Contract;
@@ -7,16 +12,34 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class ControlUnit.
+ */
 public class ControlUnit {
+    
+    /** The baraja. */
     private static Baraja baraja;
+    
+    /** The baraja pc. */
     public static ArrayList<Carta> barajaPc;
+    
+    /** The baraja jugador. */
     public static ArrayList<Carta> barajaJugador;
+    
+    /** The cartas comunitarias. */
     public static ArrayList<Carta> cartasComunitarias;
 
 
+    /** The puntaje jugador. */
     private ArrayList<Integer>puntajeJugador = new ArrayList<>();
+    
+    /** The puntaje cortana. */
     private ArrayList<Integer>puntajeCortana = new ArrayList<>();
 
+    /**
+     * Instantiates a new control unit.
+     */
     ControlUnit() {
 
         
@@ -36,6 +59,9 @@ public class ControlUnit {
         //compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
     }
     
+    /**
+     * New round.
+     */
     public static void newRound() {
     	
     	
@@ -68,22 +94,45 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
+        
 
     }
 
 
+    /**
+     * Gets the baraja pc.
+     *
+     * @return the baraja pc
+     */
     public ArrayList<Carta> getBarajaPc() {
         return barajaPc;
     }
 
+    /**
+     * Gets the baraja jugador.
+     *
+     * @return the baraja jugador
+     */
     public ArrayList<Carta> getBarajaJugador() {
         return barajaJugador;
     }
 
+    /**
+     * Gets the cartas comunitarias.
+     *
+     * @return the cartas comunitarias
+     */
     public ArrayList<Carta> getCartasComunitarias() {
         return cartasComunitarias;
     }
 
+    /**
+     * Carta mayor.
+     *
+     * @param jugador1 the jugador 1
+     * @param jugador2 the jugador 2
+     * @return the int
+     */
     @SuppressWarnings("unchecked")
 
 
@@ -102,6 +151,11 @@ public class ControlUnit {
 
     }
 
+    /**
+     * Mayor puntaje.
+     *
+     * @return true, if successful
+     */
     private boolean mayorPuntaje(){
         int playerScore = 0, cortanaScore=0;
         for (int puntaje = 0; puntaje < puntajeJugador.size(); puntaje++) {
@@ -113,6 +167,11 @@ public class ControlUnit {
         }else return true;
     }
 
+    /**
+     * Winner.
+     *
+     * @return the string
+     */
     public String winner(){
          //Jugador2
         Carta aux;
@@ -205,7 +264,13 @@ else{
     }
  */
 
-    public int ranking(ArrayList<Carta> mano) {
+    /**
+ * Ranking.
+ *
+ * @param mano the mano
+ * @return the int
+ */
+public int ranking(ArrayList<Carta> mano) {
         boolean sameType;
         //Comprueba si es del mismo tipo
         sameType = sameType(mano);
@@ -255,6 +320,12 @@ else{
         return 0;
     }
 
+    /**
+     * Pair.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean pair(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -272,6 +343,12 @@ else{
         return false;
     }
 
+    /**
+     * Two pair.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean twoPair(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -285,6 +362,12 @@ else{
         return false;
     }
 
+    /**
+     * Three ofa kind.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean threeOfaKind(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -304,6 +387,12 @@ else{
         return false;
     }
 
+    /**
+     * Escalera straight.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean escaleraStraight(ArrayList<Carta> mano) {
         int escaleraStraightValue = 0;
@@ -321,12 +410,24 @@ else{
         return false;
     }
 
+    /**
+     * Color flush.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     //@Contract(pure = true)
     private boolean colorFlush(ArrayList<Carta> mano) {
         //Collections.sort(mano);
         return true;
     }
 
+    /**
+     * Full house.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean fullHouse(ArrayList<Carta> mano) {
         //No se utiliza bucle for, porque se deborda del arraylist en ciertos casos
@@ -353,6 +454,12 @@ else{
         return false;
     }
 
+    /**
+     * Four ofa kind.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean fourOfaKind(ArrayList<Carta> mano) {
 
@@ -371,6 +478,12 @@ else{
         return false;
     }
 
+    /**
+     * Royal flush straight.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean royalFlushStraight(ArrayList<Carta> mano) {
 
@@ -384,6 +497,12 @@ else{
         return false;
     }
 
+    /**
+     * Flush straight.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     @SuppressWarnings("unchecked")
 	private boolean flushStraight(ArrayList<Carta> mano) {
         int flushStraightValue = 0;
@@ -399,6 +518,12 @@ else{
         return false;
     }
 
+    /**
+     * Same type.
+     *
+     * @param mano the mano
+     * @return true, if successful
+     */
     private boolean sameType(ArrayList<Carta> mano) {
 
         int sameValue = 0; //Si el valor da el tamaño del array -1 todas son iguales
@@ -412,6 +537,9 @@ else{
         return false;
     }
     
+    /**
+     * Check subir.
+     */
     public static void checkSubir() {
     	if(GUIPrincipal.getRonda() == 2) {
 			
@@ -456,6 +584,9 @@ else{
 		}
     }
     
+    /**
+     * Check igualar.
+     */
     public static void checkIgualar() {
     	
     	if(GUIPrincipal.getRonda() == 2) {
@@ -509,10 +640,18 @@ else{
     	
     }
     
+    /**
+     * Cortana decidir jugada.
+     */
     public static void cortanaDecidirJugada() {
     	
     }
     
+    /**
+     * Victoria.
+     *
+     * @param quien the quien
+     */
     public static void victoria(int quien) {
     	if(quien == 1) {
     		GUIPrincipal.getJugador();

@@ -1,3 +1,8 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 import Fonts.Fuentes;
@@ -9,29 +14,68 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class PanelCentral.
+ */
 public class PanelCentral extends JPanel {
 
+	/** The player 2. */
 	private JLabel username = new JLabel(Jugador.getUsername()), player2 = new JLabel("Cortana");
 
+	/** The c 2 pcy. */
 	private int c1x, c2x, c1y, c2y,ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy;
+	
+	/** The pc. */
 	public static JButton c1Ju, c2Ju, c1Pc, c2Pc, fJu, fPc;
+	
+	/** The pasar. */
 	private static JButton pasar;
+	
+	/** The subir. */
 	private static JButton subir;
+	
+	/** The igualar. */
 	private static JButton igualar;
+	
+	/** The jugar. */
 	private static JButton jugar;
+	
+	/** The bit 8. */
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
+	
+	/** The decored. */
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
+	
+	/** The cc 1. */
 	private JButton cc1;
+	
+	/** The cc 2. */
 	private JButton cc2;
+	
+	/** The cc 3. */
 	private JButton cc3;
+	
+	/** The cc 4. */
 	private JButton cc4;
+	
+	/** The cc 5. */
 	private JButton cc5;
+	
+	/** The mouse. */
 	MouseAction mouse = new MouseAction();
+	
+	/** The jugador. */
 	static Jugador jugador = new Jugador();
+	
+	/** The pcentral. */
 	public static JPanel pcentral;
 
 
 
+	/**
+	 * Instantiates a new panel central.
+	 */
 	PanelCentral(){
 		pcentral = this;
 		this.setLayout(null);
@@ -40,6 +84,9 @@ public class PanelCentral extends JPanel {
 
 	}
 
+	/**
+	 * Info panel central.
+	 */
 	public void infoPanelCentral(){
 
 		Insets insets = this.getInsets();
@@ -53,6 +100,11 @@ public class PanelCentral extends JPanel {
 		add(username);
 	}
 
+	/**
+	 * Turn cards.
+	 *
+	 * @param who the who
+	 */
 	public void turnCards(String who){
 	    if(who.equals("player")){
 	        c1Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
@@ -79,6 +131,9 @@ public class PanelCentral extends JPanel {
 	    }
     }
 
+	/**
+	 * Adds the cartas jugador.
+	 */
 	public void addCartasJugador() {
 
 		c1x = 180;
@@ -105,6 +160,9 @@ public class PanelCentral extends JPanel {
 		///////////////////////////////////////////////////////////////////////////////////
 	}
 	
+	/**
+	 * Adds the cartas PC.
+	 */
 	public void addCartasPC() {
 
 		c1pcx = 545;
@@ -129,6 +187,9 @@ public class PanelCentral extends JPanel {
 		///////////////////////////////////////////////////////////////////////////////////
 	}
 
+	/**
+	 * Adds the cartas comunitarias.
+	 */
 	public void addCartasComunitarias(){
 
 	    int cas = 125;
@@ -174,6 +235,11 @@ public class PanelCentral extends JPanel {
 
     }
 
+    /**
+     * Show next card.
+     *
+     * @param cual the cual
+     */
     public void showNextCard(int cual){
 		if(cual == 1){cc1.setVisible(true);}
 		if(cual == 2){cc2.setVisible(true);}
@@ -184,6 +250,9 @@ public class PanelCentral extends JPanel {
 
 
 
+	/**
+	 * Removes the cartas comunitarias.
+	 */
 	public void removeCartasComunitarias(){
 
 		this.remove(cc1);
@@ -195,10 +264,18 @@ public class PanelCentral extends JPanel {
 
 	}
 
+	/**
+	 * Gets the jugador.
+	 *
+	 * @return the jugador
+	 */
 	public static Jugador getJugador() {
 		return jugador;
 	}
 
+	/**
+	 * Adds the buttons.
+	 */
 	public void addButtons(){
 
         Insets insets = this.getInsets();
@@ -245,6 +322,9 @@ public class PanelCentral extends JPanel {
 
     }
 
+	/**
+	 * Adds the fichas.
+	 */
 	public void addFichas() {
 
 
@@ -267,6 +347,11 @@ public class PanelCentral extends JPanel {
 		this.add(fPc);
 	}
 
+	/**
+	 * Paint component.
+	 *
+	 * @param g the g
+	 */
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
 
@@ -280,6 +365,9 @@ public class PanelCentral extends JPanel {
 
 	}
 	
+	/**
+	 * Removes the AL.
+	 */
 	public void removeAL() {
 		
 		subir.removeMouseListener(mouse);
@@ -287,15 +375,31 @@ public class PanelCentral extends JPanel {
 		
 	}
 	
+	/**
+	 * Adds the AL.
+	 */
 	public void addAL() {
 		subir.addMouseListener(mouse);
 		igualar.addMouseListener(mouse);
 		
 	}
 
+	/**
+	 * The Class MouseAction.
+	 */
 	private class MouseAction  implements MouseListener {
+	
+	/** The jugada. */
 	private ArrayList<Carta> jugada;
+	
+	/** The elegir cartas. */
 	private boolean elegirCartas;
+		
+		/**
+		 * Mouse clicked.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@SuppressWarnings("static-access")
 		@Override
 		public void mouseClicked(java.awt.event.MouseEvent arg0) {
@@ -325,14 +429,16 @@ public class PanelCentral extends JPanel {
 				
 
 			}
-			if(arg0.getSource() == jugar) {
 
-
-			}
 			
 
 		}
 
+		/**
+		 * Mouse entered.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@Override
 		public void mouseEntered(java.awt.event.MouseEvent arg0) {
 
@@ -343,6 +449,11 @@ public class PanelCentral extends JPanel {
 			}
 		}
 
+		/**
+		 * Mouse exited.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@Override
 		public void mouseExited(java.awt.event.MouseEvent arg0) {
 
@@ -353,6 +464,11 @@ public class PanelCentral extends JPanel {
 			}
 		}
 
+		/**
+		 * Mouse pressed.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@Override
 		public void mousePressed(java.awt.event.MouseEvent arg0) {
 			if (elegirCartas){
@@ -360,6 +476,11 @@ public class PanelCentral extends JPanel {
 			}
 		}
 
+		/**
+		 * Mouse released.
+		 *
+		 * @param arg0 the arg 0
+		 */
 		@Override
 		public void mouseReleased(java.awt.event.MouseEvent arg0) {
 			// TODO Auto-generated method stub

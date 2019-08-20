@@ -1,3 +1,8 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 import java.util.Scanner;
@@ -5,12 +10,18 @@ import java.util.Scanner;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+// TODO: Auto-generated Javadoc
+/**
+ * The Class Jugador.
+ */
 public class Jugador extends JOptionPane {
 
 	/**
 	 * The apuesta valida.
 	 */
 	static boolean apuestaValida = true;
+	
+	/** The username. */
 	private static String username;
 
 
@@ -18,11 +29,16 @@ public class Jugador extends JOptionPane {
 	/** The dinero. */
 	private static int dinero = 50000;
 	
+	/** The dinero PC. */
 	private static int dineroPC = 50000;
 	
 	/** The apuesta. */
 	private static int apuesta = 0;
+	
+	/** The apuesta actual. */
 	private static int apuestaActual= 0;
+	
+	/** The apuesta PC. */
 	private static int apuestaPC = 0;
 	
 	/** The plantarse. */
@@ -38,6 +54,7 @@ public class Jugador extends JOptionPane {
 	 */
 	private Scanner lector = new Scanner(System.in);
 	
+	/** The p. */
 	PanelCentral p = GUIPrincipal.getPanelCentral();
 
 	
@@ -62,6 +79,12 @@ public class Jugador extends JOptionPane {
 		dinero = dinero - apuesta;
 	}
 
+	/**
+	 * Realizar apuesta.
+	 *
+	 * @param stage the stage
+	 * @return the int
+	 */
 	public int realizarApuesta(int stage) {
 
 		if(dinero == 0){
@@ -226,6 +249,12 @@ public class Jugador extends JOptionPane {
 		return dinero;	
 	}
 	
+	/**
+	 * Apuesta pc.
+	 *
+	 * @param apuesta the apuesta
+	 * @return the int
+	 */
 	public int apuestaPc(int apuesta) {
 		
 		if(apuesta > dineroPC) {
@@ -254,23 +283,48 @@ public class Jugador extends JOptionPane {
 	}
 		
 
+	/**
+	 * Gets the dinero.
+	 *
+	 * @return the dinero
+	 */
 	public static int getDinero() {
 		return dinero;
 	}
 
+	/**
+	 * Sets the dinero.
+	 *
+	 * @param dinero the new dinero
+	 */
 	public static void setDinero(int dinero) {
 		Jugador.dinero = dinero;
 	}
 
 
+	/**
+	 * Gets the dinero PC.
+	 *
+	 * @return the dinero PC
+	 */
 	public static int getDineroPC() {
 		return dineroPC;
 	}
 
+	/**
+	 * Sets the dinero PC.
+	 *
+	 * @param dineroPC the new dinero PC
+	 */
 	public static void setDineroPC(int dineroPC) {
 		Jugador.dineroPC = dineroPC;
 	}
 
+	/**
+	 * Turn cards.
+	 *
+	 * @param who the who
+	 */
 	public void turnCards(String who){
 	    if(who.equals("player")){
 	        p.c1Ju.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
@@ -289,35 +343,76 @@ public class Jugador extends JOptionPane {
 	
 	}
 
+	/**
+	 * Gets the apuesta.
+	 *
+	 * @return the apuesta
+	 */
 	public static int getApuesta() {
 		return apuesta;
 	}
 	
+	/**
+	 * Gets the apuesta PC.
+	 *
+	 * @return the apuesta PC
+	 */
 	public int getApuestaPC() {
 		return apuestaPC;
 	}
 
+	/**
+	 * Gets the apuesta actual.
+	 *
+	 * @return the apuesta actual
+	 */
 	public static int getApuestaActual() {
 		return apuestaActual;
 	}
 
 	
 
+	/**
+	 * Sets the username.
+	 *
+	 * @param username the new username
+	 */
 	public static void setUsername(String username) {
 		Jugador.username = username;
 	}
+	
+	/**
+	 * Gets the username.
+	 *
+	 * @return the username
+	 */
 	public static String getUsername() {
 		return Jugador.username;
 	}
 
+	/**
+	 * Sets the apuesta.
+	 *
+	 * @param apuesta the new apuesta
+	 */
 	public static void setApuesta(int apuesta) {
 		Jugador.apuesta = apuesta;
 	}
 
+	/**
+	 * Sets the apuesta actual.
+	 *
+	 * @param apuestaActual the new apuesta actual
+	 */
 	public static void setApuestaActual(int apuestaActual) {
 		Jugador.apuestaActual = apuestaActual;
 	}
 
+	/**
+	 * Sets the apuesta PC.
+	 *
+	 * @param apuestaPC the new apuesta PC
+	 */
 	public static void setApuestaPC(int apuestaPC) {
 		Jugador.apuestaPC = apuestaPC;
 	}

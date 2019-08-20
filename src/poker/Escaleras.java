@@ -1,24 +1,58 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 import java.util.ArrayList;
 
+// TODO: Auto-generated Javadoc
 //Clase de ayuda, o pruebas para verificar y se cumplen las escaleras
 
+/**
+ * The Class Escaleras.
+ */
 public class Escaleras {
+    
+    /** The flush straight. */
     public static  ArrayList<Carta> FLUSH_STRAIGHT = new ArrayList<>();
+    
+    /** The royal flush straight. */
     public static  ArrayList<Carta> ROYAL_FLUSH_STRAIGHT = new ArrayList<>();
+    
+    /** The four of a kind. */
     public static  ArrayList<Carta> FOUR_OF_A_KIND = new ArrayList<>();
+    
+    /** The four of a kind2. */
     public static  ArrayList<Carta> FOUR_OF_A_KIND2 = new ArrayList<>();
+    
+    /** The full house. */
     public static  ArrayList<Carta> FULL_HOUSE = new ArrayList<>();
+    
+    /** The color flush. */
     public static  ArrayList<Carta> COLOR_FLUSH = new ArrayList<>();
+    
+    /** The escalera straight. */
     public static  ArrayList<Carta> ESCALERA_STRAIGHT = new ArrayList<>();
+    
+    /** The three of a kind. */
     public static ArrayList<Carta> THREE_OF_A_KIND = new ArrayList<>();
+    
+    /** The two pair. */
     public static ArrayList<Carta> TWO_PAIR = new ArrayList<>();
+    
+    /** The pair. */
     public static ArrayList<Carta> PAIR = new ArrayList<>();
+    
+    /** The high card. */
     public static ArrayList<Carta> HIGH_CARD = new ArrayList<>();
 
 
 
+    /**
+     * Instantiates a new escaleras.
+     */
     Escaleras(){
         FLUSH_STRAIGHT.add(new Carta("9", "D"));
         FLUSH_STRAIGHT.add(new Carta("8", "D"));

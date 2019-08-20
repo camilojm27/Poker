@@ -1,3 +1,8 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 import Fonts.Fuentes;
@@ -9,16 +14,34 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
 import java.util.Random;
 import javax.swing.*;
+// TODO: Auto-generated Javadoc
 //import com.sun.glass.ui.Window;
 
 
 
+/**
+ * The Class MenuInicio.
+ */
 public class MenuInicio extends JFrame {
+	
+	/** The fuentes. */
 	private Fuentes fuentes;
+	
+	/** The bit 8. */
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 18);
+	
+	/** The panel inicio. */
 	private PanelInicio panelInicio;
+	
+	/** The window. */
 	private Window window = this;
+	
+	/** The gui principal. */
 	private GUIPrincipal guiPrincipal;
+	
+	/**
+	 * Instantiates a new menu inicio.
+	 */
 	MenuInicio(){
 
 		panelInicio = new PanelInicio();
@@ -35,17 +58,34 @@ public class MenuInicio extends JFrame {
 		add(panelInicio);
 	}
 
+	/**
+	 * The Class PanelInicio.
+	 */
 	private class PanelInicio extends JPanel {
 
+		/** The username. */
 		private JTextFieldHint username;
-		 private JButton start;
-		 private JButton exit;
-		 private JLabel titleBar;
-		 private Random random  = new Random();;
-		 private Sonidos sonidos;
+		 
+ 		/** The start. */
+ 		private JButton start;
+		 
+ 		/** The exit. */
+ 		private JButton exit;
+		 
+ 		/** The title bar. */
+ 		private JLabel titleBar;
+		 
+ 		/** The random. */
+ 		private Random random  = new Random();;
+		 
+ 		/** The sonidos. */
+ 		private Sonidos sonidos;
 
+		/**
+		 * Instantiates a new panel inicio.
+		 */
 		PanelInicio(){
-            sonidos = new Sonidos(Sonidos.firstSong);
+            //sonidos = new Sonidos(Sonidos.firstSong);
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
@@ -54,6 +94,9 @@ public class MenuInicio extends JFrame {
 
 		}
 
+		/**
+		 * Inits the GUI.
+		 */
 		private void initGUI() {
 
 			username = new JTextFieldHint();
@@ -90,6 +133,11 @@ public class MenuInicio extends JFrame {
 
 
 
+		/**
+		 * Paint component.
+		 *
+		 * @param g the g
+		 */
 		public void paintComponent(Graphics g){
 			super.paintComponent(g);
 
@@ -101,13 +149,21 @@ public class MenuInicio extends JFrame {
 		}
 
 
+		/**
+		 * The Class mouseAction.
+		 */
 		class mouseAction implements MouseListener{
 
+			/**
+			 * Mouse clicked.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent arg0) {
 
 				if(arg0.getSource() == start) {
-					sonidos.stop();
+				//	sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                         Jugador.setUsername(username.getText());
@@ -136,24 +192,44 @@ public class MenuInicio extends JFrame {
 
 			}
 
+			/**
+			 * Mouse entered.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void mouseEntered(java.awt.event.MouseEvent arg0) {
 				// TODO Auto-generated method stub
 
 			}
 
+			/**
+			 * Mouse exited.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void mouseExited(java.awt.event.MouseEvent arg0) {
 				// TODO Auto-generated method stub
 
 			}
 
+			/**
+			 * Mouse pressed.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void mousePressed(java.awt.event.MouseEvent arg0) {
 				// TODO Auto-generated method stub
 
 			}
 
+			/**
+			 * Mouse released.
+			 *
+			 * @param arg0 the arg 0
+			 */
 			@Override
 			public void mouseReleased(java.awt.event.MouseEvent arg0) {
 				// TODO Auto-generated method stub
@@ -166,19 +242,41 @@ public class MenuInicio extends JFrame {
 		}
 
 	}
+	
+	/**
+	 * The Class JTextFieldHint.
+	 */
 	private class JTextFieldHint extends JTextField  {
 
+		/** The font lost. */
 		private final Font fontLost = new Font("Monaco", Font.ITALIC, 10);
+		
+		/** The font gained. */
 		private final Font fontGained = new Font("Monaco", Font.PLAIN, 12);
+		
+		/** The color lost. */
 		private final Color colorLost = Color.LIGHT_GRAY;
+		
+		/** The color gained. */
 		private final Color colorGained = Color.BLACK;
+		
+		/** The hint. */
 		private String hint;
 
 
 
+	/**
+	 * Instantiates a new j text field hint.
+	 */
 	public JTextFieldHint(){
 		//addFocusListener(this);
 	}
+	
+	/**
+	 * Sets the hint.
+	 *
+	 * @param hint the new hint
+	 */
 	public void setHint(String hint){
 		setForeground(colorLost);
 		setFont(bit8);
@@ -186,6 +284,11 @@ public class MenuInicio extends JFrame {
 		this.hint = this.hint;
 	}
 
+		/**
+		 * Gets the hint.
+		 *
+		 * @return the hint
+		 */
 		public String getHint() {
 			return hint;
 		}

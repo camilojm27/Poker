@@ -1,3 +1,8 @@
+/*
+ * INTEGRANTES:
+ * CAMILO JOSE MEZU MINA = 1824313
+ * SANTIAGO MARTINEZ MESA = 1823107
+ */
 package poker;
 
 import java.awt.*;
@@ -5,25 +10,52 @@ import java.util.ArrayList;
 
 import javax.swing.*;
 
+// TODO: Auto-generated Javadoc
 //import com.sun.glass.ui.Window;
 
 
+/**
+ * The Class GUIPrincipal.
+ */
 public class GUIPrincipal extends JFrame {
 	
+	/** The baraja pc. */
 	private static ArrayList<Carta> barajaPc;
+    
+    /** The baraja jugador. */
     private static ArrayList<Carta> barajaJugador;
+    
+    /** The pc. */
     private static Jugador jugador,pc;
     
+    /** The size game. */
     public static Dimension sizeGame;
+	
+	/** The control unit. */
 	public static ControlUnit controlUnit;
+    
+    /** The panel central. */
     private static PanelCentral panelCentral;
+    
+    /** The panel lateral. */
     private static PanelLateral panelLateral;
+    
+    /** The ronda. */
     private static int ronda;
+    
+    /** The boton. */
     private JButton boton;
+    
+    /** The vprincipal. */
     public static Window vprincipal;
+	
+	/** The sonidos. */
 	private static Sonidos sonidos;
 
     
+	/**
+	 * Instantiates a new GUI principal.
+	 */
 	GUIPrincipal(){
 
         vprincipal = this;
@@ -51,6 +83,9 @@ public class GUIPrincipal extends JFrame {
         
     }
 
+	/**
+	 * Inits the GUI.
+	 */
 	public void initGUI() {
 
 		/////////////////////////////////////////
@@ -70,14 +105,22 @@ public class GUIPrincipal extends JFrame {
 
     }
 	
+	/**
+	 * Start game.
+	 */
 	public void startGame() {
-			sonidos = new Sonidos(Sonidos.secondSong);
+			//sonidos = new Sonidos(Sonidos.secondSong);
 			gameStage(1);
 			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
     	}
 
 	
-	 public static void gameStage(int ronda) {
+	 /**
+ 	 * Game stage.
+ 	 *
+ 	 * @param ronda the ronda
+ 	 */
+ 	public static void gameStage(int ronda) {
 	    	panelCentral.infoPanelCentral();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
@@ -138,46 +181,96 @@ public class GUIPrincipal extends JFrame {
 	
 
 	
+	/**
+	 * Gets the baraja pc.
+	 *
+	 * @return the baraja pc
+	 */
 	public static ArrayList<Carta> getBarajaPc() {
 		return barajaPc;
 	}
 
+	/**
+	 * Gets the baraja jugador.
+	 *
+	 * @return the baraja jugador
+	 */
 	public static ArrayList<Carta> getBarajaJugador() {
 		return barajaJugador;
 	}
 
 
+	/**
+	 * Gets the panel central.
+	 *
+	 * @return the panel central
+	 */
 	public static PanelCentral getPanelCentral() {
 		return panelCentral;
 	}
 
 
+	/**
+	 * Sets the panel central.
+	 *
+	 * @param panelCentral the new panel central
+	 */
 	public void setPanelCentral(PanelCentral panelCentral) {
 		this.panelCentral = panelCentral;
 	}
 	
+	/**
+	 * Gets the jugador.
+	 *
+	 * @return the jugador
+	 */
 	public static Jugador getJugador() {
 		return jugador;
 	}
 
 
+	/**
+	 * Gets the pc.
+	 *
+	 * @return the pc
+	 */
 	public static Jugador getPc() {
 		return pc;
 	}
 	
+	/**
+	 * Gets the panel lateral.
+	 *
+	 * @return the panel lateral
+	 */
 	public static PanelLateral getPanelLateral() {
 		return panelLateral;
 	}
 	
+	/**
+	 * Gets the ronda.
+	 *
+	 * @return the ronda
+	 */
 	public static int getRonda() {
 		return ronda;
 	}
 
+	/**
+	 * Sets the ronda.
+	 *
+	 * @param ronda the new ronda
+	 */
 	public static void setRonda(int ronda) {
 		GUIPrincipal.ronda = ronda;
 	}
 	
-	 public static Sonidos getSonidos() {
+	 /**
+ 	 * Gets the sonidos.
+ 	 *
+ 	 * @return the sonidos
+ 	 */
+ 	public static Sonidos getSonidos() {
 			return sonidos;
 		}
 
