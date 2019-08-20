@@ -32,17 +32,18 @@ public class ControlUnit {
 
 
     /** The puntaje jugador. */
-    private ArrayList<Integer>puntajeJugador = new ArrayList<>();
+    private ArrayList<Integer>puntajeJugador;
     
     /** The puntaje cortana. */
-    private ArrayList<Integer>puntajeCortana = new ArrayList<>();
+    private ArrayList<Integer>puntajeCortana ;
 
     /**
      * Instantiates a new control unit.
      */
     ControlUnit() {
 
-        
+        barajaPc = new ArrayList<>();
+        barajaJugador = new ArrayList<>();
         baraja = new Baraja();
         barajaPc = baraja.repartirBarajaJugadores();
         barajaJugador = baraja.repartirBarajaJugadores();
@@ -64,7 +65,7 @@ public class ControlUnit {
      */
     public static void newRound() {
     	
-    	
+
     	GUIPrincipal.getJugador();
     	if(Jugador.getApuestaActual() <= GUIPrincipal.getJugador().getDinero()) {
     		Jugador.setDinero((GUIPrincipal.getJugador().getDinero()) - Jugador.getApuestaActual());
@@ -94,7 +95,8 @@ public class ControlUnit {
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        
+        barajaJugador = new ArrayList<>();
+        barajaPc = new ArrayList<>();
 
     }
 
@@ -162,6 +164,8 @@ public class ControlUnit {
             playerScore += puntajeJugador.get(puntaje);
             cortanaScore += puntajeCortana.get(puntaje);
         }
+        System.out.println("Punatje JUgador = " + playerScore);
+        System.out.println("Punatje Cortana = " + cortanaScore);
         if (playerScore <= cortanaScore){
             return false;
         }else return true;
@@ -173,6 +177,8 @@ public class ControlUnit {
      * @return the string
      */
     public String winner(){
+        puntajeCortana = new ArrayList<>();
+        puntajeJugador = new ArrayList<>();
          //Jugador2
         Carta aux;
         /*Collections.sort(barajaJugador);
@@ -182,29 +188,34 @@ public class ControlUnit {
 
         for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
             aux = cartasComunitarias.get(cartaComunitaria);
-            cartasComunitarias.remove(cartaComunitaria);
+
 
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
-                cartasComunitarias.add(barajaJugador.get(cartaJugador));
+                cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
+                cartasComunitarias.remove(cartaComunitaria + 1);
                 puntajeJugador.add(ranking(cartasComunitarias));
+                cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
         }
         for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
             aux = cartasComunitarias.get(cartaComunitaria);
-            cartasComunitarias.remove(cartaComunitaria);
+
 
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
-                cartasComunitarias.add(barajaPc.get(cartaJugador));
+                cartasComunitarias.add(cartaComunitaria, barajaPc.get(cartaJugador));
+                cartasComunitarias.remove(cartaComunitaria + 1);
                 puntajeCortana.add(ranking(cartasComunitarias));
+                cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
         }
         if (mayorPuntaje()){
-            return "Cortana" ;
+            return GUIPrincipal.getJugador().getName();
+
         }
 
-        else return GUIPrincipal.getJugador().getName();
+        else return  "Cortana" ;
         		
     }
 /*
@@ -588,7 +599,7 @@ public int ranking(ArrayList<Carta> mano) {
      * Check igualar.
      */
     public static void checkIgualar() {
-    	
+
     	if(GUIPrincipal.getRonda() == 2) {
 			
     		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
