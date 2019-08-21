@@ -108,7 +108,7 @@ public class Baraja {
         int f = 1;
         System.out.println("-----Imprimiendo Baraja------");
         for (Carta value : arrayList) {
-            System.out.println(value.getImagen() + " " + f);
+            System.out.println(value.getImagen().toString()  + " " + f);
             f++;
         }
         System.out.println("-----------------");

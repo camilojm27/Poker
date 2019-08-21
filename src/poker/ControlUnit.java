@@ -12,43 +12,29 @@ import java.util.Collections;
 
 import javax.swing.JOptionPane;
 
-// TODO: Auto-generated Javadoc
-/**
- * The Class ControlUnit.
- */
 public class ControlUnit {
-    
-    /** The baraja. */
+
     private static Baraja baraja;
-    
-    /** The baraja pc. */
     public static ArrayList<Carta> barajaPc;
-    
-    /** The baraja jugador. */
-    public static ArrayList<Carta> barajaJugador;
-    
-    /** The cartas comunitarias. */
+    public static ArrayList<Carta> barajaJugador1,barajaJugador2,barajaJugador3,barajaJugador4,barajaJugador5;
     public static ArrayList<Carta> cartasComunitarias;
-
-
-    /** The puntaje jugador. */
-    private ArrayList<Integer>puntajeJugador;
-    
-    /** The puntaje cortana. */
+    public static int apuestaActual = 0;
+    private ArrayList<Integer>puntajeJugador1 ;
     private ArrayList<Integer>puntajeCortana ;
 
-    /**
-     * Instantiates a new control unit.
-     */
+
     ControlUnit() {
 
-        barajaPc = new ArrayList<>();
-        barajaJugador = new ArrayList<>();
+
         baraja = new Baraja();
         barajaPc = baraja.repartirBarajaJugadores();
-        barajaJugador = baraja.repartirBarajaJugadores();
+        barajaJugador1 = baraja.repartirBarajaJugadores();
+        barajaJugador2 = baraja.repartirBarajaJugadores();
+        barajaJugador3 = baraja.repartirBarajaJugadores();
+        barajaJugador4 = baraja.repartirBarajaJugadores();
+        barajaJugador5 = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
-        
+
         /*
         baraja.print(barajaJugador);
         System.out.println("      ");
@@ -56,89 +42,61 @@ public class ControlUnit {
         System.out.println("      ");
         baraja.print(cartasComunitarias);
         */
-        
+
         //compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
     }
-    
-    /**
-     * New round.
-     */
+
     public static void newRound() {
-    	
+
 
     	GUIPrincipal.getJugador();
-    	if(Jugador.getApuestaActual() <= GUIPrincipal.getJugador().getDinero()) {
-    		Jugador.setDinero((GUIPrincipal.getJugador().getDinero()) - Jugador.getApuestaActual());
+    	if(getApuestaActual() <= GUIPrincipal.getJugador().getDinero()) {
+    		Jugador.setDinero((GUIPrincipal.getJugador().getDinero()) - getApuestaActual());
     	}
-    	else { 
+    	else {
     		JOptionPane.showMessageDialog(null, "Te has quedado sin dinero, no puedes seguir jugando");
     			System.exit(1);
     	}
         GUIPrincipal.getJugador();
-		Jugador.setApuestaActual(0);
+		setApuestaActual(0);
 		Jugador.setApuesta(0);
-		Jugador.setApuestaPC(0);
+		Pc.setApuestaPC(0);
     	GUIPrincipal.getJugador().turnCards("player");
     	JOptionPane.showMessageDialog(null, "Nueva Ronda");
-    	
+
     	GUIPrincipal.getPanelCentral().addAL();
     	GUIPrincipal.getPanelCentral().removeCartasComunitarias();
         GUIPrincipal.getPanelCentral().updateUI();
-    	
+
         baraja = new Baraja();
         barajaPc = baraja.repartirBarajaJugadores();
-        barajaJugador = baraja.repartirBarajaJugadores();
+        barajaJugador1 = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
         GUIPrincipal.getPanelCentral().addCartasComunitarias();
-        baraja.print(barajaJugador);
+        baraja.print(barajaJugador1);
         System.out.println("      ");
         baraja.print(barajaPc);
         System.out.println("      ");
         baraja.print(cartasComunitarias);
-        barajaJugador = new ArrayList<>();
+        barajaJugador1 = new ArrayList<>();
         barajaPc = new ArrayList<>();
 
     }
 
-
-    /**
-     * Gets the baraja pc.
-     *
-     * @return the baraja pc
-     */
     public ArrayList<Carta> getBarajaPc() {
         return barajaPc;
     }
 
-    /**
-     * Gets the baraja jugador.
-     *
-     * @return the baraja jugador
-     */
     public ArrayList<Carta> getBarajaJugador() {
-        return barajaJugador;
+        return barajaJugador1;
     }
 
-    /**
-     * Gets the cartas comunitarias.
-     *
-     * @return the cartas comunitarias
-     */
     public ArrayList<Carta> getCartasComunitarias() {
         return cartasComunitarias;
     }
 
-    /**
-     * Carta mayor.
-     *
-     * @param jugador1 the jugador 1
-     * @param jugador2 the jugador 2
-     * @return the int
-     */
+
     @SuppressWarnings("unchecked")
-
-
-
 	private int cartaMayor(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2){
         Collections.sort(jugador1);
         Collections.sort(jugador2);
@@ -150,18 +108,12 @@ public class ControlUnit {
             //return "El jugador 2 tiene una mejor jugada por la carta" + jugador2.get(4).getId() + jugador1.get(4).getTipo();
             return 2;
         }
-
     }
 
-    /**
-     * Mayor puntaje.
-     *
-     * @return true, if successful
-     */
     private boolean mayorPuntaje(){
         int playerScore = 0, cortanaScore=0;
-        for (int puntaje = 0; puntaje < puntajeJugador.size(); puntaje++) {
-            playerScore += puntajeJugador.get(puntaje);
+        for (int puntaje = 0; puntaje < puntajeJugador1.size(); puntaje++) {
+            playerScore += puntajeJugador1.get(puntaje);
             cortanaScore += puntajeCortana.get(puntaje);
         }
         System.out.println("Punatje JUgador = " + playerScore);
@@ -171,15 +123,11 @@ public class ControlUnit {
         }else return true;
     }
 
-    /**
-     * Winner.
-     *
-     * @return the string
-     */
+
     public String winner(){
         puntajeCortana = new ArrayList<>();
-        puntajeJugador = new ArrayList<>();
-         //Jugador2
+        puntajeJugador1 = new ArrayList<>();
+        //Jugador2
         Carta aux;
         /*Collections.sort(barajaJugador);
         Collections.sort(barajaPc);
@@ -191,9 +139,9 @@ public class ControlUnit {
 
 
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
-                cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
+                cartasComunitarias.add(cartaComunitaria, barajaJugador1.get(cartaJugador));
                 cartasComunitarias.remove(cartaComunitaria + 1);
-                puntajeJugador.add(ranking(cartasComunitarias));
+                puntajeJugador1.add(ranking(cartasComunitarias));
                 cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
@@ -216,7 +164,9 @@ public class ControlUnit {
         }
 
         else return  "Cortana" ;
-        		
+
+
+
     }
 /*
     public int compararJugadas(ArrayList<Carta> jugador1, ArrayList<Carta> jugador2) {
@@ -275,13 +225,8 @@ else{
     }
  */
 
-    /**
- * Ranking.
- *
- * @param mano the mano
- * @return the int
- */
-public int ranking(ArrayList<Carta> mano) {
+
+    public int ranking(ArrayList<Carta> mano) {
         boolean sameType;
         //Comprueba si es del mismo tipo
         sameType = sameType(mano);
@@ -331,12 +276,7 @@ public int ranking(ArrayList<Carta> mano) {
         return 0;
     }
 
-    /**
-     * Pair.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
+
     @SuppressWarnings("unchecked")
 	private boolean pair(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -354,12 +294,7 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Two pair.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
+
     @SuppressWarnings("unchecked")
 	private boolean twoPair(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -373,12 +308,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Three ofa kind.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean threeOfaKind(ArrayList<Carta> mano) {
         Collections.sort(mano);
@@ -398,12 +327,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Escalera straight.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean escaleraStraight(ArrayList<Carta> mano) {
         int escaleraStraightValue = 0;
@@ -421,24 +344,12 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Color flush.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     //@Contract(pure = true)
     private boolean colorFlush(ArrayList<Carta> mano) {
         //Collections.sort(mano);
         return true;
     }
 
-    /**
-     * Full house.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean fullHouse(ArrayList<Carta> mano) {
         //No se utiliza bucle for, porque se deborda del arraylist en ciertos casos
@@ -465,12 +376,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Four ofa kind.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean fourOfaKind(ArrayList<Carta> mano) {
 
@@ -489,12 +394,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Royal flush straight.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean royalFlushStraight(ArrayList<Carta> mano) {
 
@@ -508,12 +407,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Flush straight.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     @SuppressWarnings("unchecked")
 	private boolean flushStraight(ArrayList<Carta> mano) {
         int flushStraightValue = 0;
@@ -529,12 +422,6 @@ public int ranking(ArrayList<Carta> mano) {
         return false;
     }
 
-    /**
-     * Same type.
-     *
-     * @param mano the mano
-     * @return true, if successful
-     */
     private boolean sameType(ArrayList<Carta> mano) {
 
         int sameValue = 0; //Si el valor da el tamaño del array -1 todas son iguales
@@ -547,31 +434,28 @@ public int ranking(ArrayList<Carta> mano) {
             return true;
         return false;
     }
-    
-    /**
-     * Check subir.
-     */
+
     public static void checkSubir() {
     	if(GUIPrincipal.getRonda() == 2) {
-			
+
 			GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(2);
 			GUIPrincipal.setRonda(3);
 			return;
 		}
-    	
+
     	if(GUIPrincipal.getRonda() == 3) {
-			
+
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
 			return;
 		}
-    	
+
     	if(GUIPrincipal.getRonda() == 4) {
-			
+
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
@@ -581,64 +465,61 @@ public int ranking(ArrayList<Carta> mano) {
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
 				victoria(1);
-				
+
 			}
 			else {
 				JOptionPane.showMessageDialog(null, "Cortana gana");
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
 				victoria(2);
-				
+
 			}
-			
+
 			return;
 		}
     }
-    
-    /**
-     * Check igualar.
-     */
+
     public static void checkIgualar() {
 
     	if(GUIPrincipal.getRonda() == 2) {
-			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
+
+    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(2);
 			GUIPrincipal.setRonda(3);
 			return;
 		}
-    	
+
     	if(GUIPrincipal.getRonda() == 3) {
-			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
+
+    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
 			return;
 		}
-    	
+
     	if(GUIPrincipal.getRonda() == 4) {
-			
-    		JOptionPane.showMessageDialog(null, "Apuestas " + Jugador.getApuestaActual());
+
+    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
 			GUIPrincipal.controlUnit.winner();
 			if(GUIPrincipal.controlUnit.winner() == GUIPrincipal.getJugador().getName()) {
-				
+
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
 				GUIPrincipal.getPanelCentral().turnCards("pc");
 				victoria(1);
-				
+
 			}
 			else {
-				
+
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
 				JOptionPane.showMessageDialog(null, "Cortana gana");
@@ -648,40 +529,42 @@ public int ranking(ArrayList<Carta> mano) {
 
 			return;
 		}
-    	
+
     }
-    
-    /**
-     * Cortana decidir jugada.
-     */
+
     public static void cortanaDecidirJugada() {
-    	
+
     }
-    
-    /**
-     * Victoria.
-     *
-     * @param quien the quien
-     */
+
     public static void victoria(int quien) {
     	if(quien == 1) {
     		GUIPrincipal.getJugador();
 			Jugador.setDinero
-    		(Jugador.getDinero() + Jugador.getApuestaActual());
+    		(Jugador.getDinero() + getApuestaActual());
 			GUIPrincipal.getPanelLateral().updateUI();
 			ControlUnit.newRound();
-    		
+
     	}
     	else {
     		GUIPrincipal.getPc();
-    		Jugador.setDineroPC
-    		(Jugador.getDineroPC() + Jugador.getApuestaActual());
+    		Pc.setDineroPC
+    		(Pc.getDineroPC() + getApuestaActual());
     		GUIPrincipal.getPanelLateral().updateUI();
     		ControlUnit.newRound();
-    		
+
     	}
-    	
+
     }
+
+    public static int getApuestaActual(){
+        return apuestaActual;
+    }
+
+    public static int setApuestaActual(int valor){
+        apuestaActual = valor;
+        return apuestaActual;
+    }
+
 
 
 }

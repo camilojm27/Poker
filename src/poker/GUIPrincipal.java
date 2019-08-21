@@ -12,50 +12,22 @@ import javax.swing.*;
 
 // TODO: Auto-generated Javadoc
 //import com.sun.glass.ui.Window;
-
-
-/**
- * The Class GUIPrincipal.
- */
 public class GUIPrincipal extends JFrame {
-	
-	/** The baraja pc. */
+
 	private static ArrayList<Carta> barajaPc;
+    private static ArrayList<Carta> barajaJugador1;
+    private static Jugador jugador;
     
-    /** The baraja jugador. */
-    private static ArrayList<Carta> barajaJugador;
-    
-    /** The pc. */
-    private static Jugador jugador,pc;
-    
-    /** The size game. */
+    private static Pc pc;
     public static Dimension sizeGame;
-	
-	/** The control unit. */
 	public static ControlUnit controlUnit;
-    
-    /** The panel central. */
     private static PanelCentral panelCentral;
-    
-    /** The panel lateral. */
     private static PanelLateral panelLateral;
-    
-    /** The ronda. */
     private static int ronda;
-    
-    /** The boton. */
     private JButton boton;
-    
-    /** The vprincipal. */
     public static Window vprincipal;
-	
-	/** The sonidos. */
 	private static Sonidos sonidos;
 
-    
-	/**
-	 * Instantiates a new GUI principal.
-	 */
 	GUIPrincipal(){
 
         vprincipal = this;
@@ -65,9 +37,9 @@ public class GUIPrincipal extends JFrame {
         panelLateral = new PanelLateral();
         
         barajaPc = controlUnit.getBarajaPc();
-        barajaJugador = controlUnit.getBarajaJugador();
+        barajaJugador1 = controlUnit.getBarajaJugador();
         jugador = new Jugador();
-        pc = new Jugador();
+        pc = new Pc();
         
         initGUI();
 
@@ -91,16 +63,15 @@ public class GUIPrincipal extends JFrame {
 		/////////////////////////////////////////
 		//ADD PANELES
 		add(getPanelCentral(),BorderLayout.CENTER);
-		add(getPanelLateral(),BorderLayout.WEST);
+//		add(getPanelLateral(),BorderLayout.WEST);
 
 		////////////////////////////////////////
 		//ADD GRAFICAL INTERFASE
-		getPanelCentral().addFichas();
 		getPanelCentral().addButtons();
-		panelLateral.addButtons();
+//		panelLateral.addButtons();
 
 		getPanelCentral().updateUI();
-		panelLateral.updateUI();
+//		panelLateral.updateUI();
 		vprincipal.setVisible(true);
 
     }
@@ -135,7 +106,7 @@ public class GUIPrincipal extends JFrame {
 					jugador.realizarApuesta(1);
 					pc.apuestaPc(jugador.getApuesta());
 
-					getPanelCentral().addCartasJugador();
+					getPanelCentral().repartirCartas();
 					getPanelCentral().addCartasPC();
 					getPanelCentral().addCartasComunitarias();
 
@@ -196,7 +167,7 @@ public class GUIPrincipal extends JFrame {
 	 * @return the baraja jugador
 	 */
 	public static ArrayList<Carta> getBarajaJugador() {
-		return barajaJugador;
+		return barajaJugador1;
 	}
 
 
@@ -234,7 +205,7 @@ public class GUIPrincipal extends JFrame {
 	 *
 	 * @return the pc
 	 */
-	public static Jugador getPc() {
+	public static Pc getPc() {
 		return pc;
 	}
 	

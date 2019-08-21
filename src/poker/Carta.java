@@ -6,6 +6,7 @@
 package poker;
 
 import javax.swing.ImageIcon;
+import java.awt.*;
 import java.net.URL;
 
 // TODO: Auto-generated Javadoc
@@ -24,11 +25,15 @@ public class Carta implements Comparable{
     private String tipo;
     
     /** The imagen. */
-    private ImageIcon imagen;
+    private ImageIcon imagenRedi, imagen;
     
     /** The id value. */
     private int idValue;
 
+
+    public ImageIcon getImagen() {
+        return imagen;
+    }
 
     /**
      * Instantiates a new carta.
@@ -43,8 +48,8 @@ public class Carta implements Comparable{
         url = this.getClass().getClassLoader().getResource("imagenes/" + id + tipo + ".png");
         //System.out.println(url.toString());
 
-
         imagen = new ImageIcon(url);
+        imagenRedi = new ImageIcon(imagen.getImage().getScaledInstance(110,158, Image.SCALE_DEFAULT));
     }
 
     /**
@@ -86,8 +91,8 @@ public class Carta implements Comparable{
      *
      * @return the imagen
      */
-    public ImageIcon getImagen() {
-        return imagen;
+    public ImageIcon getImagenRedi() {
+        return imagenRedi;
     }
 
     /**

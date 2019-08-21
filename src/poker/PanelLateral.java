@@ -100,7 +100,7 @@ public class PanelLateral extends JPanel  {
 
         apuestaJugador = GUIPrincipal.getJugador().getApuesta();
         apuestaPC = GUIPrincipal.getPc().getApuestaPC();
-		apuestaActual = Jugador.getApuestaActual();
+		apuestaActual = GUIPrincipal.controlUnit.getApuestaActual();
 		cashJugador = GUIPrincipal.getJugador().getDinero();
 		cashPC = GUIPrincipal.getPc().getDineroPC();
 		
