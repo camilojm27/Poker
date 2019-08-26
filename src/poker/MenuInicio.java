@@ -12,6 +12,7 @@ import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
+import java.net.URL;
 import java.util.Random;
 import javax.swing.*;
 
@@ -71,7 +72,7 @@ public class MenuInicio extends JFrame {
 			users = new JComboBox();
 			start = new JButton("START");
 			exit = new JButton("EXIT");
-			titleBar = new JLabel(new ImageIcon("src/imagenes/tittle-bar.gif"));
+			titleBar = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("imagenes/tittle-bar.gif")));
 
 			Insets insets = this.getInsets();
 			username.setBounds(70 + insets.left, 250  + insets.top,160,30);

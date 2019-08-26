@@ -13,7 +13,7 @@ import java.util.Collections;
 import javax.swing.JOptionPane;
 
 public class ControlUnit {
-
+    public static int cantidadJugadores;
     private static Baraja baraja;
     public static ArrayList<Carta> barajaPc;
     public static ArrayList<Carta> barajaJugador1,barajaJugador2,barajaJugador3,barajaJugador4,barajaJugador5;
