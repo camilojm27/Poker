@@ -6,6 +6,7 @@
 package poker;
 
 import Fonts.Fuentes;
+import Servidor.Servidor;
 
 import java.awt.*;
 
@@ -68,11 +69,11 @@ public class MenuInicio extends JFrame {
 
 		private void initGUI() {
 
+			titleBar = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("imagenes/tittle-bar.gif")));
 			username = new JTextFieldHint();
 			users = new JComboBox();
 			start = new JButton("START");
 			exit = new JButton("EXIT");
-			titleBar = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("imagenes/tittle-bar.gif")));
 
 			Insets insets = this.getInsets();
 			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
@@ -98,7 +99,7 @@ public class MenuInicio extends JFrame {
 			users.addItem("1"); users.addItem("2"); users.addItem("3");
 			users.addItem("4"); users.addItem("5"); users.addItem("6");
 			users.setForeground(Color.black);
-			users.show();
+
 			users.setBackground(Color.WHITE);
 
 			start.addMouseListener(new mouseAction());
@@ -136,9 +137,18 @@ public class MenuInicio extends JFrame {
 
 						//JOptionPane.showMessageDialog(null, "WELCOME");
 
-
+						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
+						System.out.println(users.getSelectedIndex());
 						guiPrincipal = new GUIPrincipal();
+						guiPrincipal.setVisible(false);
+						EventQueue.invokeLater(new Runnable() {public void run() {
 
+							Servidor servidor = new Servidor();
+
+
+
+						}});
+						guiPrincipal.setVisible(true);
 					}
 
 
@@ -150,8 +160,6 @@ public class MenuInicio extends JFrame {
 					window.dispose();
 
 				}
-
-
 
 			}
 

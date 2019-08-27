@@ -14,6 +14,9 @@ import javax.swing.JOptionPane;
 
 public class ControlUnit {
     public static int cantidadJugadores;
+
+
+
     private static Baraja baraja;
     public static ArrayList<Carta> barajaPc;
     public static ArrayList<Carta> barajaJugador1,barajaJugador2,barajaJugador3,barajaJugador4,barajaJugador5;
@@ -563,6 +566,13 @@ else{
     public static int setApuestaActual(int valor){
         apuestaActual = valor;
         return apuestaActual;
+    }
+    public static int getCantidadJugadores() {
+        return cantidadJugadores;
+    }
+
+    public static void setCantidadJugadores(int cantidadJugadores) {
+        ControlUnit.cantidadJugadores = cantidadJugadores;
     }
 
 
