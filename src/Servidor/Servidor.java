@@ -2,7 +2,8 @@ package Servidor;
 
 import poker.ControlUnit;
 
-import javax.swing.JFrame;
+import javax.swing.*;
+import java.awt.*;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.util.concurrent.ExecutorService;
@@ -12,6 +13,9 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Servidor extends JFrame {
+
+    private JTextArea areaSalida;
+
     public static final int cantidadJugadores = ControlUnit.getCantidadJugadores();
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -37,9 +41,15 @@ public class Servidor extends JFrame {
         }
 
 
-        setSize(200,300);
+        areaSalida = new JTextArea();
+        areaSalida.setEditable(false);
+        add(areaSalida, BorderLayout.CENTER);
+        areaSalida.setText("Estarando " + cantidadJugadores + " jugadores");
+
+        setSize(300,300);
         setResizable(true);
         setLocationRelativeTo(null);
+        setVisible(true);
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
 }

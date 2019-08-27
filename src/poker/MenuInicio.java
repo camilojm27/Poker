@@ -10,10 +10,7 @@ import Servidor.Servidor;
 
 import java.awt.*;
 
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.awt.event.MouseListener;
-import java.net.URL;
 import java.util.Random;
 import javax.swing.*;
 
@@ -21,6 +18,7 @@ public class MenuInicio extends JFrame {
 
 	private Fuentes fuentes;
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 18);
+	private final Font bit8Peque = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 10);
 	private PanelInicio panelInicio;
 	private Window window = this;
 	private GUIPrincipal guiPrincipal;
@@ -56,6 +54,7 @@ public class MenuInicio extends JFrame {
  		private JLabel titleBar;
  		private Random random  = new Random();;
  		private Sonidos sonidos;
+ 		private JCheckBox uniseaPartida, crearPartida;
 
 		PanelInicio(){
             //sonidos = new Sonidos(Sonidos.firstSong);
@@ -74,13 +73,18 @@ public class MenuInicio extends JFrame {
 			users = new JComboBox();
 			start = new JButton("START");
 			exit = new JButton("EXIT");
+			uniseaPartida = new JCheckBox("Unirse A partida");
+			crearPartida = new JCheckBox("Crear partida");
 
 			Insets insets = this.getInsets();
 			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
-			users.setBounds(100 + insets.left, 280  + insets.top,100,30);
+			//users.setBounds(100 + insets.left, 280  + insets.top,100,30);
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 320 + insets.top, 100,50);
 			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
+			uniseaPartida.setBounds(20 + insets.left, 380  + insets.top,200,20);
+			crearPartida.setBounds(20 + insets.left, 400  + insets.top,200,20);
+
 			start.setBackground(Color.white);
 			exit.setBackground(Color.white);
 			this.add(start);
@@ -88,9 +92,14 @@ public class MenuInicio extends JFrame {
 			this.add(username);
 			this.add(users);
 			this.add(titleBar);
+			this.add(uniseaPartida);
+			this.add(crearPartida);
 			username.setFont(bit8);
 			users.setFont(bit8);
+			uniseaPartida.setFont(bit8Peque);
+			crearPartida.setFont(bit8Peque);
 			titleBar.setBackground(Color.BLACK);
+
 
 			username.setText("Username");
 			username.setForeground(Color.black);
@@ -137,17 +146,23 @@ public class MenuInicio extends JFrame {
 
 						//JOptionPane.showMessageDialog(null, "WELCOME");
 
+						guiPrincipal = new GUIPrincipal();
+						guiPrincipal.setVisible(true);
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
 						System.out.println(users.getSelectedIndex());
-						guiPrincipal = new GUIPrincipal();
-						guiPrincipal.setVisible(false);
-						EventQueue.invokeLater(new Runnable() {public void run() {
+						if (ControlUnit.getCantidadJugadores() != 0){
+							EventQueue.invokeLater(new Runnable() {public void run() {
 
-							Servidor servidor = new Servidor();
-
+								Servidor servidor = new Servidor();
 
 
-						}});
+							}});
+						}
+						else{
+							//Inicia el jugador vs la cpu
+
+						}
+
 						guiPrincipal.setVisible(true);
 					}
 
