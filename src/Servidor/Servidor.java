@@ -31,8 +31,6 @@ public class Servidor extends JFrame {
         ejecutarJuego = Executors.newFixedThreadPool(ControlUnit.getCantidadJugadores());
         bloqueoJuego = new ReentrantLock();
 
-
-
         //establece el servidor
         try {
             servidor = new ServerSocket(12345, cantidadJugadores);

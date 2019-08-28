@@ -6,7 +6,6 @@
 package poker;
 
 import Fonts.Fuentes;
-
 import java.awt.*;
 import java.awt.event.MouseListener;
 import java.util.ArrayList;
@@ -14,16 +13,16 @@ import java.util.ArrayList;
 import javax.swing.*;
 
 public class PanelCentral extends JPanel {
-
-
-	private JLabel username = new JLabel(Jugador.getUsername()), player2 = new JLabel("Cortana");
+	
+	private JLabel username = new JLabel(Jugador.getUsername(jugador1)), player2 = new JLabel("Cortana");
 	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
 	private int numPlayers = MenuInicio.getNumPlayers();
-	public static JButton p1c1, p1c2, c1Pc, c2Pc;
+	public static JButton p1c1, p1c2,p2c1, p2c2, p3c1,p3c2,p4c1,p4c2,p5c1,p5c2,c1Pc, c2Pc;
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
 	private static JButton jugar;
+	private static JButton giveup;
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private JButton cc1;
@@ -34,6 +33,7 @@ public class PanelCentral extends JPanel {
 	
 	MouseAction mouse = new MouseAction();
 	static Jugador jugador1 = new Jugador();
+	static Jugador jugadorActual;
 	static Pc pc = new Pc();
 
 	public static JPanel pcentral;
@@ -43,6 +43,7 @@ public class PanelCentral extends JPanel {
 		this.setLayout(null);
 		this.setBackground(Color.lightGray);
 		this.setPreferredSize(GUIPrincipal.sizeGame);
+		jugadorActual = GUIPrincipal.getJugador();
 	}
 
 	public void infoPanelCentral(){
@@ -219,6 +220,7 @@ public class PanelCentral extends JPanel {
         igualar = new JButton("IGUALAR");
         subir = new JButton("SUBIR");
         jugar = new JButton("JUGAR");
+        giveup = new JButton("RENDIRSE");
 
         Dimension size = pasar.getPreferredSize();
         pasar.setBounds(1090+ insets.left, 105+ insets.top, 100,40);
@@ -234,25 +236,32 @@ public class PanelCentral extends JPanel {
 
 		size = jugar.getPreferredSize();
 		jugar.setBounds(1090 + insets.left,  10+ insets.top,100,40);
+		
+		size = giveup.getPreferredSize();
+		giveup.setBounds(1090 + insets.left,  155+ insets.top,100,40);
 
         pasar.setBackground(Color.white);
         igualar.setBackground(Color.white);
         subir.setBackground(Color.WHITE);
         jugar.setBackground(Color.white);
+        giveup.setBackground(Color.white);
 
         pasar.setFont(bit8);
         igualar.setFont(bit8);
         subir.setFont(bit8);
         jugar.setFont(bit8);
+        giveup.setFont(bit8);
         
         pasar.addMouseListener(mouse);
         igualar.addMouseListener(mouse);
         subir.addMouseListener(mouse);
         jugar.addMouseListener(mouse);
+        giveup.addMouseListener(mouse);
         
         this.add(pasar);
         this.add(igualar);
         this.add(subir);
+        this.add(giveup);
         //this.add(jugar);
 
     }
@@ -298,6 +307,9 @@ public class PanelCentral extends JPanel {
 			if(arg0.getSource() == pasar) {
 				elegirCartas = false;
 				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
+				
+				/*
+				
             	GUIPrincipal.getJugador().setDinero
 						((GUIPrincipal.getJugador().getDinero()) - GUIPrincipal.controlUnit.getApuestaActual());
 
@@ -306,6 +318,8 @@ public class PanelCentral extends JPanel {
 
             	GUIPrincipal.controlUnit.newRound();
 				GUIPrincipal.getJugador().realizarApuesta(1);
+				
+				*/
 			}
 
 			if(arg0.getSource() == subir) {
@@ -316,6 +330,21 @@ public class PanelCentral extends JPanel {
 				ControlUnit.checkIgualar();
 				
 			}
+			
+			if(arg0.getSource() == giveup) {
+				int dialogButton = JOptionPane.YES_NO_OPTION;
+	            int dialogResult = JOptionPane.showConfirmDialog(null,"Estas Seguro?", "QUITTING", dialogButton);
+
+	            if(dialogResult == 0){
+	            	
+	            	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
+	            	ControlUnit.newRound();
+	            }
+
+	            else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");
+			}
+			
+			
 		}
 
 		@Override

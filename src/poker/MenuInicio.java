@@ -23,6 +23,7 @@ public class MenuInicio extends JFrame {
 	private Window window = this;
 	private GUIPrincipal guiPrincipal;
 	private static int numPlayers;
+	private Jugador jugadorActual;
 
 	MenuInicio(){
 
@@ -34,8 +35,7 @@ public class MenuInicio extends JFrame {
 		setUndecorated(true);
 		setVisible(true);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-
+		jugadorActual = GUIPrincipal.getJugador();
 
 		add(panelInicio);
 	}
@@ -139,7 +139,7 @@ public class MenuInicio extends JFrame {
 				//	sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
-                        Jugador.setUsername(username.getText());
+                     //   Jugador.setUsername(username.getText(), jugadorActual);
                         window.dispose();
 
 						JOptionPane.showMessageDialog(null, "WELCOME");

@@ -16,8 +16,7 @@ public class GUIPrincipal extends JFrame {
 
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador1;
-    private static Jugador jugador;
-    
+    private static Jugador jugador1,jugador2,jugador3,jugador4,jugador5,jugadorActual;
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
@@ -38,8 +37,15 @@ public class GUIPrincipal extends JFrame {
         
         barajaPc = controlUnit.getBarajaPc();
         barajaJugador1 = controlUnit.getBarajaJugador();
-        jugador = new Jugador();
+        jugador1 = new Jugador();
+        jugador2 = new Jugador();
+        jugador3 = new Jugador();
+        jugador4 = new Jugador();
+        jugador5 = new Jugador();
+        
         pc = new Pc();
+        
+        jugadorActual = jugador1;
         
         initGUI();
 
@@ -59,7 +65,7 @@ public class GUIPrincipal extends JFrame {
 	 * Inits the GUI.
 	 */
 	public void initGUI() {
-
+		
 		/////////////////////////////////////////
 		//ADD PANELES
 		add(getPanelCentral(),BorderLayout.CENTER);
@@ -81,6 +87,7 @@ public class GUIPrincipal extends JFrame {
 	 */
 	public void startGame() {
 			//sonidos = new Sonidos(Sonidos.secondSong);
+			
 			gameStage(1);
 			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
     	}
@@ -92,6 +99,8 @@ public class GUIPrincipal extends JFrame {
  	 * @param ronda the ronda
  	 */
  	public static void gameStage(int ronda) {
+ 		
+ 			Jugador jugadorActual = PanelCentral.getJugador();
 	    	panelCentral.infoPanelCentral();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
@@ -99,12 +108,9 @@ public class GUIPrincipal extends JFrame {
 
 					////////////////////////////////////////
 					//REPARTICION DE CARTAS
-					
-
-					PanelCentral.getJugador();
-
-					jugador.realizarApuesta(1);
-					pc.apuestaPc(jugador.getApuesta());
+				
+					jugadorActual.realizarApuesta(1,jugadorActual);
+					pc.apuestaPc(Jugador.getBote());
 
 					getPanelCentral().repartirCartas();
 					getPanelCentral().addCartasPC();
@@ -121,23 +127,23 @@ public class GUIPrincipal extends JFrame {
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
-					pc.apuestaPc(jugador.getApuesta());
+					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
 					break;
 					
 				case 3:
 					getPanelCentral().showNextCard(4);
-					pc.apuestaPc(jugador.getApuesta());
+					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
 					break;
 				case 4:
 					getPanelCentral().showNextCard(5);
-					pc.apuestaPc(jugador.getApuesta());
+					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
 					ronda++;
 					break;
                 case 5:
-                	if (controlUnit.winner() == Jugador.getUsername()){
+                	if (controlUnit.winner() == Jugador.getUsername(jugadorActual)){
                 		JOptionPane.showMessageDialog(null, "Ganaste!");
 					}
                 	else {
@@ -149,98 +155,42 @@ public class GUIPrincipal extends JFrame {
 	  
 	 }
 	
-	
-
-	
-	/**
-	 * Gets the baraja pc.
-	 *
-	 * @return the baraja pc
-	 */
 	public static ArrayList<Carta> getBarajaPc() {
 		return barajaPc;
 	}
 
-	/**
-	 * Gets the baraja jugador.
-	 *
-	 * @return the baraja jugador
-	 */
 	public static ArrayList<Carta> getBarajaJugador() {
 		return barajaJugador1;
 	}
 
-
-	/**
-	 * Gets the panel central.
-	 *
-	 * @return the panel central
-	 */
 	public static PanelCentral getPanelCentral() {
 		return panelCentral;
 	}
 
-
-	/**
-	 * Sets the panel central.
-	 *
-	 * @param panelCentral the new panel central
-	 */
 	public void setPanelCentral(PanelCentral panelCentral) {
 		this.panelCentral = panelCentral;
 	}
 	
-	/**
-	 * Gets the jugador.
-	 *
-	 * @return the jugador
-	 */
 	public static Jugador getJugador() {
-		return jugador;
+		return jugadorActual;
 	}
 
-
-	/**
-	 * Gets the pc.
-	 *
-	 * @return the pc
-	 */
 	public static Pc getPc() {
 		return pc;
 	}
 	
-	/**
-	 * Gets the panel lateral.
-	 *
-	 * @return the panel lateral
-	 */
 	public static PanelLateral getPanelLateral() {
 		return panelLateral;
 	}
 	
-	/**
-	 * Gets the ronda.
-	 *
-	 * @return the ronda
-	 */
 	public static int getRonda() {
 		return ronda;
 	}
 
-	/**
-	 * Sets the ronda.
-	 *
-	 * @param ronda the new ronda
-	 */
 	public static void setRonda(int ronda) {
 		GUIPrincipal.ronda = ronda;
 	}
 	
-	 /**
- 	 * Gets the sonidos.
- 	 *
- 	 * @return the sonidos
- 	 */
  	public static Sonidos getSonidos() {
 			return sonidos;
 		}

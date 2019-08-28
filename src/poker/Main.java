@@ -5,8 +5,8 @@
  */
 package poker;
 
-import javax.swing.UIManager;
 import java.awt.EventQueue;
+import javax.swing.UIManager;
 
 // TODO: Auto-generated Javadoc
 //Compilar con la ultima version de JDK para que funcione la musica :D
@@ -30,7 +30,7 @@ public class Main {
         catch (Exception e) {}
 
         EventQueue.invokeLater(new Runnable() {public void run() {
-
+        	
             MenuInicio myWindow =
                     new MenuInicio();
 
