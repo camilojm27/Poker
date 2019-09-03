@@ -54,7 +54,7 @@ public class MenuInicio extends JFrame {
  		private JLabel titleBar;
  		private Random random  = new Random();;
  		private Sonidos sonidos;
- 		private JCheckBox uniseaPartida, crearPartida;
+ 		//private JCheckBox uniseaPartida, crearPartida;
 
 		PanelInicio(){
             //sonidos = new Sonidos(Sonidos.firstSong);
@@ -73,8 +73,8 @@ public class MenuInicio extends JFrame {
 			users = new JComboBox();
 			start = new JButton("START");
 			exit = new JButton("EXIT");
-			uniseaPartida = new JCheckBox("Unirse A partida");
-			crearPartida = new JCheckBox("Crear partida");
+			//uniseaPartida = new JCheckBox("Unirse A partida");
+			//crearPartida = new JCheckBox("Crear partida");
 
 			Insets insets = this.getInsets();
 			username.setBounds(70 + insets.left, 250  + insets.top,160,30);
@@ -82,8 +82,8 @@ public class MenuInicio extends JFrame {
 			start.setBounds(100 + insets.left, 150  + insets.top,100,50);
 			exit.setBounds(100 + insets.left, 320 + insets.top, 100,50);
 			titleBar.setBounds(40 + insets.left, 3  + insets.top,220,37);
-			uniseaPartida.setBounds(20 + insets.left, 380  + insets.top,200,20);
-			crearPartida.setBounds(20 + insets.left, 400  + insets.top,200,20);
+			//uniseaPartida.setBounds(20 + insets.left, 380  + insets.top,200,20);
+			//crearPartida.setBounds(20 + insets.left, 400  + insets.top,200,20);
 
 			start.setBackground(Color.white);
 			exit.setBackground(Color.white);
@@ -92,12 +92,12 @@ public class MenuInicio extends JFrame {
 			this.add(username);
 			this.add(users);
 			this.add(titleBar);
-			this.add(uniseaPartida);
-			this.add(crearPartida);
+			//this.add(uniseaPartida);
+			//this.add(crearPartida);
 			username.setFont(bit8);
 			users.setFont(bit8);
-			uniseaPartida.setFont(bit8Peque);
-			crearPartida.setFont(bit8Peque);
+			//uniseaPartida.setFont(bit8Peque);
+			//crearPartida.setFont(bit8Peque);
 			titleBar.setBackground(Color.BLACK);
 
 
@@ -142,8 +142,9 @@ public class MenuInicio extends JFrame {
                      //   Jugador.setUsername(username.getText(), jugadorActual);
                         window.dispose();
 
-						JOptionPane.showMessageDialog(null, "WELCOME");
-
+						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Crear partida", "Unirse a partida", "Jugar 1vs1 contra cortana"}, "Crear partida");
+						System.out.println( "MOdo de juego " + modoDeJUego);
 						//JOptionPane.showMessageDialog(null, "WELCOME");
 
 						guiPrincipal = new GUIPrincipal();
