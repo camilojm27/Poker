@@ -141,26 +141,28 @@ public class MenuInicio extends JFrame {
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                      //   Jugador.setUsername(username.getText(), jugadorActual);
-                        window.dispose();
+
 
 						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego, de ser miltijugador indique la cantidad", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
 								JOptionPane.QUESTION_MESSAGE, null, new Object[] {users, "Crear partida", "Unirse a partida", "Jugar 1vs1 contra cortana"}, "Crear partida");
 
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex()  + 2);//Test
+						System.out.println(ControlUnit.getCantidadJugadores());
 						if(modoDeJUego == 1 && ControlUnit.getCantidadJugadores() != 0){
 							EventQueue.invokeLater(new Runnable() {public void run() {
 
 								Servidor servidor = new Servidor();
-
+								servidor.execute();
 
 							}});
 						}
 						//JOptionPane.showMessageDialog(null, "WELCOME");
 
-						guiPrincipal = new GUIPrincipal();
-						guiPrincipal.setVisible(true);
+						window.dispose();
+						guiPrincipal = new GUIPrincipal("127.0.0.1");
+						guiPrincipal.setVisible(false);
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
-						System.out.println(users.getSelectedIndex());
+						System.out.println(ControlUnit.getCantidadJugadores());
 
 						guiPrincipal.setVisible(true);
 					}

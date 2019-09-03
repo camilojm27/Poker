@@ -6,13 +6,23 @@
 package poker;
 
 import java.awt.*;
+import java.io.IOException;
+import java.net.InetAddress;
+import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Formatter;
+import java.util.Scanner;
 
 import javax.swing.*;
 
 // TODO: Auto-generated Javadoc
 //import com.sun.glass.ui.Window;
 public class GUIPrincipal extends JFrame {
+	private String hostPoker;
+	private Socket conexion; // conexion con el servidor
+	private Scanner entrada; // entrada del servidor
+	private Formatter salida; // salida al servidor
+
 
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador1;
@@ -27,8 +37,8 @@ public class GUIPrincipal extends JFrame {
     public static Window vprincipal;
 	private static Sonidos sonidos;
 
-	GUIPrincipal(){
-
+	GUIPrincipal(String host){
+		hostPoker = host;
         vprincipal = this;
     	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
@@ -57,9 +67,23 @@ public class GUIPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        iniciarCliente();
         startGame();
         
     }
+
+	private void iniciarCliente() {
+		// se conecta al servidor, obtiene los flujos e inicia subproceso de salida
+
+		try {
+			conexion = new Socket(InetAddress.getByName(hostPoker), 15408);
+
+			entrada = new Scanner(conexion.getInputStream());
+			salida = new Formatter(conexion.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 
 	/**
 	 * Inits the GUI.
