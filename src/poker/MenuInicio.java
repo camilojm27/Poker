@@ -48,7 +48,6 @@ public class MenuInicio extends JFrame {
 	private class PanelInicio extends JPanel {
 
 		private JTextFieldHint username;
-		private JComboBox users;
  		private JButton start;
  		private JButton exit;
  		private JLabel titleBar;
@@ -70,7 +69,6 @@ public class MenuInicio extends JFrame {
 
 			titleBar = new JLabel(new ImageIcon(this.getClass().getClassLoader().getResource("imagenes/tittle-bar.gif")));
 			username = new JTextFieldHint();
-			users = new JComboBox();
 			start = new JButton("START");
 			exit = new JButton("EXIT");
 			//uniseaPartida = new JCheckBox("Unirse A partida");
@@ -90,12 +88,12 @@ public class MenuInicio extends JFrame {
 			this.add(start);
 			this.add(exit);
 			this.add(username);
-			this.add(users);
+			//this.add(users);
 			this.add(titleBar);
 			//this.add(uniseaPartida);
 			//this.add(crearPartida);
 			username.setFont(bit8);
-			users.setFont(bit8);
+
 			//uniseaPartida.setFont(bit8Peque);
 			//crearPartida.setFont(bit8Peque);
 			titleBar.setBackground(Color.BLACK);
@@ -105,11 +103,6 @@ public class MenuInicio extends JFrame {
 			username.setForeground(Color.black);
 			username.setOpaque(true);
 
-			users.addItem("1"); users.addItem("2"); users.addItem("3");
-			users.addItem("4"); users.addItem("5"); users.addItem("6");
-			users.setForeground(Color.black);
-
-			users.setBackground(Color.WHITE);
 
 			start.addMouseListener(new mouseAction());
 			exit.addMouseListener(new mouseAction());
@@ -127,31 +120,34 @@ public class MenuInicio extends JFrame {
 		}
 
 
-		class mouseAction implements MouseListener{
+	private class mouseAction implements MouseListener{
+
+
 
 			@Override
 			public void mouseClicked(java.awt.event.MouseEvent arg0) {
+				JComboBox users = new JComboBox();
+
+				users.addItem("2"); users.addItem("3");
+				users.addItem("4"); users.addItem("5"); users.addItem("6");
+				users.setForeground(Color.black);
+				users.setBackground(Color.WHITE);
+				users.setFont(bit8);
 
 				if(arg0.getSource() == start) {
 
 					numPlayers = users.getSelectedIndex();
-					JOptionPane.showMessageDialog(null, "player numbers is " + numPlayers);
 				//	sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                      //   Jugador.setUsername(username.getText(), jugadorActual);
                         window.dispose();
 
-						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, new Object[] {"Crear partida", "Unirse a partida", "Jugar 1vs1 contra cortana"}, "Crear partida");
-						System.out.println( "MOdo de juego " + modoDeJUego);
-						//JOptionPane.showMessageDialog(null, "WELCOME");
+						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego, de ser miltijugador indique la cantidad", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null, new Object[] {users, "Crear partida", "Unirse a partida", "Jugar 1vs1 contra cortana"}, "Crear partida");
 
-						guiPrincipal = new GUIPrincipal();
-						guiPrincipal.setVisible(true);
-						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
-						System.out.println(users.getSelectedIndex());
-						if (ControlUnit.getCantidadJugadores() != 0){
+						ControlUnit.setCantidadJugadores(users.getSelectedIndex()  + 2);//Test
+						if(modoDeJUego == 1 && ControlUnit.getCantidadJugadores() != 0){
 							EventQueue.invokeLater(new Runnable() {public void run() {
 
 								Servidor servidor = new Servidor();
@@ -159,10 +155,12 @@ public class MenuInicio extends JFrame {
 
 							}});
 						}
-						else{
-							//Inicia el jugador vs la cpu
+						//JOptionPane.showMessageDialog(null, "WELCOME");
 
-						}
+						guiPrincipal = new GUIPrincipal();
+						guiPrincipal.setVisible(true);
+						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
+						System.out.println(users.getSelectedIndex());
 
 						guiPrincipal.setVisible(true);
 					}
