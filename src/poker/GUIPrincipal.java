@@ -76,10 +76,11 @@ public class GUIPrincipal extends JFrame {
 		// se conecta al servidor, obtiene los flujos e inicia subproceso de salida
 
 		try {
-			conexion = new Socket(InetAddress.getByName(hostPoker), 15408);
+			conexion = new Socket(InetAddress.getByName(hostPoker), 12345);
 
 			entrada = new Scanner(conexion.getInputStream());
 			salida = new Formatter(conexion.getOutputStream());
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

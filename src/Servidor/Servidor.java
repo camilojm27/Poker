@@ -16,10 +16,20 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 public class Servidor extends JFrame {
+    public static void main(String[] args) {
+
+            EventQueue.invokeLater(new Runnable() {public void run() {
+
+                Servidor servidor = new Servidor();
+                //servidor.execute();
+
+            }});
+
+    }
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = ControlUnit.getCantidadJugadores();
+    public static final int cantidadJugadores = 2;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
     private Condition[] turnos = new Condition[cantidadJugadores];
@@ -32,7 +42,7 @@ public class Servidor extends JFrame {
         super("Servidor Juego");
 
 
-        ejecutarJuego = Executors.newFixedThreadPool(ControlUnit.getCantidadJugadores());
+        ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
         bloqueoJuego = new ReentrantLock();
         for (int i = 0; i < cantidadJugadores; i++) {
             turnos[i] = bloqueoJuego.newCondition();
@@ -43,11 +53,7 @@ public class Servidor extends JFrame {
 
 
         //establece el servidor
-        try {
-            servidor = new ServerSocket(12345, cantidadJugadores);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+
 
 
         areaSalida = new JTextArea();
@@ -59,7 +65,13 @@ public class Servidor extends JFrame {
         setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        try {
+            servidor = new ServerSocket(12345, cantidadJugadores);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     public void execute(){
@@ -72,7 +84,7 @@ public class Servidor extends JFrame {
                 System.exit(1);
             }
         }
-        bloqueoJuego.lock();
+
 try {
         jugadores[0].establecerSuspendido(false);
         turnos[0].signal();
@@ -117,7 +129,20 @@ finally {
 
         @Override
         public void run() {
-            mostrarMensaje("Jugador " + " conectado\n");
+            try{
+                mostrarMensaje( "Jugador " + "marca" + " conectado\n" );
+                salida.format( "%s\n", "marca" ); // envia la marca del jugador
+                salida.flush(); // vacia la salida
+
+            } // fin de try
+            finally {
+                try {
+                    conexion.close(); // cierra la conexion con el cliente
+                } catch ( IOException excepcionES ){
+                    excepcionES.printStackTrace();
+                    System.exit( 1 );
+                }
+            }
         }
         public void establecerSuspendido( boolean estado ){
             suspendido = estado;

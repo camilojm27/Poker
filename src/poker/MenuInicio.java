@@ -156,7 +156,6 @@ public class MenuInicio extends JFrame {
 
 							}});
 						}
-						//JOptionPane.showMessageDialog(null, "WELCOME");
 
 						window.dispose();
 						guiPrincipal = new GUIPrincipal("127.0.0.1");
