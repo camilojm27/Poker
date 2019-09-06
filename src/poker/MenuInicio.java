@@ -152,14 +152,14 @@ public class MenuInicio extends JFrame {
 							EventQueue.invokeLater(new Runnable() {public void run() {
 
 								Servidor servidor = new Servidor();
-								servidor.execute();
+
 
 							}});
 						}
 
 						window.dispose();
 						guiPrincipal = new GUIPrincipal("127.0.0.1");
-						guiPrincipal.setVisible(false);
+
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex());
 						System.out.println(ControlUnit.getCantidadJugadores());
 

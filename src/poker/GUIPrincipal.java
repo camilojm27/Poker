@@ -5,10 +5,13 @@
  */
 package poker;
 
+import sun.nio.ch.SocketAdaptor;
+
 import java.awt.*;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.SocketImpl;
 import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
@@ -16,8 +19,8 @@ import java.util.Scanner;
 import javax.swing.*;
 
 // TODO: Auto-generated Javadoc
-//import com.sun.glass.ui.Window;
-public class GUIPrincipal extends JFrame {
+
+public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
 	private Scanner entrada; // entrada del servidor
@@ -38,7 +41,7 @@ public class GUIPrincipal extends JFrame {
 	private static Sonidos sonidos;
 
 	GUIPrincipal(String host){
-		hostPoker = host;
+		hostPoker = "127.0.0.1";
         vprincipal = this;
     	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
@@ -67,24 +70,10 @@ public class GUIPrincipal extends JFrame {
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        iniciarCliente();
         startGame();
         
     }
 
-	private void iniciarCliente() {
-		// se conecta al servidor, obtiene los flujos e inicia subproceso de salida
-
-		try {
-			conexion = new Socket(InetAddress.getByName(hostPoker), 12345);
-
-			entrada = new Scanner(conexion.getInputStream());
-			salida = new Formatter(conexion.getOutputStream());
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 * Inits the GUI.
@@ -112,9 +101,16 @@ public class GUIPrincipal extends JFrame {
 	 */
 	public void startGame() {
 			//sonidos = new Sonidos(Sonidos.secondSong);
-			
-			gameStage(1);
-			JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
+		this.run();
+			EventQueue.invokeLater(new Runnable() {
+				@Override
+				public void run() {
+
+					gameStage(1);
+					JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
+				}
+			});
+
     	}
 
 	
@@ -220,6 +216,18 @@ public class GUIPrincipal extends JFrame {
 			return sonidos;
 		}
 
-	
-    
+
+	@Override
+	public void run() {
+		try {
+			conexion = new Socket(InetAddress.getLocalHost(), 12345);
+
+			entrada = new Scanner(conexion.getInputStream());
+			salida = new Formatter(conexion.getOutputStream());
+
+		} catch (IOException e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+	}
 }
