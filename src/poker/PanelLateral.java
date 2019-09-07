@@ -35,7 +35,7 @@ public class PanelLateral extends JPanel  {
 
         this.setLayout(null);
         this.setBackground(Color.black);
-        this.setPreferredSize(new Dimension(200,1000));   
+        this.setPreferredSize(new Dimension(100,1000));
         jugadorActual = GUIPrincipal.getJugador();
     }
 

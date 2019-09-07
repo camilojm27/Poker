@@ -24,12 +24,18 @@ public class PanelCentral extends JPanel {
 	private static JButton jugar;
 	private static JButton giveup;
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
-	private final Font decored = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
+	private final Font decored2 = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
+	private final Font decored = new Fuentes().fuente(Fuentes.DECORED, Font.BOLD, 24);
+	private final Font ibmRegularItalic = new Fuentes().fuente(Fuentes.IBM_REGULAR_ITALIC, Font.TYPE1_FONT, 14);
+
+
 	private JButton cc1;
 	private JButton cc2;
 	private JButton cc3;
 	private JButton cc4;
 	private JButton cc5;
+
+	private JTextArea informacion;
 	
 	MouseAction mouse = new MouseAction();
 	static Jugador jugador1 = new Jugador();
@@ -49,14 +55,20 @@ public class PanelCentral extends JPanel {
 	public void infoPanelCentral(){
 
 		Insets insets = this.getInsets();
-		player2.setFont(decored);
+		informacion = new JTextArea(GUIPrincipal.getEntrada());
+		informacion.setBounds(920 + insets.left, 500 + insets.top,200,250);
+		informacion.setFont(ibmRegularItalic);
+		player2.setFont(decored2);
 		player2.setBounds(750 + insets.left, 150 + insets.top,420,161);
 		player2.setForeground(Color.CYAN);
-		username.setFont(decored);
+		username.setFont(decored2);
 		username.setBounds(260 + insets.left, 400 + insets.top,400,161);
 		username.setForeground(Color.ORANGE);
 		add(player2);
 		add(username);
+		add(informacion);
+		informacion.setVisible(true);
+
 	}
 
 	public void turnCards(String who){

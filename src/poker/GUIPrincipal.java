@@ -23,13 +23,13 @@ import javax.swing.*;
 public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
-	private Scanner entrada; // entrada del servidor
+	private static Scanner entrada; // entrada del servidor
 	private Formatter salida; // salida al servidor
 
 
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador1;
-    private static Jugador jugador1,jugador2,jugador3,jugador4,jugador5,jugadorActual;
+    private static Jugador jugador1, jugadorActual;
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
@@ -41,7 +41,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	private static Sonidos sonidos;
 
 	GUIPrincipal(String host){
-		hostPoker = "127.0.0.1";
+		hostPoker = host;
         vprincipal = this;
     	sizeGame = new Dimension(1200,720);
     	controlUnit = new ControlUnit();
@@ -51,17 +51,13 @@ public class GUIPrincipal extends JFrame implements Runnable{
         barajaPc = controlUnit.getBarajaPc();
         barajaJugador1 = controlUnit.getBarajaJugador();
         jugador1 = new Jugador();
-        jugador2 = new Jugador();
-        jugador3 = new Jugador();
-        jugador4 = new Jugador();
-        jugador5 = new Jugador();
+
         
         pc = new Pc();
         
         jugadorActual = jugador1;
         
         initGUI();
-
 
         setTitle("Poker");
         setResizable(false);
@@ -102,14 +98,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	public void startGame() {
 			//sonidos = new Sonidos(Sonidos.secondSong);
 		this.run();
-			EventQueue.invokeLater(new Runnable() {
-				@Override
-				public void run() {
-
 					gameStage(1);
 					JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
-				}
-			});
 
     	}
 
@@ -220,14 +210,21 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	@Override
 	public void run() {
 		try {
-			conexion = new Socket(InetAddress.getLocalHost(), 12345);
+			conexion = new Socket(hostPoker, 12345);
 
 			entrada = new Scanner(conexion.getInputStream());
 			salida = new Formatter(conexion.getOutputStream());
 
 		} catch (IOException e) {
 			e.printStackTrace();
-			System.exit(1);
+			//System.exit(1);
 		}
+	}
+
+	public static String getEntrada() {
+ 		if (entrada.hasNextLine())
+			return entrada.nextLine();
+ 		else
+ 			return "null";
 	}
 }

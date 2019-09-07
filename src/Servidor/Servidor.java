@@ -21,7 +21,6 @@ public class Servidor extends JFrame {
             EventQueue.invokeLater(new Runnable() {public void run() {
 
                 Servidor servidor = new Servidor();
-                //servidor.execute();
 
             }});
 
@@ -35,7 +34,7 @@ public class Servidor extends JFrame {
     private Condition[] turnos = new Condition[cantidadJugadores];
     private Jugador[] jugadores;
     private int jugadorActual;
-
+    private Window ventana;
     private ServerSocket servidor;
 
     public Servidor() {
@@ -56,34 +55,39 @@ public class Servidor extends JFrame {
 
 
 
+        try {
+            servidor = new ServerSocket(12345, cantidadJugadores);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         areaSalida = new JTextArea();
         areaSalida.setEditable(false);
         add(areaSalida, BorderLayout.CENTER);
-        areaSalida.setText("Esperando " + cantidadJugadores + " jugadores");
+        areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
+
+        ventana = this;
 
         setSize(300, 300);
         setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        try {
-            servidor = new ServerSocket(12345, cantidadJugadores);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        execute();
     }
 
     public void execute(){
+
         for (int i = 0; i < cantidadJugadores; i++) {
             try {
                 jugadores[i] = new Jugador(servidor.accept(), i);
                 ejecutarJuego.execute(jugadores[i]);
+                System.out.println(i);
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
             }
         }
+    bloqueoJuego.lock();
 
 try {
         jugadores[0].establecerSuspendido(false);
@@ -97,9 +101,11 @@ finally {
     }
 
     private void mostrarMensaje(final String mensajeAMostrar) {
+
         SwingUtilities.invokeLater(new Runnable() {
                                        public void run() {
-                                           areaSalida.append(mensajeAMostrar); // agrega el mensaje
+                                           areaSalida.append(mensajeAMostrar + "\n"); // agrega el mensaje
+                                           System.out.println(mensajeAMostrar);
                                        } // fin del metodo run
                                    } // fin de la clase interna
         ); // fin de la llamada a SwingUtilities.invokeLater
@@ -127,22 +133,17 @@ finally {
         }
 
 
-        @Override
+
         public void run() {
-            try{
-                mostrarMensaje( "Jugador " + "marca" + " conectado\n" );
+
+                System.out.println("s");
+                mostrarMensaje( "Jugador "  + " conectado\n" );
                 salida.format( "%s\n", "marca" ); // envia la marca del jugador
                 salida.flush(); // vacia la salida
 
-            } // fin de try
-            finally {
-                try {
-                    conexion.close(); // cierra la conexion con el cliente
-                } catch ( IOException excepcionES ){
-                    excepcionES.printStackTrace();
-                    System.exit( 1 );
-                }
-            }
+             // fin de try
+
+
         }
         public void establecerSuspendido( boolean estado ){
             suspendido = estado;

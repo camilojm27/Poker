@@ -9,6 +9,7 @@ public class Fuentes {
     public static final String DECORED2 = "BungeeShade-Regular.ttf";
     public static final String BIT8_2 = "VT323-Regular.ttf";
     public static final String BIT8 = "PressStart2P-Regular.ttf";
+    public static final String IBM_REGULAR_ITALIC = "IBMPlexMono-RegularItalic.ttf";
 
     /* Font.PLAIN = 0 , Font.BOLD = 1 , Font.ITALIC = 2
      * tamanio = float
