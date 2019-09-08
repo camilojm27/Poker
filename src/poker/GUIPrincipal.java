@@ -154,7 +154,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					ronda++;
 					break;
                 case 5:
-                	if (controlUnit.winner() == Jugador.getUsername(jugadorActual)){
+                	if (controlUnit.winner() == Jugador.getUsername()){
                 		JOptionPane.showMessageDialog(null, "Ganaste!");
 					}
                 	else {

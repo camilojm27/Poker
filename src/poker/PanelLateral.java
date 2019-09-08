@@ -74,7 +74,7 @@ public class PanelLateral extends JPanel  {
 		cashJugador = Jugador.getDinero(jugadorActual);
 		cashPC = GUIPrincipal.getPc().getDineroPC();
 		
-		g.drawString(Jugador.getUsername(jugadorActual)+ ": " + String.valueOf(cashJugador), 8, 120);
+		g.drawString(Jugador.getUsername()+ ": " + String.valueOf(cashJugador), 8, 120);
         g.drawString("Cortana: " + String.valueOf(cashPC), 8, 150);
         g.drawString("Bote =  " + apuestaActual,10,350);
       //  g.drawString("es de:  " + apuestaActual, 10 ,370);

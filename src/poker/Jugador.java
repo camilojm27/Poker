@@ -12,7 +12,8 @@ public class Jugador extends JOptionPane {
 
 
 	private boolean apuestaValida = true;
-	private String username;
+	private static String username;
+	//public static final int ID = Integer.parseInt(GUIPrincipal.getEntrada());
 	private int dinero = 50000;
 	private static int bote = 0;
 	private int miApuesta;
@@ -24,7 +25,7 @@ public class Jugador extends JOptionPane {
 	static int apuestaActual = control.getApuestaActual();
 
 	Jugador(){
-		this.username = " ";
+		username = " ";
 		this.apuestaValida = true;
 		this.dinero = 50000;
 		this.miApuesta = 0;
@@ -47,7 +48,7 @@ public class Jugador extends JOptionPane {
 		jugador.plantarse = true;
 		return plantarse;
 	}
-	
+
 	public static void realizarApuestaFija(Jugador jugador) {
 		bote = ControlUnit.getApuestaActual();
 		apuestaActual= bote + getBote();
@@ -244,12 +245,12 @@ public class Jugador extends JOptionPane {
 		return bote;
 	}
 
-	public static void setUsername(String username,Jugador jugador) {
-		jugador.username = username;
+	public static void setUsername(String nombre) {
+		username = nombre;
 	}
 
-	public static String getUsername(Jugador jugador) {
-		return jugador.username;
+	public static String getUsername() {
+		return username;
 	}
 
 	public static void setApuesta(int apuesta) {

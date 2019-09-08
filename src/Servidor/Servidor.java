@@ -29,6 +29,7 @@ public class Servidor extends JFrame {
     private JTextArea areaSalida;
 
     public static final int cantidadJugadores = 2;
+    public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
     private Condition[] turnos = new Condition[cantidadJugadores];
@@ -126,6 +127,7 @@ finally {
                 entrada = new Scanner(conexion.getInputStream());
                 salida = new Formatter(conexion.getOutputStream());
                 salida.flush();
+                jugadoresConectados++;
             } catch (IOException e) {
                 e.printStackTrace();
                 System.exit(1);
@@ -136,9 +138,9 @@ finally {
 
         public void run() {
 
-                System.out.println("s");
-                mostrarMensaje( "Jugador "  + " conectado\n" );
-                salida.format( "%s\n", "marca" ); // envia la marca del jugador
+                System.out.println("Jugador # " + jugadoresConectados + " conectado");
+                mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
+                salida.format("%s\n", String.valueOf(jugadoresConectados)); // envia la marca del jugador
                 salida.flush(); // vacia la salida
 
              // fin de try

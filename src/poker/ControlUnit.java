@@ -471,7 +471,7 @@ else{
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
-			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername(jugadorActual)) {
+			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername()) {
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");

@@ -140,7 +140,8 @@ public class MenuInicio extends JFrame {
 				//	sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
-                     //   Jugador.setUsername(username.getText(), jugadorActual);
+                        Jugador.setUsername(username.getText());
+                        System.out.println();
 
 
 						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego, de ser miltijugador indique la cantidad", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
