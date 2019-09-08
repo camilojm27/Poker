@@ -25,7 +25,6 @@ public class Jugador extends JOptionPane {
 	static int apuestaActual = control.getApuestaActual();
 
 	Jugador(){
-		username = " ";
 		this.apuestaValida = true;
 		this.dinero = 50000;
 		this.miApuesta = 0;

@@ -29,7 +29,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 	private static ArrayList<Carta> barajaPc;
     private static ArrayList<Carta> barajaJugador1;
-    private static Jugador jugador1, jugadorActual;
+    public static Jugador jugador1, jugadorActual ;
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;

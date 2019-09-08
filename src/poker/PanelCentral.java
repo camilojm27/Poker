@@ -26,7 +26,7 @@ public class PanelCentral extends JPanel {
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 	private final Font decored2 = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED, Font.BOLD, 24);
-	private final Font ibmRegularItalic = new Fuentes().fuente(Fuentes.IBM_REGULAR_ITALIC, Font.TYPE1_FONT, 14);
+	private final Font ibmRegularItalic = new Fuentes().fuente(Fuentes.IBM_REGULAR_ITALIC, Font.PLAIN, 14);
 
 
 	private JButton cc1;
@@ -55,8 +55,10 @@ public class PanelCentral extends JPanel {
 	public void infoPanelCentral(){
 
 		Insets insets = this.getInsets();
-		informacion = new JTextArea(GUIPrincipal.getEntrada());
-		informacion.setBounds(920 + insets.left, 500 + insets.top,200,250);
+		informacion = new JTextArea("Bienvenido " + Jugador.getUsername() + "\nEres el jugador #" + GUIPrincipal.getEntrada());
+		informacion.setEditable(false);
+		username = new JLabel(Jugador.getUsername());
+		informacion.setBounds(920 + insets.left, 500 + insets.top,200,280);
 		informacion.setFont(ibmRegularItalic);
 		player2.setFont(decored2);
 		player2.setBounds(750 + insets.left, 150 + insets.top,420,161);
@@ -65,9 +67,10 @@ public class PanelCentral extends JPanel {
 		username.setBounds(260 + insets.left, 400 + insets.top,400,161);
 		username.setForeground(Color.ORANGE);
 		add(player2);
-		add(username);
 		add(informacion);
 		informacion.setVisible(true);
+		add(username);
+		username.setVisible(true);
 
 	}
 
