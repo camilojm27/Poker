@@ -28,8 +28,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 	private static ArrayList<Carta> barajaPc;
-    private static ArrayList<Carta> barajaJugador1;
-    public static Jugador jugador1, jugadorActual ;
+    private static ArrayList<Carta> barajaJugador;
+    public static Jugador jugador;
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
@@ -41,22 +41,21 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	private static Sonidos sonidos;
 
 	GUIPrincipal(String host){
-		hostPoker = host;
-        vprincipal = this;
-    	sizeGame = new Dimension(1200,720);
-    	controlUnit = new ControlUnit();
-        setPanelCentral(new PanelCentral());
-        panelLateral = new PanelLateral();
-        
-        barajaPc = controlUnit.getBarajaPc();
-        barajaJugador1 = controlUnit.getBarajaJugador();
-        jugador1 = new Jugador();
 
-        
-        pc = new Pc();
-        
-        jugadorActual = jugador1;
-        
+		hostPoker = host;
+		vprincipal = this;
+		sizeGame = new Dimension(1200,720);
+		controlUnit = new ControlUnit();
+		setPanelCentral(new PanelCentral());
+		panelLateral = new PanelLateral();
+
+
+
+		barajaPc = controlUnit.getBarajaPc();
+		barajaJugador = controlUnit.getBarajaJugador();
+
+		jugador = new Jugador();
+		pc = new Pc();
         initGUI();
 
         setTitle("Poker");
@@ -66,6 +65,9 @@ public class GUIPrincipal extends JFrame implements Runnable{
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+
         startGame();
         
     }
@@ -110,8 +112,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
  	 * @param ronda the ronda
  	 */
  	public static void gameStage(int ronda) {
- 		
- 			Jugador jugadorActual = PanelCentral.getJugador();
+
 	    	panelCentral.infoPanelCentral();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
@@ -120,7 +121,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					////////////////////////////////////////
 					//REPARTICION DE CARTAS
 				
-					jugadorActual.realizarApuesta(1,jugadorActual);
+					jugador.realizarApuesta(1);
 					pc.apuestaPc(Jugador.getBote());
 
 					getPanelCentral().repartirCartas();
@@ -171,7 +172,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	}
 
 	public static ArrayList<Carta> getBarajaJugador() {
-		return barajaJugador1;
+		return barajaJugador;
 	}
 
 	public static PanelCentral getPanelCentral() {
@@ -183,7 +184,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	}
 	
 	public static Jugador getJugador() {
-		return jugadorActual;
+		return jugador;
 	}
 
 	public static Pc getPc() {

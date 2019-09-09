@@ -17,7 +17,7 @@ public class PanelCentral extends JPanel {
 	private JLabel username , player2 = new JLabel("Cortana");
 	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
 	private int numPlayers = MenuInicio.getNumPlayers();
-	public static JButton p1c1, p1c2,p2c1, p2c2, p3c1,p3c2,p4c1,p4c2,p5c1,p5c2,c1Pc, c2Pc;
+	public static JButton p1c1, p1c2,c1Pc, c2Pc;
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
@@ -38,9 +38,8 @@ public class PanelCentral extends JPanel {
 	private JTextArea informacion;
 	
 	MouseAction mouse = new MouseAction();
-	static Jugador jugador1 = new Jugador();
-	static Jugador jugadorActual;
-	static Pc pc = new Pc();
+	private static Jugador jugador = new Jugador();
+	private static Pc pc = new Pc();
 
 	public static JPanel pcentral;
 
@@ -49,7 +48,8 @@ public class PanelCentral extends JPanel {
 		this.setLayout(null);
 		this.setBackground(Color.lightGray);
 		this.setPreferredSize(GUIPrincipal.sizeGame);
-		jugadorActual = GUIPrincipal.getJugador();
+
+
 	}
 
 	public void infoPanelCentral(){
@@ -224,7 +224,7 @@ public class PanelCentral extends JPanel {
 	}
 
 	public static Jugador getJugador() {
-		return jugador1;
+		return jugador;
 	}
 
 	public void addButtons(){
@@ -367,7 +367,7 @@ public class PanelCentral extends JPanel {
 
 			if(arg0.getSource() == p1c1 || arg0.getSource() == p1c2) {
 
-				jugador1.turnCards("pNormal");
+				jugador.turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().repaint();
 			}
 		}
@@ -377,7 +377,7 @@ public class PanelCentral extends JPanel {
 
 			if(arg0.getSource() == p1c1 || arg0.getSource() == p1c2) {
 
-				jugador1.turnCards("player");
+				jugador.turnCards("player");
 				GUIPrincipal.getPanelCentral().repaint();
 			}
 		}
