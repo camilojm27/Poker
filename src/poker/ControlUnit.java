@@ -14,29 +14,21 @@ import javax.swing.JOptionPane;
 
 public class ControlUnit {
     public static int cantidadJugadores;
-
-
-
     private static Baraja baraja;
     public static ArrayList<Carta> barajaPc;
-    public static ArrayList<Carta> barajaJugador1,barajaJugador2,barajaJugador3,barajaJugador4,barajaJugador5;
+    public static ArrayList<Carta> barajaJugador;
     public static ArrayList<Carta> cartasComunitarias;
     public static int apuestaActual = 0;
-    private ArrayList<Integer>puntajeJugador1 ;
-    private ArrayList<Integer>puntajeCortana ;
-    private static Jugador jugadorActual;
+    private ArrayList<Integer>puntajeJugador;
+    private ArrayList<Integer>puntajeCortana;
 
 
-    public ControlUnit() {
+    ControlUnit() {
 
 
         baraja = new Baraja();
         barajaPc = baraja.repartirBarajaJugadores();
-        barajaJugador1 = baraja.repartirBarajaJugadores();
-        barajaJugador2 = baraja.repartirBarajaJugadores();
-        barajaJugador3 = baraja.repartirBarajaJugadores();
-        barajaJugador4 = baraja.repartirBarajaJugadores();
-        barajaJugador5 = baraja.repartirBarajaJugadores();
+        barajaJugador = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
 
         /*
@@ -53,8 +45,8 @@ public class ControlUnit {
     public static void newRound() {
 
 
-    	if(getApuestaActual() <= Jugador.getDinero(jugadorActual)) {
-    		Jugador.setDinero((Jugador.getDinero(jugadorActual)) - getApuestaActual(), jugadorActual);
+    	if(getApuestaActual() <= Jugador.getDinero()) {
+    		Jugador.setDinero((Jugador.getDinero()) - getApuestaActual());
     	}
     	else {
     		JOptionPane.showMessageDialog(null, "Te has quedado sin dinero, no puedes seguir jugando");
@@ -64,7 +56,7 @@ public class ControlUnit {
 		setApuestaActual(0);
 		Jugador.setApuesta(0);
 		Pc.setApuestaPC(0);
-    	jugadorActual.turnCards("player");
+    	GUIPrincipal.getJugador().turnCards("show");
     	JOptionPane.showMessageDialog(null, "Nueva Ronda");
 
     	GUIPrincipal.getPanelCentral().addAL();
@@ -72,18 +64,14 @@ public class ControlUnit {
         GUIPrincipal.getPanelCentral().updateUI();
 
         baraja = new Baraja();
-        barajaJugador1 = new ArrayList<>();
+        barajaJugador = new ArrayList<>();
         barajaPc = new ArrayList<>();
 
         barajaPc = baraja.repartirBarajaJugadores();
-        barajaJugador1 = baraja.repartirBarajaJugadores();
-        barajaJugador2 = baraja.repartirBarajaJugadores();
-        barajaJugador3 = baraja.repartirBarajaJugadores();
-        barajaJugador4 = baraja.repartirBarajaJugadores();
-        barajaJugador5 = baraja.repartirBarajaJugadores();
+        barajaJugador = baraja.repartirBarajaJugadores();
         cartasComunitarias = baraja.repartirCartasComunitarias();
         GUIPrincipal.getPanelCentral().addCartasComunitarias();
-        baraja.print(barajaJugador1);
+        baraja.print(barajaJugador);
         System.out.println("      ");
         baraja.print(barajaPc);
         System.out.println("      ");
@@ -97,7 +85,7 @@ public class ControlUnit {
     }
 
     public ArrayList<Carta> getBarajaJugador() {
-        return barajaJugador1;
+        return barajaJugador;
     }
 
     public ArrayList<Carta> getCartasComunitarias() {
@@ -121,8 +109,8 @@ public class ControlUnit {
 
     private boolean mayorPuntaje(){
         int playerScore = 0, cortanaScore=0;
-        for (int puntaje = 0; puntaje < puntajeJugador1.size(); puntaje++) {
-            playerScore += puntajeJugador1.get(puntaje);
+        for (int puntaje = 0; puntaje < puntajeJugador.size(); puntaje++) {
+            playerScore += puntajeJugador.get(puntaje);
             cortanaScore += puntajeCortana.get(puntaje);
         }
         System.out.println("Punatje JUgador = " + playerScore);
@@ -135,7 +123,7 @@ public class ControlUnit {
 
     public String winner(){
         puntajeCortana = new ArrayList<>();
-        puntajeJugador1 = new ArrayList<>();
+        puntajeJugador = new ArrayList<>();
         //Jugador2
         Carta aux;
         /*Collections.sort(barajaJugador);
@@ -148,9 +136,9 @@ public class ControlUnit {
 
 
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
-                cartasComunitarias.add(cartaComunitaria, barajaJugador1.get(cartaJugador));
+                cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
                 cartasComunitarias.remove(cartaComunitaria + 1);
-                puntajeJugador1.add(ranking(cartasComunitarias));
+                puntajeJugador.add(ranking(cartasComunitarias));
                 cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
@@ -168,7 +156,7 @@ public class ControlUnit {
             }
         }
         if (mayorPuntaje()){
-            return jugadorActual.getName();
+            return GUIPrincipal.getJugador().getName();
 
         }
 
@@ -447,9 +435,7 @@ else{
     public static void checkSubir() {
     	if(GUIPrincipal.getRonda() == 2) {
 
-            jugadorActual = GUIPrincipal.getJugador();
-
-			jugadorActual.realizarApuesta(3,jugadorActual);
+			GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(2);
 			GUIPrincipal.setRonda(3);
@@ -458,7 +444,7 @@ else{
 
     	if(GUIPrincipal.getRonda() == 3) {
 
-    		jugadorActual.realizarApuesta(3,jugadorActual);
+    		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
@@ -467,7 +453,7 @@ else{
 
     	if(GUIPrincipal.getRonda() == 4) {
 
-    		jugadorActual.realizarApuesta(3,jugadorActual);
+    		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
@@ -492,12 +478,12 @@ else{
 
     public static void checkIgualar() {
 
-        jugadorActual = GUIPrincipal.getJugador();
+        Jugador jugador = GUIPrincipal.getJugador();
 
     	if(GUIPrincipal.getRonda() == 2) {
 
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
-    		Jugador.realizarApuestaFija(GUIPrincipal.getJugador());
+    		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(2);
 			GUIPrincipal.setRonda(3);
@@ -507,7 +493,7 @@ else{
     	if(GUIPrincipal.getRonda() == 3) {
 
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
-    		Jugador.realizarApuestaFija(jugadorActual);
+    		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
@@ -517,12 +503,12 @@ else{
     	if(GUIPrincipal.getRonda() == 4) {
 
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
-    		Jugador.realizarApuestaFija(jugadorActual);
+    		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
 			GUIPrincipal.controlUnit.winner();
-			if(GUIPrincipal.controlUnit.winner() == jugadorActual.getName()) {
+			if(GUIPrincipal.controlUnit.winner() == jugador.getName()) {
 
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
@@ -552,7 +538,7 @@ else{
     public static void victoria(int quien) {
     	if(quien == 1) {
 			Jugador.setDinero
-    		(Jugador.getDinero(jugadorActual) + getApuestaActual(), jugadorActual);
+    		(Jugador.getDinero() + getApuestaActual());
 			GUIPrincipal.getPanelLateral().updateUI();
 			ControlUnit.newRound();
 

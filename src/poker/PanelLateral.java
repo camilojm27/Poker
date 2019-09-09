@@ -29,14 +29,14 @@ public class PanelLateral extends JPanel  {
     private static int cashJugador,cashPC;
     private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8_2, Font.BOLD, 24);
     private final Font bit8_2 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
-    private static Jugador jugadorActual;
+    private static Jugador jugador;
 
 	public PanelLateral(){
 
         this.setLayout(null);
         this.setBackground(Color.black);
         this.setPreferredSize(new Dimension(100,1000));
-        jugadorActual = GUIPrincipal.getJugador();
+        jugador = GUIPrincipal.getJugador();
     }
 
     public void addButtons(){
@@ -71,7 +71,7 @@ public class PanelLateral extends JPanel  {
         apuestaJugador = Jugador.getBote();
         apuestaPC = GUIPrincipal.getPc().getApuestaPC();
 		apuestaActual = GUIPrincipal.controlUnit.getApuestaActual();
-		cashJugador = Jugador.getDinero(jugadorActual);
+		cashJugador = Jugador.getDinero();
 		cashPC = GUIPrincipal.getPc().getDineroPC();
 		
 		g.drawString(Jugador.getUsername()+ ": " + String.valueOf(cashJugador), 8, 120);

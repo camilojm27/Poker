@@ -5,12 +5,16 @@
  */
 package poker;
 
+import sun.nio.ch.SocketAdaptor;
+
 import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.Socket;
+import java.net.SocketImpl;
 import java.util.ArrayList;
 import java.util.Formatter;
+import java.util.Scanner;
 
 import javax.swing.*;
 
@@ -24,8 +28,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 	private static ArrayList<Carta> barajaPc;
-    private static ArrayList<Carta> barajaJugador1;
-    public static Jugador jugador1, jugadorActual ;
+    private static ArrayList<Carta> barajaJugador;
+    public static Jugador jugador;
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
@@ -37,20 +41,21 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	private static Sonidos sonidos;
 
 	GUIPrincipal(String host){
+
 		hostPoker = host;
-        vprincipal = this;
-    	sizeGame = new Dimension(1200,720);
-    	controlUnit = new ControlUnit();
-        setPanelCentral(new PanelCentral());
-        panelLateral = new PanelLateral();
-
-        jugador1 = new Jugador();
+		vprincipal = this;
+		sizeGame = new Dimension(1200,720);
+		controlUnit = new ControlUnit();
+		setPanelCentral(new PanelCentral());
+		panelLateral = new PanelLateral();
 
 
-        pc = new Pc();
 
-        jugadorActual = jugador1;
+		barajaPc = controlUnit.getBarajaPc();
+		barajaJugador = controlUnit.getBarajaJugador();
 
+		jugador = new Jugador();
+		pc = new Pc();
         initGUI();
 
         setTitle("Poker");
@@ -60,8 +65,11 @@ public class GUIPrincipal extends JFrame implements Runnable{
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        startGame();
 
+
+
+        startGame();
+        
     }
 
 
@@ -69,7 +77,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	 * Inits the GUI.
 	 */
 	public void initGUI() {
-
+		
 		/////////////////////////////////////////
 		//ADD PANELES
 		add(getPanelCentral(),BorderLayout.CENTER);
@@ -85,7 +93,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 		vprincipal.setVisible(true);
 
     }
-
+	
 	/**
 	 * Start game.
 	 */
@@ -97,7 +105,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
     	}
 
-
+	
 	 /**
  	 * Game stage.
  	 *
@@ -105,7 +113,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
  	 */
  	public static void gameStage(int ronda) {
 
- 			Jugador jugadorActual = PanelCentral.getJugador();
 	    	panelCentral.infoPanelCentral();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
@@ -113,8 +120,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 					////////////////////////////////////////
 					//REPARTICION DE CARTAS
-
-					jugadorActual.realizarApuesta(1,jugadorActual);
+				
+					jugador.realizarApuesta(1);
 					pc.apuestaPc(Jugador.getBote());
 
 					getPanelCentral().repartirCartas();
@@ -125,17 +132,18 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					getPanelCentral().turnCards("pc");
 					getPanelCentral().updateUI();
 					break;
-
+	    		
 
 
 				case 2:
+
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
 					break;
-
+					
 				case 3:
 					getPanelCentral().showNextCard(4);
 					pc.apuestaPc(Jugador.getBote());
@@ -157,15 +165,15 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
                     break;
 	    	}
-
+	  
 	 }
-
+	
 	public static ArrayList<Carta> getBarajaPc() {
 		return barajaPc;
 	}
 
 	public static ArrayList<Carta> getBarajaJugador() {
-		return barajaJugador1;
+		return barajaJugador;
 	}
 
 	public static PanelCentral getPanelCentral() {
@@ -175,19 +183,19 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	public void setPanelCentral(PanelCentral panelCentral) {
 		this.panelCentral = panelCentral;
 	}
-
+	
 	public static Jugador getJugador() {
-		return jugadorActual;
+		return jugador;
 	}
 
 	public static Pc getPc() {
 		return pc;
 	}
-
+	
 	public static PanelLateral getPanelLateral() {
 		return panelLateral;
 	}
-
+	
 	public static int getRonda() {
 		return ronda;
 	}
@@ -195,7 +203,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	public static void setRonda(int ronda) {
 		GUIPrincipal.ronda = ronda;
 	}
-
+	
  	public static Sonidos getSonidos() {
 			return sonidos;
 		}
@@ -209,16 +217,14 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new Formatter(conexion.getOutputStream());
 
-			barajaJugador1 = (ArrayList<Carta>) entrada.readObject();
+			//barajaJugador1 = (ArrayList<Carta>) entrada.readObject();
 
 
 		} catch (IOException e) {
 			e.printStackTrace();
 			//System.exit(1);
-		} catch (ClassNotFoundException e) {
-			e.printStackTrace();
 		}
-	}
+    }
 
 	public static int getEntrada() {
 
