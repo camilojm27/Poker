@@ -9,7 +9,7 @@ import sun.nio.ch.SocketAdaptor;
 
 import java.awt.*;
 import java.io.IOException;
-import java.net.InetAddress;
+import java.io.ObjectInputStream;
 import java.net.Socket;
 import java.net.SocketImpl;
 import java.util.ArrayList;
@@ -23,7 +23,7 @@ import javax.swing.*;
 public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
-	private static Scanner entrada; // entrada del servidor
+	private static ObjectInputStream entrada; // entrada del servidor
 	private Formatter salida; // salida al servidor
 
 
@@ -136,6 +136,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 				case 2:
+
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
@@ -213,19 +214,26 @@ public class GUIPrincipal extends JFrame implements Runnable{
 		try {
 			conexion = new Socket(hostPoker, 12345);
 
-			entrada = new Scanner(conexion.getInputStream());
+			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new Formatter(conexion.getOutputStream());
+
+			//barajaJugador1 = (ArrayList<Carta>) entrada.readObject();
+
 
 		} catch (IOException e) {
 			e.printStackTrace();
 			//System.exit(1);
 		}
-	}
+    }
 
-	public static String getEntrada() {
- 		if (entrada.hasNextLine())
-			return entrada.nextLine();
- 		else
- 			return "null";
+	public static int getEntrada() {
+
+		try {
+			return entrada.readInt();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return 0;
 	}
 }

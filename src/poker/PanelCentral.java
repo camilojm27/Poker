@@ -15,7 +15,7 @@ import javax.swing.*;
 public class PanelCentral extends JPanel {
 	
 	private JLabel username , player2 = new JLabel("Cortana");
-	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
+	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey,apuesta,cashjugador,cashpc;
 	private int numPlayers = MenuInicio.getNumPlayers();
 	public static JButton p1c1, p1c2,c1Pc, c2Pc;
 	private static JButton pasar;
@@ -23,6 +23,7 @@ public class PanelCentral extends JPanel {
 	private static JButton igualar;
 	private static JButton jugar;
 	private static JButton giveup;
+	private static JLabel theCash;
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 	private final Font decored2 = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED, Font.BOLD, 24);
@@ -55,7 +56,7 @@ public class PanelCentral extends JPanel {
 	public void infoPanelCentral(){
 
 		Insets insets = this.getInsets();
-		informacion = new JTextArea("Bienvenido " + Jugador.getUsername() + "\nEres el jugador #" + GUIPrincipal.getEntrada());
+		informacion = new JTextArea("Bienvenido " + "\nEres el jugador #" );
 		informacion.setEditable(false);
 		username = new JLabel(Jugador.getUsername());
 		informacion.setBounds(920 + insets.left, 500 + insets.top,200,280);
@@ -284,14 +285,13 @@ public class PanelCentral extends JPanel {
 
 	public void paintComponent(Graphics g){
 		super.paintComponent(g);
-		
-		
-
-
 		Dimension height = getSize();
 		ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/tableformat.png"));
 		g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
 		setOpaque(false);
+
+		g.drawString("Bote = " + + ControlUnit.getApuestaActual(),250,250);
+		repaint();
 
 
 

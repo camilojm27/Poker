@@ -66,6 +66,7 @@ public class Servidor extends JFrame {
         add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
+
         ventana = this;
 
         setSize(300, 300);
