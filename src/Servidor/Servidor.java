@@ -1,12 +1,15 @@
 package Servidor;
 
+import poker.Carta;
 import poker.ControlUnit;
 
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -37,9 +40,12 @@ public class Servidor extends JFrame {
     private int jugadorActual;
     private Window ventana;
     private ServerSocket servidor;
+    private ArrayList<Carta> cartas;
+    private ControlUnit controlUnit;
 
     public Servidor() {
         super("Servidor Juego");
+         controlUnit = new ControlUnit();
 
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
@@ -106,7 +112,7 @@ finally {
         SwingUtilities.invokeLater(new Runnable() {
                                        public void run() {
                                            areaSalida.append(mensajeAMostrar + "\n"); // agrega el mensaje
-                                           System.out.println(mensajeAMostrar);
+                                           //System.out.println(mensajeAMostrar);
                                        } // fin del metodo run
                                    } // fin de la clase interna
         ); // fin de la llamada a SwingUtilities.invokeLater
@@ -115,7 +121,7 @@ finally {
     private class Jugador implements Runnable {
         private Socket conexion; // conexion con el cliente
         private Scanner entrada; // entrada del cliente
-        private Formatter salida; // salida al cliente
+        private ObjectOutputStream salida; // salida al cliente
         private int numeroJugador; // identifica al Jugador
         private boolean suspendido = true; // indica si el subproceso esta suspendido
 
@@ -125,7 +131,7 @@ finally {
 
             try {
                 entrada = new Scanner(conexion.getInputStream());
-                salida = new Formatter(conexion.getOutputStream());
+                salida = new ObjectOutputStream(conexion.getOutputStream());
                 salida.flush();
                 jugadoresConectados++;
             } catch (IOException e) {
@@ -140,10 +146,19 @@ finally {
 
                 System.out.println("Jugador # " + jugadoresConectados + " conectado");
                 mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
-                salida.format("%s\n", String.valueOf(jugadoresConectados)); // envia la marca del jugador
-                salida.flush(); // vacia la salida
 
-             // fin de try
+            try {
+                salida.writeInt(jugadoresConectados); // envia la marca del jugador
+                salida.flush(); // vacia la salida
+                    System.out.println("Repartiendo cartas ");
+                    salida.writeObject(controlUnit.getBarajaJugador());
+
+
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            // fin de try
 
 
         }

@@ -27,7 +27,7 @@ public class ControlUnit {
     private static Jugador jugadorActual;
 
 
-    ControlUnit() {
+    public ControlUnit() {
 
 
         baraja = new Baraja();
