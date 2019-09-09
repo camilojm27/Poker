@@ -1,5 +1,6 @@
 package Servidor;
 
+import poker.Carta;
 import poker.ControlUnit;
 
 import javax.swing.*;
@@ -8,6 +9,7 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -19,11 +21,11 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Servidor extends JFrame {
     public static void main(String[] args) {
 
-            EventQueue.invokeLater(new Runnable() {public void run() {
+        EventQueue.invokeLater(new Runnable() {public void run() {
 
-                Servidor servidor = new Servidor();
+            Servidor servidor = new Servidor();
 
-            }});
+        }});
 
     }
 
@@ -38,9 +40,12 @@ public class Servidor extends JFrame {
     private int jugadorActual;
     private Window ventana;
     private ServerSocket servidor;
+    private ArrayList<Carta> cartas;
+    private ControlUnit controlUnit;
 
     public Servidor() {
         super("Servidor Juego");
+        controlUnit = new ControlUnit();
 
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
@@ -67,7 +72,6 @@ public class Servidor extends JFrame {
         add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
-
         ventana = this;
 
         setSize(300, 300);
@@ -90,16 +94,16 @@ public class Servidor extends JFrame {
                 System.exit(1);
             }
         }
-    bloqueoJuego.lock();
+        bloqueoJuego.lock();
 
-try {
-        jugadores[0].establecerSuspendido(false);
-        turnos[0].signal();
+        try {
+            jugadores[0].establecerSuspendido(false);
+            turnos[0].signal();
 
-}
-finally {
-    bloqueoJuego.unlock();
-}
+        }
+        finally {
+            bloqueoJuego.unlock();
+        }
 
     }
 
@@ -140,17 +144,23 @@ finally {
 
         public void run() {
 
-                System.out.println("Jugador # " + jugadoresConectados + " conectado");
-                mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
+            System.out.println("Jugador # " + jugadoresConectados + " conectado");
+            mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
+
             try {
-                salida.writeInt(jugadoresConectados);
+                salida.writeInt(jugadoresConectados); // envia la marca del jugador
+                salida.flush(); // vacia la salida
+                System.out.println("Repartiendo cartas ");
+                cartas = controlUnit.getBarajaJugador();
+                salida.writeObject(cartas);
                 salida.flush();
+
+
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            // vacia la salida
 
-             // fin de try
+            // fin de try
 
 
         }

@@ -51,12 +51,13 @@ public class PanelCentral extends JPanel {
 		this.setPreferredSize(GUIPrincipal.sizeGame);
 
 
+
 	}
 
 	public void infoPanelCentral(){
 
 		Insets insets = this.getInsets();
-		informacion = new JTextArea("Bienvenido " + "\nEres el jugador #" );
+		informacion = new JTextArea("Bienvenido " + Jugador.getUsername() +  "\nEres el jugador #"  + Jugador.getID()  );
 		informacion.setEditable(false);
 		username = new JLabel(Jugador.getUsername());
 		informacion.setBounds(920 + insets.left, 500 + insets.top,200,280);

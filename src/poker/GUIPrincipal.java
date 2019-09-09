@@ -4,12 +4,13 @@
  * SANTIAGO MARTINEZ MESA = 1823107
  */
 package poker;
-
+//https://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
 import sun.nio.ch.SocketAdaptor;
 
 import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.net.Socket;
 import java.net.SocketImpl;
 import java.util.ArrayList;
@@ -23,8 +24,8 @@ import javax.swing.*;
 public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
-	private static ObjectInputStream entrada; // entrada del servidor
-	private Formatter salida; // salida al servidor
+	private  ObjectInputStream entrada; // entrada del servidor
+	private ObjectOutputStream salida; // salida al servidor
 
 
 	private static ArrayList<Carta> barajaPc;
@@ -52,14 +53,14 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 		barajaPc = controlUnit.getBarajaPc();
-		barajaJugador = controlUnit.getBarajaJugador();
+		//barajaJugador = controlUnit.getBarajaJugador();
 
 		jugador = new Jugador();
 		pc = new Pc();
         initGUI();
 
         setTitle("Poker");
-        setResizable(false);
+        setResizable(true);
         //pack();
         setSize(sizeGame);
         setLocationRelativeTo(null);
@@ -100,6 +101,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	public void startGame() {
 			//sonidos = new Sonidos(Sonidos.secondSong);
 		this.run();
+
 					gameStage(1);
 					JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
 
@@ -215,25 +217,25 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			conexion = new Socket(hostPoker, 12345);
 
 			entrada = new ObjectInputStream(conexion.getInputStream());
-			salida = new Formatter(conexion.getOutputStream());
+			salida = new ObjectOutputStream(conexion.getOutputStream());
+			getEntrada();
+			barajaJugador = (ArrayList<Carta>) entrada.readObject();
 
-			//barajaJugador1 = (ArrayList<Carta>) entrada.readObject();
 
-
-		} catch (IOException e) {
+		} catch (IOException | ClassNotFoundException e) {
 			e.printStackTrace();
 			//System.exit(1);
 		}
     }
 
-	public static int getEntrada() {
-
+	public  void  getEntrada() {
 		try {
-			return entrada.readInt();
+			int id = entrada.readInt() ;
+			Jugador.setID(id);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 
-		return 0;
+
 	}
 }

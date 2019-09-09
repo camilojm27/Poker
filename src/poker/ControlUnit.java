@@ -23,7 +23,7 @@ public class ControlUnit {
     private ArrayList<Integer>puntajeCortana;
 
 
-    ControlUnit() {
+    public ControlUnit() {
 
 
         baraja = new Baraja();

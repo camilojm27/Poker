@@ -7,13 +7,14 @@ package poker;
 
 import javax.swing.ImageIcon;
 import java.awt.*;
+import java.io.Serializable;
 import java.net.URL;
 
 // TODO: Auto-generated Javadoc
 /**
  * The Class Carta.
  */
-public class Carta implements Comparable{
+public class Carta implements Comparable, Serializable {
     
     /** The url. */
     private URL url;

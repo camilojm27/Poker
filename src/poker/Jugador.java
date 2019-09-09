@@ -14,16 +14,18 @@ public class Jugador extends JOptionPane {
 
 	private static boolean apuestaValida = true;
 	private static String username;
+	private static int ID;
+
 	private static int dinero = 50000;
+
 	private static int bote = 0;
 	private static int miApuesta;
 	private static int id,cordx, cordy;
 	private static boolean plantarse;
-
 	PanelCentral p = GUIPrincipal.getPanelCentral();
+
 	static ControlUnit control = GUIPrincipal.controlUnit;
 	static int apuestaActual = control.getApuestaActual();
-
 	Jugador(){
 		this.apuestaValida = true;
 		this.dinero = 50000;
@@ -33,7 +35,7 @@ public class Jugador extends JOptionPane {
 		this.plantarse = false;
 
 	}
-	
+
 	public static void resetStats() {
 		apuestaValida = true;
 		miApuesta = 0;
@@ -57,22 +59,22 @@ public class Jugador extends JOptionPane {
 		if(dinero == 0){
 			return 0;
 		}
-		
+
 		if(stage == 1) {
 			String inApuesta = JOptionPane.showInputDialog(
-					GUIPrincipal.vprincipal, 
+					GUIPrincipal.vprincipal,
 			        "Cuanto desea apostar?",
-			        "Ciega", 
+			        "Ciega",
 			        JOptionPane.WARNING_MESSAGE
 			    );
 
-				if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
+				if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))
 				{
 					JOptionPane.showMessageDialog(null, "Sin ciega no hay juego");
 					realizarApuesta(1);
 					//System.exit(1);
 				}
-			   
+
 			   else {
 
 					while(apuestaValida) {
@@ -87,125 +89,125 @@ public class Jugador extends JOptionPane {
 					}
 
 
-				 
+
 					 if(getBote() > dinero) {
 						 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente");
 						 realizarApuesta(1);
-						
+
 					 }
-					 
+
 					 if(getBote() <= dinero) {
 						 dinero = dinero - getBote();
 						 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
 						 apuestaActual = getBote();
-					 }	
+					 }
 			   }
-     
+
 		}
-		
+
 		if(stage == 2) {
-			
+
 			if(dinero >= apuestaActual) {
-				
+
 				String inApuesta = JOptionPane.showInputDialog(
-						GUIPrincipal.vprincipal, 
-				        "�Cuanto desea apostar?", 
-				        "Ciega", 
+						GUIPrincipal.vprincipal,
+				        "�Cuanto desea apostar?",
+				        "Ciega",
 				        JOptionPane.WARNING_MESSAGE
 				    );
-				
-				
-					if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
+
+
+					if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))
 					{
-						
+
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
 						realizarApuesta(2);
 						//System.exit(1);
 					}
-					
+
 					if(Integer.parseInt(inApuesta) < apuestaActual) {
-						
+
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
 						realizarApuesta(2);
-						
+
 					}
-				   
+
 				   else {
-					   
+
 					   bote = Integer.parseInt(inApuesta);
-					   
-					 
+
+
 						 if(getBote() > dinero) {
 							 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente, tu pierdes");
 							 System.exit(1);
-							
+
 						 }
-						 
+
 						 if(getBote() <= dinero) {
 							 apuestaActual = apuestaActual + getBote();
 							 dinero = dinero - getBote();
 							 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
-						 }	
+						 }
 				   }
-				
+
 			}
-			
+
 			else JOptionPane.showMessageDialog(null, "no tienes dinero para seguir apostando, tu pierdes");
 				// System.exit(1);
-			
-			
-     
-		
-			
+
+
+
+
+
 			}
-		
+
 		if(stage == 3) {
-			
+
 			if(dinero > apuestaActual) {
-				
+
 				String inApuesta = JOptionPane.showInputDialog(
-						GUIPrincipal.vprincipal, 
+						GUIPrincipal.vprincipal,
 				        "Ingrese su apuesta",
-				        "Ciega", 
+				        "Ciega",
 				        JOptionPane.WARNING_MESSAGE
 				    );
-				
-				
-					if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
+
+
+					if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))
 					{
-						
+
 						JOptionPane.showMessageDialog(null, "Debes aumentar la apuesta actual");
 						realizarApuesta(3);
 						//System.exit(1);
 					}
-					
+
 					if(Integer.parseInt(inApuesta) <= apuestaActual) {
-						
+
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
 						realizarApuesta(3);
-						
+
 					}
-				   
+
 				   else {
-					   
+
 					   bote = Integer.parseInt(inApuesta);
-					   
-					 
+
+
 						 if(getBote() > dinero) {
 							 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente, tu pierdes");
 							 System.exit(1);
-							
+
 						 }
-						 
+
 						 if(getBote() <= dinero) {
 							 apuestaActual = apuestaActual + getBote();
 							 dinero = dinero - getBote();
 							 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
-						 }	
+						 }
 				   }
-				
+
 			}
-			
+
 			else {
 				JOptionPane.showMessageDialog(null, "no tienes dinero para seguir apostando, tu pierdes");
 				System.exit(1);
@@ -213,10 +215,10 @@ public class Jugador extends JOptionPane {
 
 			}
 
-		return dinero;	
+		return dinero;
 	}
 
-		
+
 	public static int getDinero() {
 		return dinero;
 	}
@@ -231,9 +233,9 @@ public class Jugador extends JOptionPane {
 			p.p1c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 	        p.p1c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 		}
-	    
+
 	    if(who.equals("pNormal")) {
-	    	
+
 	    	p.p1c1.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(0).getImagenRedi());
 	    	p.p1c2.setIcon(GUIPrincipal.controlUnit.getBarajaJugador().get(1).getImagenRedi());
 	    }
@@ -253,6 +255,14 @@ public class Jugador extends JOptionPane {
 
 	public static void setApuesta(int apuesta) {
 		bote = apuesta;
+	}
+
+	public static int getID() {
+		return ID;
+	}
+
+	public static void setID(int ID) {
+		Jugador.ID = ID;
 	}
 
 }
