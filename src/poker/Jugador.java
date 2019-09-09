@@ -8,17 +8,17 @@ package poker;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
+
 public class Jugador extends JOptionPane {
 
 
-	private boolean apuestaValida = true;
+	private static boolean apuestaValida = true;
 	private static String username;
-	//public static final int ID = Integer.parseInt(GUIPrincipal.getEntrada());
-	private int dinero = 50000;
+	private static int dinero = 50000;
 	private static int bote = 0;
-	private int miApuesta;
-	private int id,cordx, cordy;
-	private boolean plantarse,winner;
+	private static int miApuesta;
+	private static int id,cordx, cordy;
+	private static boolean plantarse;
 
 	PanelCentral p = GUIPrincipal.getPanelCentral();
 	static ControlUnit control = GUIPrincipal.controlUnit;
@@ -31,30 +31,28 @@ public class Jugador extends JOptionPane {
 		this.cordx = 0;
 		this.cordy = 0;
 		this.plantarse = false;
-		this.winner = false;
 
 	}
 	
-	public static void resetStats(Jugador jugador) {
-		jugador.apuestaValida = true;
-		jugador.miApuesta = 0;
-		jugador.plantarse = false;
-		jugador.winner = false;
+	public static void resetStats() {
+		apuestaValida = true;
+		miApuesta = 0;
+		plantarse = false;
 	}
 
-	boolean plantarse(Jugador jugador) {
+	boolean plantarse() {
 
-		jugador.plantarse = true;
+		plantarse = true;
 		return plantarse;
 	}
 
-	public static void realizarApuestaFija(Jugador jugador) {
+	public static void realizarApuestaFija() {
 		bote = ControlUnit.getApuestaActual();
 		apuestaActual= bote + getBote();
-		Jugador.setDinero(jugador.dinero - bote, jugador);
+		setDinero(dinero - bote);
 	}
 
-	public int realizarApuesta(int stage,Jugador jugador) {
+	public int realizarApuesta(int stage) {
 
 		if(dinero == 0){
 			return 0;
@@ -71,7 +69,7 @@ public class Jugador extends JOptionPane {
 				if(inApuesta == null || (inApuesta != null && ("".equals(inApuesta))))   
 				{
 					JOptionPane.showMessageDialog(null, "Sin ciega no hay juego");
-					realizarApuesta(1,jugador);
+					realizarApuesta(1);
 					//System.exit(1);
 				}
 			   
@@ -84,7 +82,7 @@ public class Jugador extends JOptionPane {
 							apuestaValida = false;
 						} catch (NumberFormatException e) {
 							JOptionPane.showMessageDialog(null, "Ingresa un valor valido");
-							realizarApuesta(1,jugador);
+							realizarApuesta(1);
 						}
 					}
 
@@ -92,7 +90,7 @@ public class Jugador extends JOptionPane {
 				 
 					 if(getBote() > dinero) {
 						 JOptionPane.showMessageDialog(null, "no tienes el dinero suficiente");
-						 realizarApuesta(1,jugador);
+						 realizarApuesta(1);
 						
 					 }
 					 
@@ -121,14 +119,14 @@ public class Jugador extends JOptionPane {
 					{
 						
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
-						realizarApuesta(2,jugador);
+						realizarApuesta(2);
 						//System.exit(1);
 					}
 					
 					if(Integer.parseInt(inApuesta) < apuestaActual) {
 						
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
-						realizarApuesta(2,jugador);
+						realizarApuesta(2);
 						
 					}
 				   
@@ -177,14 +175,14 @@ public class Jugador extends JOptionPane {
 					{
 						
 						JOptionPane.showMessageDialog(null, "Debes aumentar la apuesta actual");
-						realizarApuesta(3,jugador);
+						realizarApuesta(3);
 						//System.exit(1);
 					}
 					
 					if(Integer.parseInt(inApuesta) <= apuestaActual) {
 						
 						JOptionPane.showMessageDialog(null, "Debes igualar o aumentar la apuesta actual");
-						realizarApuesta(3,jugador);
+						realizarApuesta(3);
 						
 					}
 				   
@@ -219,17 +217,18 @@ public class Jugador extends JOptionPane {
 	}
 
 		
-	public static int getDinero(Jugador jugador) {
-		return jugador.dinero;
+	public static int getDinero() {
+		return dinero;
 	}
 
-	public static void setDinero(int dinero,Jugador jugador) {
-		jugador.dinero = dinero;
+	public static void setDinero(int amount) {
+
+		dinero = amount;
 	}
 
 	public void turnCards(String who){
 	    if(who.equals("player")){
-	        p.p1c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+			p.p1c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 	        p.p1c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 		}
 	    

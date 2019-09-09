@@ -1,6 +1,5 @@
 package Servidor;
 
-import poker.Carta;
 import poker.ControlUnit;
 
 import javax.swing.*;
@@ -9,7 +8,6 @@ import java.io.IOException;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.ArrayList;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -31,7 +29,7 @@ public class Servidor extends JFrame {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 2;
+    public static final int cantidadJugadores = 6;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -40,12 +38,9 @@ public class Servidor extends JFrame {
     private int jugadorActual;
     private Window ventana;
     private ServerSocket servidor;
-    private ArrayList<Carta> cartas;
-    private ControlUnit controlUnit;
 
     public Servidor() {
         super("Servidor Juego");
-         controlUnit = new ControlUnit();
 
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
@@ -71,6 +66,7 @@ public class Servidor extends JFrame {
         areaSalida.setEditable(false);
         add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
+
 
         ventana = this;
 
@@ -146,19 +142,15 @@ finally {
 
                 System.out.println("Jugador # " + jugadoresConectados + " conectado");
                 mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
-
             try {
-                salida.writeInt(jugadoresConectados); // envia la marca del jugador
-                salida.flush(); // vacia la salida
-                    System.out.println("Repartiendo cartas ");
-                    salida.writeObject(controlUnit.getBarajaJugador());
-
-
+                salida.writeInt(jugadoresConectados);
+                salida.flush();
             } catch (IOException e) {
                 e.printStackTrace();
             }
+            // vacia la salida
 
-            // fin de try
+             // fin de try
 
 
         }
