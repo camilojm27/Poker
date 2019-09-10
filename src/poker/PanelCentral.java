@@ -290,12 +290,15 @@ public class PanelCentral extends JPanel {
 		ImageIcon Img = new ImageIcon(getClass().getResource("/imagenes/tableformat.png"));
 		g.drawImage(Img.getImage(), 0, 0, height.width, height.height, null);
 		setOpaque(false);
-
-		g.drawString("Bote = " + + ControlUnit.getApuestaActual(),250,250);
-		repaint();
+		drawScore(g);
 
 
+	}
 
+	public void drawScore(Graphics g){
+		g.setFont(decored2);
+		g.setColor(Color.white);
+		g.drawString("Bote = " + + ControlUnit.getApuestaActual(),20,650);
 
 	}
 
