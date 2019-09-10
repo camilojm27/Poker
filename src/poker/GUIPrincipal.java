@@ -28,8 +28,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	private ObjectOutputStream salida; // salida al servidor
 
 
-	private static ArrayList<Carta> barajaPc;
-    private static ArrayList<Carta> barajaJugador;
+
     public static Jugador jugador;
     private static Pc pc;
     public static Dimension sizeGame;
@@ -52,7 +51,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 
-		barajaPc = controlUnit.getBarajaPc();
+
 		//barajaJugador = controlUnit.getBarajaJugador();
 
 		jugador = new Jugador();
@@ -102,7 +101,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			//sonidos = new Sonidos(Sonidos.secondSong);
 		this.run();
 
-					gameStage(1);
+					//gameStage(1);
 					JOptionPane.showMessageDialog(null, "Primera Ronda de Apuestas");
 
     	}
@@ -170,13 +169,9 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	  
 	 }
 	
-	public static ArrayList<Carta> getBarajaPc() {
-		return barajaPc;
-	}
 
-	public static ArrayList<Carta> getBarajaJugador() {
-		return barajaJugador;
-	}
+
+
 
 	public static PanelCentral getPanelCentral() {
 		return panelCentral;
@@ -219,7 +214,10 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new ObjectOutputStream(conexion.getOutputStream());
 			getEntrada();
-			barajaJugador = (ArrayList<Carta>) entrada.readObject();
+			controlUnit.setBarajaJugador( (ArrayList<Carta>) entrada.readObject() );
+			controlUnit.setCartasComunitarias((ArrayList<Carta>) entrada.readObject());
+			gameStage(1);
+
 
 
 		} catch (IOException | ClassNotFoundException e) {

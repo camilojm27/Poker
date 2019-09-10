@@ -94,7 +94,7 @@ public class PanelLateral extends JPanel  {
             if(dialogResult == 0){
             	
             	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
-            	ControlUnit.newRound();
+                GUIPrincipal.controlUnit.newRound();
           
             }
 

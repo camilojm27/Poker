@@ -342,11 +342,11 @@ public class PanelCentral extends JPanel {
 			}
 
 			if(arg0.getSource() == subir) {
-				ControlUnit.checkSubir();
+				GUIPrincipal.controlUnit.checkSubir();
 			}
 			
 			if(arg0.getSource() == igualar) {
-				ControlUnit.checkIgualar();
+				GUIPrincipal.controlUnit.checkIgualar();
 				
 			}
 			
@@ -357,7 +357,7 @@ public class PanelCentral extends JPanel {
 	            if(dialogResult == 0){
 	            	
 	            	JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
-	            	ControlUnit.newRound();
+					GUIPrincipal.controlUnit.newRound();
 	            }
 
 	            else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");

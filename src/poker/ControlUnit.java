@@ -16,8 +16,8 @@ public class ControlUnit {
     public static int cantidadJugadores;
     private static Baraja baraja;
     public static ArrayList<Carta> barajaPc;
-    public static ArrayList<Carta> barajaJugador;
-    public static ArrayList<Carta> cartasComunitarias;
+    public  ArrayList<Carta> barajaJugador;
+    public  ArrayList<Carta> cartasComunitarias;
     public static int apuestaActual = 0;
     private ArrayList<Integer>puntajeJugador;
     private ArrayList<Integer>puntajeCortana;
@@ -28,8 +28,6 @@ public class ControlUnit {
 
         baraja = new Baraja();
         barajaPc = baraja.repartirBarajaJugadores();
-        barajaJugador = baraja.repartirBarajaJugadores();
-        cartasComunitarias = baraja.repartirCartasComunitarias();
 
         /*
         baraja.print(barajaJugador);
@@ -42,7 +40,7 @@ public class ControlUnit {
         //compararJugadas(Escaleras.FOUR_OF_A_KIND, Escaleras.FOUR_OF_A_KIND2);
     }
 
-    public static void newRound() {
+    public  void newRound() {
 
 
     	if(getApuestaActual() <= Jugador.getDinero()) {
@@ -86,6 +84,14 @@ public class ControlUnit {
 
     public ArrayList<Carta> getBarajaJugador() {
         return barajaJugador;
+    }
+
+    public  void setBarajaJugador(ArrayList<Carta> payerCards) {
+        barajaJugador = payerCards;
+    }
+
+    public  void setCartasComunitarias(ArrayList<Carta> comunityCards) {
+        cartasComunitarias = comunityCards;
     }
 
     public ArrayList<Carta> getCartasComunitarias() {
@@ -432,7 +438,7 @@ else{
         return false;
     }
 
-    public static void checkSubir() {
+    public  void checkSubir() {
     	if(GUIPrincipal.getRonda() == 2) {
 
 			GUIPrincipal.getJugador().realizarApuesta(3);
@@ -476,7 +482,7 @@ else{
 		}
     }
 
-    public static void checkIgualar() {
+    public  void checkIgualar() {
 
         Jugador jugador = GUIPrincipal.getJugador();
 
@@ -531,16 +537,16 @@ else{
 
     }
 
-    public static void cortanaDecidirJugada() {
+    public  void cortanaDecidirJugada() {
 
     }
 
-    public static void victoria(int quien) {
+    public  void victoria(int quien) {
     	if(quien == 1) {
 			Jugador.setDinero
     		(Jugador.getDinero() + getApuestaActual());
 			GUIPrincipal.getPanelLateral().updateUI();
-			ControlUnit.newRound();
+			newRound();
 
     	}
     	else {
@@ -548,7 +554,7 @@ else{
     		Pc.setDineroPC
     		(Pc.getDineroPC() + getApuestaActual());
     		GUIPrincipal.getPanelLateral().updateUI();
-    		ControlUnit.newRound();
+    		newRound();
 
     	}
 
