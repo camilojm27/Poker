@@ -45,6 +45,8 @@ public class Servidor extends ControlUnit {
     private ArrayList<Carta> cartas, cartasComunitarias;
     private ControlUnit controlUnit;
     private Baraja baraja;
+    private  int apuestaActual = 0;
+    private String[] nombres;
 
     public Servidor() {
         //super("Servidor Juego");
@@ -56,6 +58,7 @@ public class Servidor extends ControlUnit {
         for (int i = 0; i < cantidadJugadores; i++) {
             turnos[i] = bloqueoJuego.newCondition();
         }
+        nombres = new String[cantidadJugadores];
 
 
         jugadores = new Jugador[cantidadJugadores];
@@ -136,7 +139,6 @@ public class Servidor extends ControlUnit {
         private  int dinero = 50000;
         private  int miApuesta;
         private  int bote = 0;
-        private  int apuestaActual;
 
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
@@ -161,8 +163,11 @@ public class Servidor extends ControlUnit {
             mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
 
             try {
+
+
                 salida.writeInt(jugadoresConectados); // envia la marca del jugador
                 salida.flush(); // vacia la salida
+
                 System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
                 cartas = baraja.repartirBarajaJugadores();
                 cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
@@ -171,9 +176,14 @@ public class Servidor extends ControlUnit {
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
                 dinero = entrada.readInt();
-                apuestaActual = entrada.readInt();
-                System.out.println("Dinero = " + dinero);
+                apuestaActual += entrada.readInt();
+                String nombre = (String) entrada.readObject();
+                nombres[jugadoresConectados - 1] = nombre;
+                System.out.println("Dinero de " + nombres[jugadoresConectados - 1] + " = " + dinero);
                 System.out.println("apueta = " + apuestaActual);
+
+
+
                 bloqueoJuego.lock();
                 /*
                 while (suspendido){
@@ -193,6 +203,8 @@ public class Servidor extends ControlUnit {
 
 
             } catch (IOException e) {
+                e.printStackTrace();
+            } catch (ClassNotFoundException e) {
                 e.printStackTrace();
             }
 
