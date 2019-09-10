@@ -86,8 +86,8 @@ public class ControlUnit {
         return barajaJugador;
     }
 
-    public  void setBarajaJugador(ArrayList<Carta> payerCards) {
-        barajaJugador = payerCards;
+    public  void setBarajaJugador(Object payerCards) {
+        barajaJugador = (ArrayList<Carta>) payerCards;
     }
 
     public  void setCartasComunitarias(ArrayList<Carta> comunityCards) {

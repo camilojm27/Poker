@@ -31,7 +31,7 @@ public class Baraja {
     /**
      * Instantiates a new baraja.
      */
-    Baraja() {
+    public Baraja() {
         escaleras = new Escaleras();
         all = new ArrayList<>();
         clubs = new ArrayList<>();
@@ -83,7 +83,7 @@ public class Baraja {
      *
      * @return the array list
      */
-    public ArrayList<Carta> repartirBarajaJugadores() {
+    public  ArrayList<Carta> repartirBarajaJugadores() {
         ArrayList<Carta> todos = all;
         repartir = new ArrayList<>();
         random = new Random();

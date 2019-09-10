@@ -214,8 +214,12 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new ObjectOutputStream(conexion.getOutputStream());
 			getEntrada();
-			controlUnit.setBarajaJugador( (ArrayList<Carta>) entrada.readObject() );
-			controlUnit.setCartasComunitarias((ArrayList<Carta>) entrada.readObject());
+			ArrayList<Carta> cartas = (ArrayList<Carta>) entrada.readObject();
+			//cartas.forEach(carta -> System.out.println(carta.getId()));
+			GUIPrincipal.controlUnit.setBarajaJugador(cartas);
+			cartas =  (ArrayList<Carta>) entrada.readObject();
+			//cartas.forEach(carta -> System.out.println(carta.getId()));
+			GUIPrincipal.controlUnit.setCartasComunitarias(cartas);
 			gameStage(1);
 
 

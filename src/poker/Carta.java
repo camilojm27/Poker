@@ -68,10 +68,10 @@ public class Carta implements Comparable, Serializable {
      * @return the id value
      */
     public int getIdValue() {
-        if (id == "J"){return 11;}
-        else if (id == "Q"){return 12;}
-        else if (id == "K"){return 13;}
-        else if (id == "A"){return 14;}
+        if (id.equals("J")){return 11;}
+        else if (id.equals("Q")){return 12;}
+        else if (id.equals("K")){return 13;}
+        else if (id.equals("A")){return 14;}
         else{
 
             return Integer.valueOf(id);

@@ -1,5 +1,6 @@
 package Servidor;
 
+import poker.Baraja;
 import poker.Carta;
 import poker.ControlUnit;
 
@@ -18,7 +19,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Servidor extends JFrame {
+public class Servidor extends ControlUnit {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(new Runnable() {public void run() {
@@ -42,11 +43,12 @@ public class Servidor extends JFrame {
     private ServerSocket servidor;
     private ArrayList<Carta> cartas, cartasComunitarias;
     private ControlUnit controlUnit;
+    private Baraja baraja;
 
     public Servidor() {
-        super("Servidor Juego");
-        controlUnit = new ControlUnit();
-        cartasComunitarias = controlUnit.getCartasComunitarias();
+        //super("Servidor Juego");
+        baraja = new Baraja();
+        cartasComunitarias = baraja.repartirCartasComunitarias();
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
         bloqueoJuego = new ReentrantLock();
@@ -69,16 +71,16 @@ public class Servidor extends JFrame {
         }
         areaSalida = new JTextArea();
         areaSalida.setEditable(false);
-        add(areaSalida, BorderLayout.CENTER);
+        //add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
-        ventana = this;
+        //ventana = this;
 
-        setSize(300, 300);
-        setResizable(true);
-        setLocationRelativeTo(null);
-        setVisible(true);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //setSize(300, 300);
+        //setResizable(true);
+        //setLocationRelativeTo(null);
+        //setVisible(true);
+        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         execute();
     }
 
@@ -151,7 +153,7 @@ public class Servidor extends JFrame {
                 salida.writeInt(jugadoresConectados); // envia la marca del jugador
                 salida.flush(); // vacia la salida
                 System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
-                cartas = controlUnit.getBarajaJugador();
+                cartas = baraja.repartirBarajaJugadores();
                 //cartas.forEach(carta -> System.out.println(carta.getId()));
                 salida.writeObject(cartas);
                 salida.flush();
