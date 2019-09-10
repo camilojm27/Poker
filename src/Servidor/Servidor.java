@@ -33,7 +33,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 2;
+    public static final int cantidadJugadores = 6;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -100,7 +100,7 @@ public class Servidor extends ControlUnit {
                 System.exit(1);
             }
         }
-        bloqueoJuego.lock();
+        /*bloqueoJuego.lock();
         try {
             jugadores[0].wait();
         } catch (InterruptedException e) {
@@ -116,6 +116,8 @@ public class Servidor extends ControlUnit {
         finally {
             bloqueoJuego.unlock();
         }
+
+         */
 
     }
 
@@ -160,27 +162,47 @@ public class Servidor extends ControlUnit {
         public void run() {
 
             System.out.println("Jugador # " + jugadoresConectados + " conectado");
-            mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
+            //mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
 
             try {
 
-
                 salida.writeInt(jugadoresConectados); // envia la marca del jugador
                 salida.flush(); // vacia la salida
-
-                System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
-                cartas = baraja.repartirBarajaJugadores();
-                cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
-                salida.writeObject(cartas);
-                salida.flush();
-                salida.writeObject(cartasComunitarias);
-                salida.flush();
-                dinero = entrada.readInt();
-                apuestaActual += entrada.readInt();
+                //Envia la etapa 0 del juego y recibe el nombre del jugador
+                salida.writeInt(0);
                 String nombre = (String) entrada.readObject();
                 nombres[jugadoresConectados - 1] = nombre;
-                System.out.println("Dinero de " + nombres[jugadoresConectados - 1] + " = " + dinero);
-                System.out.println("apueta = " + apuestaActual);
+
+                if (cantidadJugadores == jugadoresConectados){
+                    //  Inicia la etapa 1 de reparticion de cartas
+                    salida.writeInt(1);
+
+                    System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
+                    ObjectInputStream entradaTEMP;
+                    ObjectOutputStream salidaTEMP;
+
+                    for (int i = 0; i < cantidadJugadores; i++) {
+                        salidaTEMP = jugadores[i].salida;
+                        entradaTEMP = jugadores[i].entrada;
+
+                        cartas = baraja.repartirBarajaJugadores();
+                        cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
+                        salidaTEMP.writeObject(cartas);
+                        salidaTEMP.flush();
+                        salidaTEMP.writeObject(cartasComunitarias);
+                        salidaTEMP.flush();
+                        dinero = entradaTEMP.readInt();
+                        apuestaActual += entradaTEMP.readInt();
+
+
+                        System.out.println("Dinero de " + nombres[jugadoresConectados - 1] + " = " + dinero);
+                        System.out.println("apueta = " + apuestaActual);
+
+
+                    }
+
+
+                }
 
 
 
