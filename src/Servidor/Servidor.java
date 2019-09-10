@@ -3,6 +3,7 @@ package Servidor;
 import poker.Baraja;
 import poker.Carta;
 import poker.ControlUnit;
+import poker.GUIPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -26,6 +27,7 @@ public class Servidor extends ControlUnit {
         EventQueue.invokeLater(new Runnable() {public void run() {
 
             Servidor servidor = new Servidor();
+
 
         }});
 
@@ -87,6 +89,8 @@ public class Servidor extends ControlUnit {
 
     public void execute(){
 
+        System.out.println("Servidor Iniciado");
+
         for (int i = 0; i < cantidadJugadores; i++) {
             try {
                 jugadores[i] = new Jugador(servidor.accept(), i);
@@ -128,15 +132,16 @@ public class Servidor extends ControlUnit {
     } // fin del metodo mostrarMensaje
 
     private class Jugador implements Runnable {
+
         private Socket conexion; // conexion con el cliente
         private ObjectInputStream entrada; // entrada del cliente
         private ObjectOutputStream salida; // salida al cliente
         private int numeroJugador; // identifica al Jugador
         private boolean suspendido = true; // indica si el subproceso esta suspendido
-        private  int dinero = 50000;
-        private  int miApuesta;
-        private  int bote = 0;
-        private  int apuestaActual;
+        private int dinero = 50000;
+        private int miApuesta;
+        private int bote = 0;
+        private int apuestaActual;
 
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
@@ -170,12 +175,12 @@ public class Servidor extends ControlUnit {
                 salida.flush();
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
-                dinero = entrada.readInt();
-                apuestaActual = entrada.readInt();
+
+
                 System.out.println("Dinero = " + dinero);
-                System.out.println("apueta = " + apuestaActual);
+                System.out.println("apuesta = " + apuestaActual);
                 bloqueoJuego.lock();
-                /*
+
                 while (suspendido){
                     try {
                         turnos[0].await();
@@ -188,7 +193,7 @@ public class Servidor extends ControlUnit {
                     System.out.println("El otro jugador se conecto. Ahora es su turno.\n" );
 
 
-                }*/
+                }
 
 
 

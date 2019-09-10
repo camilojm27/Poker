@@ -49,9 +49,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
 		setPanelCentral(new PanelCentral());
 		panelLateral = new PanelLateral();
 
-
-
-
 		//barajaJugador = controlUnit.getBarajaJugador();
 
 		jugador = new Jugador();
@@ -106,7 +103,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
     	}
 
-	
 	 /**
  	 * Game stage.
  	 *
