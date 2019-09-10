@@ -16,11 +16,12 @@ public class Jugador extends JOptionPane {
 	private static String username;
 	private static int ID;
 
+	private static int cordx, cordy;
+
 	private static int dinero = 50000;
 
 	private static int bote = 0;
 	private static int miApuesta;
-	private static int id,cordx, cordy;
 	private static boolean plantarse;
 	PanelCentral p = GUIPrincipal.getPanelCentral();
 
@@ -30,8 +31,6 @@ public class Jugador extends JOptionPane {
 		this.apuestaValida = true;
 		this.dinero = 50000;
 		this.miApuesta = 0;
-		this.cordx = 0;
-		this.cordy = 0;
 		this.plantarse = false;
 
 	}
@@ -263,6 +262,22 @@ public class Jugador extends JOptionPane {
 
 	public static void setID(int ID) {
 		Jugador.ID = ID;
+	}
+
+	public static int getCordx() {
+		return cordx;
+	}
+
+	public static void setCordx(int cordx) {
+		Jugador.cordx = cordx;
+	}
+
+	public static int getCordy() {
+		return cordy;
+	}
+
+	public static void setCordy(int cordy) {
+		Jugador.cordy = cordy;
 	}
 
 }

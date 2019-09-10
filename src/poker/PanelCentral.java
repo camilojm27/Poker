@@ -15,7 +15,7 @@ import javax.swing.*;
 public class PanelCentral extends JPanel {
 	
 	private JLabel username , player2 = new JLabel("Cortana");
-	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey,apuesta,cashjugador,cashpc;
+	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
 	private int numPlayers = MenuInicio.getNumPlayers();
 	public static JButton p1c1, p1c2,c1Pc, c2Pc;
 	private static JButton pasar;
@@ -23,7 +23,6 @@ public class PanelCentral extends JPanel {
 	private static JButton igualar;
 	private static JButton jugar;
 	private static JButton giveup;
-	private static JLabel theCash;
 	private final Font bit8 = new Fuentes().fuente(Fuentes.BIT8, Font.BOLD, 8);
 	private final Font decored2 = new Fuentes().fuente(Fuentes.DECORED2, Font.BOLD, 24);
 	private final Font decored = new Fuentes().fuente(Fuentes.DECORED, Font.BOLD, 24);
@@ -107,8 +106,8 @@ public class PanelCentral extends JPanel {
 			csizex = 110;
 			csizey = 158;
 
-			int c1x = 291;
-			int c1y = 523;
+			int c1x = Jugador.getCordx();
+			int c1y = Jugador.getCordy();
 			Insets insets = this.getInsets();
 
 			p1c1 = new JButton();
@@ -136,11 +135,11 @@ public class PanelCentral extends JPanel {
 		csizex = 110;
 		csizey = 158;
 
-		c1pcx = 640;
-		c1pcy = 12;
+		c1pcx = 15;
+		c1pcy = 260;
 		////////////////////////////////////////
 		c2pcx= c1pcx + 135;
-		c2pcy = 12;
+		c2pcy = c1pcy;
         ///////////////////////////////////////
 		Insets insets = this.getInsets();
 
@@ -164,8 +163,8 @@ public class PanelCentral extends JPanel {
 		csizey = 158;
 
 	    int cas = 125;
-        ccx = 180;
-        ccy = 250;
+        ccx = 350;
+        ccy = 260;
         //////////////////////////////////
         Insets insets = this.getInsets();
         cc1 = new JButton();

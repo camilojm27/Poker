@@ -228,8 +228,34 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 	public  void  getEntrada() {
 		try {
-			int id = entrada.readInt() ;
+			int id = entrada.readInt();
 			Jugador.setID(id);
+			if(id == 1){
+				Jugador.setCordx(291);
+				Jugador.setCordy(523);
+			}
+
+			if(id == 2){
+				Jugador.setCordx(640);
+				Jugador.setCordy(523);
+			}
+
+			if(id == 3){
+				Jugador.setCordx(940);
+				Jugador.setCordy(260);
+			}
+
+			if(id == 4){
+				Jugador.setCordx(640);
+				Jugador.setCordy(12);
+			}
+
+			if(id == 5){
+				Jugador.setCordx(291);
+				Jugador.setCordy(12);
+			}
+
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

@@ -31,7 +31,7 @@ public class Servidor extends JFrame {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 6;
+    public static final int cantidadJugadores = 100;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
