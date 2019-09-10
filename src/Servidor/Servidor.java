@@ -7,6 +7,7 @@ import poker.ControlUnit;
 import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
+import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -128,7 +129,7 @@ public class Servidor extends ControlUnit {
 
     private class Jugador implements Runnable {
         private Socket conexion; // conexion con el cliente
-        private Scanner entrada; // entrada del cliente
+        private ObjectInputStream entrada; // entrada del cliente
         private ObjectOutputStream salida; // salida al cliente
         private int numeroJugador; // identifica al Jugador
         private boolean suspendido = true; // indica si el subproceso esta suspendido
@@ -142,8 +143,8 @@ public class Servidor extends ControlUnit {
             conexion = socket;
 
             try {
-                entrada = new Scanner(conexion.getInputStream());
                 salida = new ObjectOutputStream(conexion.getOutputStream());
+                entrada = new ObjectInputStream(conexion.getInputStream());
                 salida.flush();
                 jugadoresConectados++;
             } catch (IOException e) {
@@ -169,12 +170,12 @@ public class Servidor extends ControlUnit {
                 salida.flush();
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
-                dinero = entrada.nextInt();
-                apuestaActual = entrada.nextInt();
+                dinero = entrada.readInt();
+                apuestaActual = entrada.readInt();
                 System.out.println("Dinero = " + dinero);
                 System.out.println("apueta = " + apuestaActual);
                 bloqueoJuego.lock();
-
+                /*
                 while (suspendido){
                     try {
                         turnos[0].await();
@@ -187,7 +188,7 @@ public class Servidor extends ControlUnit {
                     System.out.println("El otro jugador se conecto. Ahora es su turno.\n" );
 
 
-                }
+                }*/
 
 
 

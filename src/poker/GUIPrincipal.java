@@ -24,7 +24,7 @@ import javax.swing.*;
 public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
-	public static   ObjectInputStream entrada; // entrada del servidor
+	public static ObjectInputStream entrada; // entrada del servidor
 	public static ObjectOutputStream salida; // salida al servidor
 
 
@@ -257,6 +257,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			if(id == 5){
 				Jugador.setCordx(291);
 				Jugador.setCordy(12);
+
 			}
 
 
