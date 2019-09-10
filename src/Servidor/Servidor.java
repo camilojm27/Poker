@@ -40,13 +40,13 @@ public class Servidor extends JFrame {
     private int jugadorActual;
     private Window ventana;
     private ServerSocket servidor;
-    private ArrayList<Carta> cartas;
+    private ArrayList<Carta> cartas, cartasComunitarias;
     private ControlUnit controlUnit;
 
     public Servidor() {
         super("Servidor Juego");
         controlUnit = new ControlUnit();
-
+        cartasComunitarias = controlUnit.getCartasComunitarias();
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
         bloqueoJuego = new ReentrantLock();
@@ -150,9 +150,12 @@ public class Servidor extends JFrame {
             try {
                 salida.writeInt(jugadoresConectados); // envia la marca del jugador
                 salida.flush(); // vacia la salida
-                System.out.println("Repartiendo cartas ");
+                System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
                 cartas = controlUnit.getBarajaJugador();
+                //cartas.forEach(carta -> System.out.println(carta.getId()));
                 salida.writeObject(cartas);
+                salida.flush();
+                salida.writeObject(cartasComunitarias);
                 salida.flush();
 
 
