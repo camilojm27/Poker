@@ -32,7 +32,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 100;
+    public static final int cantidadJugadores = 2;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -97,8 +97,14 @@ public class Servidor extends ControlUnit {
             }
         }
         bloqueoJuego.lock();
+        try {
+            jugadores[0].wait();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
         try {
+
             jugadores[0].establecerSuspendido(false);
             turnos[0].signal();
 
@@ -126,6 +132,10 @@ public class Servidor extends ControlUnit {
         private ObjectOutputStream salida; // salida al cliente
         private int numeroJugador; // identifica al Jugador
         private boolean suspendido = true; // indica si el subproceso esta suspendido
+        private  int dinero = 50000;
+        private  int miApuesta;
+        private  int bote = 0;
+        private  int apuestaActual;
 
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
@@ -154,11 +164,31 @@ public class Servidor extends ControlUnit {
                 salida.flush(); // vacia la salida
                 System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
                 cartas = baraja.repartirBarajaJugadores();
-                //cartas.forEach(carta -> System.out.println(carta.getId()));
+                cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
                 salida.writeObject(cartas);
                 salida.flush();
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
+                dinero = entrada.nextInt();
+                apuestaActual = entrada.nextInt();
+                System.out.println("Dinero = " + dinero);
+                System.out.println("apueta = " + apuestaActual);
+                bloqueoJuego.lock();
+
+                while (suspendido){
+                    try {
+                        turnos[0].await();
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    finally {
+                        bloqueoJuego.unlock();
+                    }
+                    System.out.println("El otro jugador se conecto. Ahora es su turno.\n" );
+
+
+                }
+
 
 
             } catch (IOException e) {

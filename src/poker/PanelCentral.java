@@ -305,12 +305,16 @@ public class PanelCentral extends JPanel {
 		
 		subir.removeMouseListener(mouse);
 		igualar.removeMouseListener(mouse);
+		pasar.removeMouseListener(mouse);
+		giveup.removeMouseListener(mouse);
 		
 	}
 	
 	public void addAL() {
 		subir.addMouseListener(mouse);
 		igualar.addMouseListener(mouse);
+		pasar.addMouseListener(mouse);
+		giveup.addMouseListener(mouse);
 		
 	}
 

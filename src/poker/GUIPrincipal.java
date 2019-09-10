@@ -24,8 +24,8 @@ import javax.swing.*;
 public class GUIPrincipal extends JFrame implements Runnable{
 	private String hostPoker;
 	private Socket conexion; // conexion con el servidor
-	private  ObjectInputStream entrada; // entrada del servidor
-	private ObjectOutputStream salida; // salida al servidor
+	public static   ObjectInputStream entrada; // entrada del servidor
+	public static ObjectOutputStream salida; // salida al servidor
 
 
 
@@ -33,7 +33,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
     private static Pc pc;
     public static Dimension sizeGame;
 	public static ControlUnit controlUnit;
-    private static PanelCentral panelCentral;
+    public static PanelCentral panelCentral;
     private static PanelLateral panelLateral;
     private static int ronda;
     private JButton boton;

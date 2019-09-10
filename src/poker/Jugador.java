@@ -7,6 +7,7 @@ package poker;
 
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import java.io.IOException;
 
 
 public class Jugador extends JOptionPane {
@@ -99,9 +100,21 @@ public class Jugador extends JOptionPane {
 						 dinero = dinero - getBote();
 						 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
 						 apuestaActual = getBote();
+						 try {
+							 GUIPrincipal.salida.writeInt(dinero);
+							 GUIPrincipal.salida.flush();
+							 GUIPrincipal.salida.writeInt(apuestaActual);
+							 GUIPrincipal.salida.flush();
+							 //Se le da el turno al otro jugadorM;
+
+
+						 } catch (IOException e) {
+							 e.printStackTrace();
+						 }
+
 					 }
 			   }
-
+			GUIPrincipal.panelCentral.removeAL();
 		}
 
 		if(stage == 2) {
