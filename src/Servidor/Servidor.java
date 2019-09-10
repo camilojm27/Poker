@@ -3,7 +3,6 @@ package Servidor;
 import poker.Baraja;
 import poker.Carta;
 import poker.ControlUnit;
-import poker.GUIPrincipal;
 
 import javax.swing.*;
 import java.awt.*;
@@ -47,7 +46,8 @@ public class Servidor extends ControlUnit {
     private ArrayList<Carta> cartas, cartasComunitarias;
     private ControlUnit controlUnit;
     private Baraja baraja;
-    private int apuestaActual = 0;
+    private  int apuestaActual = 0;
+    private String[] nombres;
 
     public Servidor() {
         //super("Servidor Juego");
@@ -59,6 +59,7 @@ public class Servidor extends ControlUnit {
         for (int i = 0; i < cantidadJugadores; i++) {
             turnos[i] = bloqueoJuego.newCondition();
         }
+        nombres = new String[cantidadJugadores];
 
 
         jugadores = new Jugador[cantidadJugadores];
@@ -149,7 +150,6 @@ public class Servidor extends ControlUnit {
         private int miApuesta;
         private int bote = 0;
 
-
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
             conexion = socket;
@@ -182,14 +182,17 @@ public class Servidor extends ControlUnit {
                 salida.flush();
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
-
                 dinero = entrada.readInt();
                 apuestaActual += entrada.readInt();
+                String nombre = (String) entrada.readObject();
+                nombres[jugadoresConectados - 1] = nombre;
+                System.out.println("Dinero de " + nombres[jugadoresConectados - 1] + " = " + dinero);
+                System.out.println("apueta = " + apuestaActual);
 
-                System.out.println("Dinero = " + dinero);
-                System.out.println("apuesta = " + apuestaActual);
+
+
                 bloqueoJuego.lock();
-
+                /*
                 while (suspendido){
                     try {
                         turnos[0].await();
@@ -202,21 +205,22 @@ public class Servidor extends ControlUnit {
                     System.out.println("El otro jugador se conecto. Ahora es su turno.\n" );
 
 
-                }
+                }*/
 
 
 
             } catch (IOException e) {
                 e.printStackTrace();
+            } catch (ClassNotFoundException e) {
+                e.printStackTrace();
             }
 
             // fin de try
-        }
 
+
+        }
         public void establecerSuspendido( boolean estado ){
             suspendido = estado;
         }
-
-
     }
 }

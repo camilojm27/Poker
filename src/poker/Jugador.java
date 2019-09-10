@@ -106,6 +106,8 @@ public class Jugador extends JOptionPane {
 							 GUIPrincipal.salida.writeInt(apuestaActual);
 							 GUIPrincipal.salida.flush();
 							 //Se le da el turno al otro jugadorM;
+							 GUIPrincipal.salida.writeObject(Jugador.getUsername());
+							 GUIPrincipal.salida.flush();
 
 
 						 } catch (IOException e) {
