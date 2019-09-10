@@ -17,7 +17,8 @@ public class PanelCentral extends JPanel {
 	private JLabel username , player2 = new JLabel("Cortana");
 	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
 	private int numPlayers = MenuInicio.getNumPlayers();
-	public static JButton p1c1, p1c2,c1Pc, c2Pc;
+	public static JButton p1c1, p1c2,p2c1,p2c2,p3c1,p3c2,
+						  c1Pc, c2Pc,p4c1,p4c2,p5p1,p5p2;
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
@@ -129,7 +130,33 @@ public class PanelCentral extends JPanel {
 			this.add(p1c2);
 
 	}
-	
+
+	public void repartirOthers() {
+
+		csizex = 110;
+		csizey = 158;
+
+		int c1x = 640;
+		int c1y = 523;
+		Insets insets = this.getInsets();
+		p2c1 = new JButton();
+		Dimension size = p2c1.getPreferredSize();
+		p2c1.setBounds(c1x + insets.left, c1y + insets.top,csizex,csizey);
+		p2c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p2c1);
+
+
+		int c2x= c1x+134;
+		int c2y = c1y;
+		p2c2 = new JButton();
+		size = p2c2.getPreferredSize();
+		p2c2.setBounds(c2x + insets.left, c2y + insets.top, csizex,csizey);
+		p2c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p2c2);
+
+		//////////////////////////////////////////////////////////////////////////////
+	}
+
 	public void addCartasPC() {
 
 		csizex = 110;

@@ -24,12 +24,12 @@ import java.util.concurrent.locks.ReentrantLock;
 public class Servidor extends ControlUnit {
     public static void main(String[] args) {
 
-        EventQueue.invokeLater(new Runnable() {public void run() {
+
 
             Servidor servidor = new Servidor();
 
 
-        }});
+
 
     }
 
@@ -47,6 +47,7 @@ public class Servidor extends ControlUnit {
     private ArrayList<Carta> cartas, cartasComunitarias;
     private ControlUnit controlUnit;
     private Baraja baraja;
+    private int apuestaActual = 0;
 
     public Servidor() {
         //super("Servidor Juego");
@@ -101,12 +102,16 @@ public class Servidor extends ControlUnit {
                 System.exit(1);
             }
         }
+
+        /*
         bloqueoJuego.lock();
+
         try {
             jugadores[0].wait();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
 
         try {
 
@@ -115,8 +120,10 @@ public class Servidor extends ControlUnit {
 
         }
         finally {
-            bloqueoJuego.unlock();
+          //  bloqueoJuego.unlock();
         }
+
+         */
 
     }
 
@@ -141,7 +148,7 @@ public class Servidor extends ControlUnit {
         private int dinero = 50000;
         private int miApuesta;
         private int bote = 0;
-        private int apuestaActual;
+
 
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
@@ -176,6 +183,8 @@ public class Servidor extends ControlUnit {
                 salida.writeObject(cartasComunitarias);
                 salida.flush();
 
+                dinero = entrada.readInt();
+                apuestaActual += entrada.readInt();
 
                 System.out.println("Dinero = " + dinero);
                 System.out.println("apuesta = " + apuestaActual);
@@ -202,11 +211,12 @@ public class Servidor extends ControlUnit {
             }
 
             // fin de try
-
-
         }
+
         public void establecerSuspendido( boolean estado ){
             suspendido = estado;
         }
+
+
     }
 }

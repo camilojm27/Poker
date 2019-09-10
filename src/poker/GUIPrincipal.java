@@ -120,7 +120,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
 				
 					jugador.realizarApuesta(1);
 					pc.apuestaPc(Jugador.getBote());
-
 					getPanelCentral().repartirCartas();
 					getPanelCentral().addCartasPC();
 					getPanelCentral().addCartasComunitarias();
