@@ -33,7 +33,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 2;
+    public static final int cantidadJugadores = 1;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -47,6 +47,7 @@ public class Servidor extends ControlUnit {
 
     public Servidor() {
         //super("Servidor Juego");
+        System.out.println("SERVIDOR INICIADO...");
         baraja = new Baraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
 
@@ -213,10 +214,11 @@ public class Servidor extends ControlUnit {
                         apuestaActual += apuestaIndividual;
 
                         printCambios(dinero, apuestaIndividual, i);
-                        //setea la ronda 3
 
                     }
+
                     for (int i = 0; i < cantidadJugadores; i++) {
+
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
                         //Se envia la etapa #2
@@ -224,9 +226,10 @@ public class Servidor extends ControlUnit {
                         salidaTEMP.writeInt(3);
                         salidaTEMP.flush();
 
-                        //setea la ronda 3
-
+                        printCambios(dinero, apuestaIndividual, i);
                     }
+
+
 
                    //
 

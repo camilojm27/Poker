@@ -225,7 +225,7 @@ public class PanelCentral extends JPanel {
 		csizey = 158;
 
 	    int cas = 125;
-        ccx = 350;
+        ccx = 310;
         ccy = 260;
         //////////////////////////////////
         Insets insets = this.getInsets();

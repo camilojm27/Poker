@@ -166,6 +166,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					panelCentral.addAL();
 					getPanelCentral().showNextCard(4);
 					pc.apuestaPc(Jugador.getBote());
+					panelCentral.updateUI();
 
 					break;
 				case 4:
@@ -218,7 +219,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 	public static void setRonda(int ronda) throws IOException {
 		GUIPrincipal.ronda = ronda;
-		gameStage(entrada.readInt());
 	}
 	
  	public static Sonidos getSonidos() {
