@@ -18,7 +18,7 @@ public class PanelCentral extends JPanel {
 	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey,tempx,tempy;
 	private int numPlayers = MenuInicio.getNumPlayers();
 	public static JButton p1c1, p1c2,p2c1,p2c2,p3c1,p3c2,
-						  c1Pc, c2Pc,p4c1,p4c2,p5c1,p5c2;
+						  c1Pc, c2Pc,p4c1,p4c2,p5c1,p5c2,ptc1,ptc2;
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
@@ -127,6 +127,20 @@ public class PanelCentral extends JPanel {
 	public void repartirOthers() {
 
 		Insets insets = this.getInsets();
+
+		if(Jugador.getID() != 1){
+			setCords(291,523);
+			ptc1 = new JButton(); ptc2 = new JButton();
+			ptc1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
+			ptc2.setBounds(tempx+134 + insets.left, tempy + insets.top, csizex,csizey);
+			ptc1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+			ptc2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+			this.add(ptc1);
+			this.add(ptc2);
+
+		}
+
+
 		setCords(640,523);
 		p2c1 = new JButton(); p2c2 = new JButton();
 		p2c1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
