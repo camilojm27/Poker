@@ -119,6 +119,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					salida.flush();
 					gameStage(entrada.readInt());
 
+
 					break;
 				case 1:
 
@@ -151,22 +152,24 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 				case 2:
+					panelCentral.informacion.append("Etapa #2");
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
 					pc.apuestaPc(Jugador.getBote());
-					getPanelCentral().updateUI();
+					panelCentral.updateUI();
 					panelCentral.addAL();
 					break;
 					
 				case 3:
+					panelCentral.informacion.append("Etapa #3");
 					panelCentral.addAL();
 					getPanelCentral().showNextCard(4);
 					pc.apuestaPc(Jugador.getBote());
-					getPanelCentral().updateUI();
 
 					break;
 				case 4:
+					panelCentral.informacion.append("Etapa #4");
 					getPanelCentral().showNextCard(5);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();

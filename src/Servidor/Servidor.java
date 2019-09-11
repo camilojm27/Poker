@@ -33,7 +33,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 1;
+    public static final int cantidadJugadores = 2;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -220,7 +220,7 @@ public class Servidor extends ControlUnit {
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
                         //Se envia la etapa #2
-                        System.out.println("Empieza la etapa #2");
+                        System.out.println("Empieza la etapa #3");
                         salidaTEMP.writeInt(3);
                         salidaTEMP.flush();
 

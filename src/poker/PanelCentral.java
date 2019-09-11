@@ -37,7 +37,7 @@ public class PanelCentral extends JPanel {
 	private JButton cc4;
 	private JButton cc5;
 
-	private JTextArea informacion;
+	public static JTextArea informacion;
 	
 	MouseAction mouse = new MouseAction();
 	private static Jugador jugador = new Jugador();
