@@ -216,8 +216,19 @@ public class Servidor extends ControlUnit {
                         //setea la ronda 3
 
                     }
+                    for (int i = 0; i < cantidadJugadores; i++) {
+                        salidaTEMP = jugadores[i].salida;
+                        entradaTEMP = jugadores[i].entrada;
+                        //Se envia la etapa #2
+                        System.out.println("Empieza la etapa #2");
+                        salidaTEMP.writeInt(3);
+                        salidaTEMP.flush();
 
-                   // salidaTEMP.writeInt(3);
+                        //setea la ronda 3
+
+                    }
+
+                   //
 
 
                 }

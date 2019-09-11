@@ -151,7 +151,6 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 
 				case 2:
-
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
@@ -161,7 +160,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					break;
 					
 				case 3:
-
+					panelCentral.addAL();
 					getPanelCentral().showNextCard(4);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();

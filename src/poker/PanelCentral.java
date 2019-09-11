@@ -442,6 +442,7 @@ public class PanelCentral extends JPanel {
 					GUIPrincipal.salida.writeInt(0);
 					GUIPrincipal.salida.flush();
 					//Se le da el turno al otro jugadorM;
+					removeAL();
 
 
 				} catch (IOException e) {
@@ -465,6 +466,7 @@ public class PanelCentral extends JPanel {
 			if(arg0.getSource() == subir) {
 				try {
 					GUIPrincipal.controlUnit.checkSubir();
+					removeAL();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -473,6 +475,7 @@ public class PanelCentral extends JPanel {
 			if(arg0.getSource() == igualar) {
 				try {
 					GUIPrincipal.controlUnit.checkIgualar();
+					removeAL();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -490,6 +493,7 @@ public class PanelCentral extends JPanel {
 	            }
 
 	            else  JOptionPane.showMessageDialog(null,"RETURNING TO GAME");
+	            removeAL();
 			}
 			
 			
