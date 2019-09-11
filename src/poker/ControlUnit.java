@@ -7,6 +7,7 @@ package poker;
 
 //import org.jetbrains.annotations.Contract;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -438,7 +439,7 @@ else{
         return false;
     }
 
-    public  void checkSubir() {
+    public  void checkSubir() throws IOException {
     	if(GUIPrincipal.getRonda() == 2) {
 
 			GUIPrincipal.getJugador().realizarApuesta(3);
@@ -482,7 +483,7 @@ else{
 		}
     }
 
-    public  void checkIgualar() {
+    public  void checkIgualar() throws IOException {
 
         Jugador jugador = GUIPrincipal.getJugador();
 

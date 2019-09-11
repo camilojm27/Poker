@@ -8,6 +8,7 @@ package poker;
 import Fonts.Fuentes;
 import java.awt.*;
 import java.awt.event.MouseListener;
+import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.*;
@@ -451,12 +452,20 @@ public class PanelCentral extends JPanel {
 			}
 
 			if(arg0.getSource() == subir) {
-				GUIPrincipal.controlUnit.checkSubir();
+				try {
+					GUIPrincipal.controlUnit.checkSubir();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 			}
 			
 			if(arg0.getSource() == igualar) {
-				GUIPrincipal.controlUnit.checkIgualar();
-				
+				try {
+					GUIPrincipal.controlUnit.checkIgualar();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+
 			}
 			
 			if(arg0.getSource() == giveup) {
