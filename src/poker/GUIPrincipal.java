@@ -112,16 +112,32 @@ public class GUIPrincipal extends JFrame implements Runnable{
  	 *
  	 * @param ronda the ronda
  	 */
- 	public static void gameStage(int ronda) {
+ 	public static void gameStage(int ronda) throws IOException {
 
 	    	panelCentral.infoPanelCentral();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
+				case 0:
+					salida.writeObject(Jugador.getUsername());
+					salida.flush();
+					gameStage(entrada.readInt());
+
+					break;
 				case 1:
 
 					////////////////////////////////////////
 					//REPARTICION DE CARTAS
-				
+
+					//cartas.forEach(carta -> System.out.println(carta.getId()));
+					try {
+						ArrayList<Carta> cartas = (ArrayList<Carta>) entrada.readObject();
+						GUIPrincipal.controlUnit.setBarajaJugador(cartas);
+						cartas =  (ArrayList<Carta>) entrada.readObject();
+						GUIPrincipal.controlUnit.setCartasComunitarias(cartas);
+					} catch (ClassNotFoundException e) {
+						e.printStackTrace();
+					}
+					//cartas.forEach(carta -> System.out.println(carta.getId()));
 					jugador.realizarApuesta(1);
 					pc.apuestaPc(Jugador.getBote());
 
@@ -214,17 +230,12 @@ public class GUIPrincipal extends JFrame implements Runnable{
 			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new ObjectOutputStream(conexion.getOutputStream());
 			getEntrada();
-			ArrayList<Carta> cartas = (ArrayList<Carta>) entrada.readObject();
-			//cartas.forEach(carta -> System.out.println(carta.getId()));
-			GUIPrincipal.controlUnit.setBarajaJugador(cartas);
-			cartas =  (ArrayList<Carta>) entrada.readObject();
-			//cartas.forEach(carta -> System.out.println(carta.getId()));
-			GUIPrincipal.controlUnit.setCartasComunitarias(cartas);
-			gameStage(1);
+			gameStage(entrada.readInt());
 
 
 
-		} catch (IOException | ClassNotFoundException e) {
+
+		} catch (IOException e) {
 			e.printStackTrace();
 			//System.exit(1);
 		}

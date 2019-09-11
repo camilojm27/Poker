@@ -33,7 +33,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 6;
+    public static final int cantidadJugadores = 2;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -168,22 +168,25 @@ public class Servidor extends ControlUnit {
 
                 salida.writeInt(jugadoresConectados); // envia la marca del jugador
                 salida.flush(); // vacia la salida
+
                 //Envia la etapa 0 del juego y recibe el nombre del jugador
                 salida.writeInt(0);
+                salida.flush();
                 String nombre = (String) entrada.readObject();
                 nombres[jugadoresConectados - 1] = nombre;
 
                 if (cantidadJugadores == jugadoresConectados){
                     //  Inicia la etapa 1 de reparticion de cartas
-                    salida.writeInt(1);
 
                     System.out.println("Repartiendo cartas al jugador  " + jugadoresConectados);
                     ObjectInputStream entradaTEMP;
                     ObjectOutputStream salidaTEMP;
 
                     for (int i = 0; i < cantidadJugadores; i++) {
+                        int apuestaIndividual = 0;
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
+                        salidaTEMP.writeInt(1);
 
                         cartas = baraja.repartirBarajaJugadores();
                         cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
@@ -192,11 +195,13 @@ public class Servidor extends ControlUnit {
                         salidaTEMP.writeObject(cartasComunitarias);
                         salidaTEMP.flush();
                         dinero = entradaTEMP.readInt();
-                        apuestaActual += entradaTEMP.readInt();
+                        apuestaIndividual = entradaTEMP.readInt();
+                        apuestaActual += apuestaIndividual;
 
 
-                        System.out.println("Dinero de " + nombres[jugadoresConectados - 1] + " = " + dinero);
-                        System.out.println("apueta = " + apuestaActual);
+                        System.out.println("Dinero de " + nombres[i] + " = " + dinero);
+                        System.out.println(nombres[i] + "apuesta " + apuestaIndividual);
+                        System.out.println("Tamaño del bote = " + apuestaActual);
 
 
                     }
