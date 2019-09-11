@@ -33,17 +33,14 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 2;
+    public static final int cantidadJugadores = 1;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
     private Condition[] turnos = new Condition[cantidadJugadores];
     private Jugador[] jugadores;
-    private int jugadorActual;
-    private Window ventana;
     private ServerSocket servidor;
     private ArrayList<Carta> cartas, cartasComunitarias;
-    private ControlUnit controlUnit;
     private Baraja baraja;
     private  int apuestaActual = 0;
     private String[] nombres;
@@ -141,7 +138,7 @@ public class Servidor extends ControlUnit {
         private  int dinero = 50000;
         private  int miApuesta;
         private  int bote = 0;
-
+        int apuestaIndividual = 0;
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
             conexion = socket;
@@ -183,11 +180,11 @@ public class Servidor extends ControlUnit {
                     ObjectOutputStream salidaTEMP;
 
                     for (int i = 0; i < cantidadJugadores; i++) {
-                        int apuestaIndividual = 0;
+
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
                         salidaTEMP.writeInt(1);
-
+                        salidaTEMP.flush();
                         cartas = baraja.repartirBarajaJugadores();
                         cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
                         salidaTEMP.writeObject(cartas);
@@ -199,12 +196,28 @@ public class Servidor extends ControlUnit {
                         apuestaActual += apuestaIndividual;
 
 
-                        System.out.println("Dinero de " + nombres[i] + " = " + dinero);
-                        System.out.println(nombres[i] + "apuesta " + apuestaIndividual);
-                        System.out.println("Tamaño del bote = " + apuestaActual);
-
+                        printCambios(dinero, apuestaIndividual, i);
 
                     }
+                    //Stage 2
+                    for (int i = 0; i < cantidadJugadores; i++) {
+                        salidaTEMP = jugadores[i].salida;
+                        entradaTEMP = jugadores[i].entrada;
+                        //Se envia la etapa #2
+                        System.out.println("Empieza la etapa #2");
+                        salidaTEMP.writeInt(2);
+                        salidaTEMP.flush();
+
+                        dinero = entradaTEMP.readInt();
+                        apuestaIndividual = entradaTEMP.readInt();
+                        apuestaActual += apuestaIndividual;
+
+                        printCambios(dinero, apuestaIndividual, i);
+                        //setea la ronda 3
+
+                    }
+
+                   // salidaTEMP.writeInt(3);
 
 
                 }
@@ -239,6 +252,13 @@ public class Servidor extends ControlUnit {
 
 
         }
+
+        private void printCambios(int dinero, int apuestaIndividual, int numeroJugador) {
+            System.out.println("Dinero de " + nombres[numeroJugador] + " = " + dinero);
+            System.out.println(nombres[numeroJugador] + "apuesta " + apuestaIndividual);
+            System.out.println("Tamaño del bote = " + apuestaActual);
+        }
+
         public void establecerSuspendido( boolean estado ){
             suspendido = estado;
         }

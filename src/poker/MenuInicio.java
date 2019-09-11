@@ -158,6 +158,7 @@ public class MenuInicio extends JFrame {
 							}});
 						}
 
+
 						window.dispose();
 						guiPrincipal = new GUIPrincipal("127.0.0.1");
 

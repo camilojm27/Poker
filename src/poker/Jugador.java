@@ -52,6 +52,17 @@ public class Jugador extends JOptionPane {
 		bote = ControlUnit.getApuestaActual();
 		apuestaActual= bote + getBote();
 		setDinero(dinero - bote);
+		try {
+			GUIPrincipal.salida.writeInt(dinero);
+			GUIPrincipal.salida.flush();
+			GUIPrincipal.salida.writeInt(apuestaActual);
+			GUIPrincipal.salida.flush();
+			//Se le da el turno al otro jugadorM;
+
+
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	public int realizarApuesta(int stage) {
@@ -106,8 +117,6 @@ public class Jugador extends JOptionPane {
 							 GUIPrincipal.salida.writeInt(apuestaActual);
 							 GUIPrincipal.salida.flush();
 							 //Se le da el turno al otro jugadorM;
-							 GUIPrincipal.salida.writeObject(Jugador.getUsername());
-							 GUIPrincipal.salida.flush();
 
 
 						 } catch (IOException e) {
@@ -216,6 +225,17 @@ public class Jugador extends JOptionPane {
 						 if(getBote() <= dinero) {
 							 apuestaActual = apuestaActual + getBote();
 							 dinero = dinero - getBote();
+							 try {
+								 GUIPrincipal.salida.writeInt(dinero);
+								 GUIPrincipal.salida.flush();
+								 GUIPrincipal.salida.writeInt(apuestaActual);
+								 GUIPrincipal.salida.flush();
+								 //Se le da el turno al otro jugadorM;
+
+
+							 } catch (IOException e) {
+								 e.printStackTrace();
+							 }
 							 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
 						 }
 				   }

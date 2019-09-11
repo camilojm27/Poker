@@ -145,6 +145,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					getPanelCentral().turnCards("player");
 					getPanelCentral().turnCards("pc");
 					getPanelCentral().updateUI();
+					gameStage(entrada.readInt());
 					break;
 	    		
 
@@ -156,12 +157,15 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					getPanelCentral().showNextCard(3);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
+					panelCentral.addAL();
 					break;
 					
 				case 3:
+
 					getPanelCentral().showNextCard(4);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
+
 					break;
 				case 4:
 					getPanelCentral().showNextCard(5);
@@ -210,8 +214,9 @@ public class GUIPrincipal extends JFrame implements Runnable{
 		return ronda;
 	}
 
-	public static void setRonda(int ronda) {
+	public static void setRonda(int ronda) throws IOException {
 		GUIPrincipal.ronda = ronda;
+		gameStage(entrada.readInt());
 	}
 	
  	public static Sonidos getSonidos() {

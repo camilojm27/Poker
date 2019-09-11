@@ -444,7 +444,7 @@ else{
 
 			GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(2);
+			//GUIPrincipal.gameStage(2);
 			GUIPrincipal.setRonda(3);
 			return;
 		}
@@ -453,7 +453,7 @@ else{
 
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(3);
+			//GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
 			return;
 		}
@@ -462,7 +462,7 @@ else{
 
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(4);
+			//GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
 			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername()) {
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
@@ -492,8 +492,8 @@ else{
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(2);
-			GUIPrincipal.setRonda(3);
+
+
 			return;
 		}
 
@@ -502,7 +502,7 @@ else{
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(3);
+			//GUIPrincipal.gameStage(3);
 			GUIPrincipal.setRonda(4);
 			return;
 		}
@@ -512,7 +512,7 @@ else{
     		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
-			GUIPrincipal.gameStage(4);
+			//GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
 			GUIPrincipal.controlUnit.winner();
 			if(GUIPrincipal.controlUnit.winner() == jugador.getName()) {

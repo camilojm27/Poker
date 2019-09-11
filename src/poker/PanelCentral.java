@@ -339,7 +339,7 @@ public class PanelCentral extends JPanel {
         this.add(pasar);
         this.add(igualar);
         this.add(subir);
-        this.add(giveup);
+        //this.add(giveup);
         //this.add(jugar);
 
     }
@@ -436,6 +436,17 @@ public class PanelCentral extends JPanel {
 			if(arg0.getSource() == pasar) {
 				elegirCartas = false;
 				JOptionPane.showMessageDialog(null, "Pierdes esta ronda");
+				try {
+					GUIPrincipal.salida.writeInt(Jugador.getDinero());
+					GUIPrincipal.salida.flush();
+					GUIPrincipal.salida.writeInt(0);
+					GUIPrincipal.salida.flush();
+					//Se le da el turno al otro jugadorM;
+
+
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
 				
 				/*
 				
