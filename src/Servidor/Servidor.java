@@ -226,6 +226,28 @@ public class Servidor extends ControlUnit {
                         salidaTEMP.writeInt(3);
                         salidaTEMP.flush();
 
+                        dinero = entradaTEMP.readInt();
+                        apuestaIndividual = entradaTEMP.readInt();
+                        apuestaActual += apuestaIndividual;
+
+                        printCambios(dinero, apuestaIndividual, i);
+                    }
+
+                    System.out.println("ETAPA 4 HERE");
+
+                    for (int i = 0; i < cantidadJugadores; i++) {
+
+                        salidaTEMP = jugadores[i].salida;
+                        entradaTEMP = jugadores[i].entrada;
+                        //Se envia la etapa #2
+                        System.out.println("Empieza la etapa #4");
+                        salidaTEMP.writeInt(4);
+                        salidaTEMP.flush();
+
+                        dinero = entradaTEMP.readInt();
+                        apuestaIndividual = entradaTEMP.readInt();
+                        apuestaActual += apuestaIndividual;
+
                         printCambios(dinero, apuestaIndividual, i);
                     }
 

@@ -170,6 +170,18 @@ public class Jugador extends JOptionPane {
 							 apuestaActual = apuestaActual + getBote();
 							 dinero = dinero - getBote();
 							 JOptionPane.showMessageDialog(null, "Apuestas " + getBote());
+
+							 try {
+								 GUIPrincipal.salida.writeInt(dinero);
+								 GUIPrincipal.salida.flush();
+								 GUIPrincipal.salida.writeInt(apuestaActual);
+								 GUIPrincipal.salida.flush();
+								 //Se le da el turno al otro jugadorM;
+
+
+							 } catch (IOException e) {
+								 e.printStackTrace();
+							 }
 						 }
 				   }
 
