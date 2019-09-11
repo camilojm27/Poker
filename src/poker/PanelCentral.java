@@ -15,10 +15,10 @@ import javax.swing.*;
 public class PanelCentral extends JPanel {
 	
 	private JLabel username , player2 = new JLabel("Cortana");
-	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey;
+	private int ccx,ccy, c1pcx,c1pcy, c2pcx, c2pcy,csizex,csizey,tempx,tempy;
 	private int numPlayers = MenuInicio.getNumPlayers();
 	public static JButton p1c1, p1c2,p2c1,p2c2,p3c1,p3c2,
-						  c1Pc, c2Pc,p4c1,p4c2,p5p1,p5p2;
+						  c1Pc, c2Pc,p4c1,p4c2,p5c1,p5c2;
 	private static JButton pasar;
 	private static JButton subir;
 	private static JButton igualar;
@@ -59,21 +59,14 @@ public class PanelCentral extends JPanel {
 		Insets insets = this.getInsets();
 		informacion = new JTextArea("Bienvenido " + Jugador.getUsername() +  "\nEres el jugador #"  + Jugador.getID()  );
 		informacion.setEditable(false);
-		username = new JLabel(Jugador.getUsername());
-		informacion.setBounds(920 + insets.left, 500 + insets.top,200,280);
+		informacion.setBounds(950 + insets.left, 550 + insets.top,200,120);
 		informacion.setFont(ibmRegularItalic);
 		player2.setFont(decored2);
-		player2.setBounds(750 + insets.left, 150 + insets.top,420,161);
+		player2.setBounds(20 + insets.left, 140 + insets.top,420,161);
 		player2.setForeground(Color.CYAN);
-		username.setFont(decored2);
-		username.setBounds(260 + insets.left, 400 + insets.top,400,161);
-		username.setForeground(Color.ORANGE);
 		add(player2);
 		add(informacion);
 		informacion.setVisible(true);
-		add(username);
-		username.setVisible(true);
-
 	}
 
 	public void turnCards(String who){
@@ -133,28 +126,55 @@ public class PanelCentral extends JPanel {
 
 	public void repartirOthers() {
 
-		csizex = 110;
-		csizey = 158;
-
-		int c1x = 640;
-		int c1y = 523;
 		Insets insets = this.getInsets();
-		p2c1 = new JButton();
-		Dimension size = p2c1.getPreferredSize();
-		p2c1.setBounds(c1x + insets.left, c1y + insets.top,csizex,csizey);
+		setCords(640,523);
+		p2c1 = new JButton(); p2c2 = new JButton();
+		p2c1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
+		p2c2.setBounds(tempx+134 + insets.left, tempy + insets.top, csizex,csizey);
 		p2c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
-		this.add(p2c1);
-
-
-		int c2x= c1x+134;
-		int c2y = c1y;
-		p2c2 = new JButton();
-		size = p2c2.getPreferredSize();
-		p2c2.setBounds(c2x + insets.left, c2y + insets.top, csizex,csizey);
 		p2c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p2c1);
 		this.add(p2c2);
 
-		//////////////////////////////////////////////////////////////////////////////
+		setCords(940,260);
+		p3c1 = new JButton(); p3c2 = new JButton();
+		p3c1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
+		p3c2.setBounds(tempx+134 + insets.left, tempy + insets.top, csizex,csizey);
+		p3c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		p3c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p3c1);
+		this.add(p3c2);
+
+		setCords(640,12);
+		p4c1 = new JButton(); p4c2 = new JButton();
+		p4c1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
+		p4c2.setBounds(tempx+134 + insets.left, tempy + insets.top, csizex,csizey);
+		p4c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		p4c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p4c1);
+		this.add(p4c2);
+
+		setCords(291,12);
+		p5c1 = new JButton(); p5c2 = new JButton();
+		p5c1.setBounds(tempx + insets.left, tempy+ insets.top, csizex,csizey);
+		p5c2.setBounds(tempx+134 + insets.left, tempy + insets.top, csizex,csizey);
+		p5c1.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		p5c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
+		this.add(p5c1);
+		this.add(p5c2);
+
+
+
+
+
+
+
+	}
+
+	public void setCords(int wichx, int wichy){
+		tempx = wichx;
+		tempy = wichy;
+
 	}
 
 	public void addCartasPC() {
@@ -343,6 +363,51 @@ public class PanelCentral extends JPanel {
 		pasar.addMouseListener(mouse);
 		giveup.addMouseListener(mouse);
 		
+	}
+
+	public void fixName(){
+
+		Insets insets = this.getInsets();
+		username = new JLabel(Jugador.getUsername());
+		username.setFont(decored2);
+		int x,y;
+
+		if(Jugador.getID() == 1){
+			x = 260;
+			y  = 410;
+			username.setBounds(x + insets.left, y + insets.top,400,161);
+		}
+
+		if(Jugador.getID() == 2){
+			x = 620;
+			y  = 415;
+			username.setBounds(x + insets.left, y + insets.top,400,161);
+		}
+
+		if(Jugador.getID() == 3){
+			x = 1000;
+			y  = 140;
+			username.setBounds(x + insets.left, y + insets.top,400,161);
+		}
+
+		if(Jugador.getID() == 4){
+			x = 620;
+			y  = 120;
+			username.setBounds(x + insets.left, y + insets.top,400,161);
+		}
+
+		if(Jugador.getID() == 5){
+			x = 260;
+			y  = 120;
+			username.setBounds(x + insets.left, y + insets.top,400,161);
+		}
+
+
+
+		username.setForeground(Color.ORANGE);
+		add(username);
+		username.setVisible(true);
+
 	}
 
 	private class MouseAction  implements MouseListener {

@@ -34,7 +34,7 @@ public class Servidor extends ControlUnit {
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 2;
+    public static final int cantidadJugadores = 100;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;

@@ -111,6 +111,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
  	public static void gameStage(int ronda) {
 
 	    	panelCentral.infoPanelCentral();
+	    	panelCentral.fixName();
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
 				case 1:
@@ -121,6 +122,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					jugador.realizarApuesta(1);
 					pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().repartirCartas();
+					getPanelCentral().repartirOthers();
 					getPanelCentral().addCartasPC();
 					getPanelCentral().addCartasComunitarias();
 
