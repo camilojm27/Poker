@@ -65,7 +65,7 @@ public class PanelCentral extends JPanel {
 		player2.setFont(decored2);
 		player2.setBounds(20 + insets.left, 140 + insets.top,420,161);
 		player2.setForeground(Color.CYAN);
-		add(player2);
+	//	add(player2);
 		add(informacion);
 		informacion.setVisible(true);
 	}
@@ -177,13 +177,6 @@ public class PanelCentral extends JPanel {
 		p5c2.setIcon(new ImageIcon(getClass().getResource("/imagenes/RR.png")));
 		this.add(p5c1);
 		this.add(p5c2);
-
-
-
-
-
-
-
 	}
 
 	public void setCords(int wichx, int wichy){
@@ -359,7 +352,8 @@ public class PanelCentral extends JPanel {
 	public void drawScore(Graphics g){
 		g.setFont(decored2);
 		g.setColor(Color.white);
-		g.drawString("Bote = " + + ControlUnit.getApuestaActual(),20,650);
+		int bet = GUIPrincipal.getBet();
+		g.drawString("Bote = " + bet,20,650);
 
 	}
 
@@ -417,11 +411,52 @@ public class PanelCentral extends JPanel {
 			username.setBounds(x + insets.left, y + insets.top,400,161);
 		}
 
-
-
 		username.setForeground(Color.ORANGE);
 		add(username);
 		username.setVisible(true);
+	}
+
+	public void pintarNombres(){
+
+		int x,y;
+
+		for (int i = 0; i < 6 ; i++) {
+			if(GUIPrincipal.nombres[i] == null){
+				GUIPrincipal.nombres[i] = " ";
+			}
+		}
+
+		JLabel jugador1 = new JLabel(GUIPrincipal.nombres[0]);
+		JLabel jugador2 = new JLabel(GUIPrincipal.nombres[1]);
+		JLabel jugador3 = new JLabel(GUIPrincipal.nombres[2]);
+		JLabel jugador4 = new JLabel(GUIPrincipal.nombres[3]);
+		JLabel jugador5 = new JLabel(GUIPrincipal.nombres[4]);
+		JLabel jugador6 = new JLabel(GUIPrincipal.nombres[5]);
+
+		jugador1.setFont(decored2); jugador2.setFont(decored2);
+		jugador3.setFont(decored2); jugador4.setFont(decored2);
+		jugador5.setFont(decored2); jugador6.setFont(decored2);
+
+		Insets insets = this.getInsets();
+
+		x = 260; y  = 410; jugador1.setBounds(x + insets.left, y + insets.top,400,161);
+		x = 620; y  = 415; jugador2.setBounds(x + insets.left, y + insets.top,400,161);
+		x = 1000; y  = 140; jugador3.setBounds(x + insets.left, y + insets.top,400,161);
+		x = 620; y  = 120; jugador4.setBounds(x + insets.left, y + insets.top,400,161);
+		x = 260; y  = 120; jugador5.setBounds(x + insets.left, y + insets.top,400,161);
+		x = 20; y  = 140;  jugador6.setBounds(20 + insets.left, 140 + insets.top,420,161);
+
+		jugador1.setForeground(Color.lightGray); jugador2.setForeground(Color.red);
+		jugador3.setForeground(Color.green); jugador4.setForeground(Color.ORANGE);
+		jugador5.setForeground(Color.yellow); jugador6.setForeground(Color.MAGENTA);
+
+		add(jugador1); add(jugador2);
+		add(jugador3); add(jugador4);
+		add(jugador5); add(jugador6);
+
+		jugador1.setVisible(true); jugador2.setVisible(true);
+		jugador3.setVisible(true); jugador4.setVisible(true);
+		jugador5.setVisible(true); jugador6.setVisible(true);
 
 	}
 

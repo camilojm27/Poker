@@ -56,7 +56,7 @@ public class Servidor extends ControlUnit {
         for (int i = 0; i < cantidadJugadores; i++) {
             turnos[i] = bloqueoJuego.newCondition();
         }
-        nombres = new String[cantidadJugadores];
+        nombres = new String[6];
 
 
         jugadores = new Jugador[cantidadJugadores];
@@ -67,7 +67,7 @@ public class Servidor extends ControlUnit {
 
 
         try {
-            servidor = new ServerSocket(12345, cantidadJugadores);
+            servidor = new ServerSocket(5000, cantidadJugadores);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -186,6 +186,8 @@ public class Servidor extends ControlUnit {
                         entradaTEMP = jugadores[i].entrada;
                         salidaTEMP.writeInt(1);
                         salidaTEMP.flush();
+                        salidaTEMP.writeObject(nombres);
+                        salidaTEMP.flush();
                         cartas = baraja.repartirBarajaJugadores();
                         cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
                         salidaTEMP.writeObject(cartas);
@@ -196,6 +198,8 @@ public class Servidor extends ControlUnit {
                         apuestaIndividual = entradaTEMP.readInt();
                         apuestaActual += apuestaIndividual;
 
+                        salidaTEMP.writeInt(apuestaActual);
+                        salidaTEMP.flush();
 
                         printCambios(dinero, apuestaIndividual, i);
 
@@ -212,6 +216,9 @@ public class Servidor extends ControlUnit {
                         dinero = entradaTEMP.readInt();
                         apuestaIndividual = entradaTEMP.readInt();
                         apuestaActual += apuestaIndividual;
+
+                        salidaTEMP.writeInt(apuestaActual);
+                        salidaTEMP.flush();
 
                         printCambios(dinero, apuestaIndividual, i);
 
@@ -250,6 +257,8 @@ public class Servidor extends ControlUnit {
 
                         printCambios(dinero, apuestaIndividual, i);
                     }
+
+
 
 
 

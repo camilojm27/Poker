@@ -26,9 +26,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	private Socket conexion; // conexion con el servidor
 	public static ObjectInputStream entrada; // entrada del servidor
 	public static ObjectOutputStream salida; // salida al servidor
-
-
-
+	public static int bet;
+	public static String[] nombres;
     public static Jugador jugador;
     private static Pc pc;
     public static Dimension sizeGame;
@@ -39,6 +38,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
     private JButton boton;
     public static Window vprincipal;
 	private static Sonidos sonidos;
+
 
 	GUIPrincipal(String host){
 
@@ -111,7 +111,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
  	public static void gameStage(int ronda) throws IOException {
 
 	    	panelCentral.infoPanelCentral();
-	    	panelCentral.fixName();
+	    	//panelCentral.fixName();
+
 	    	GUIPrincipal.ronda = 2;
 	    	switch(ronda) {
 				case 0:
@@ -128,6 +129,8 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 					//cartas.forEach(carta -> System.out.println(carta.getId()));
 					try {
+						nombres = (String[]) entrada.readObject();
+						panelCentral.pintarNombres();
 						ArrayList<Carta> cartas = (ArrayList<Carta>) entrada.readObject();
 						GUIPrincipal.controlUnit.setBarajaJugador(cartas);
 						cartas =  (ArrayList<Carta>) entrada.readObject();
@@ -137,7 +140,10 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					}
 					//cartas.forEach(carta -> System.out.println(carta.getId()));
 					jugador.realizarApuesta(1);
-					pc.apuestaPc(Jugador.getBote());
+				//	pc.apuestaPc(Jugador.getBote());
+
+					bet = entrada.readInt();
+
 					getPanelCentral().repartirCartas();
 					getPanelCentral().repartirOthers();
 					getPanelCentral().addCartasPC();
@@ -156,7 +162,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
-					pc.apuestaPc(Jugador.getBote());
+				//	pc.apuestaPc(Jugador.getBote());
 					panelCentral.updateUI();
 					panelCentral.addAL();
 					break;
@@ -165,17 +171,19 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					panelCentral.informacion.append("Etapa #3");
 					panelCentral.addAL();
 					getPanelCentral().showNextCard(4);
-					pc.apuestaPc(Jugador.getBote());
+				//	pc.apuestaPc(Jugador.getBote());
+					bet = entrada.readInt();
 					panelCentral.updateUI();
-
 					break;
+
 				case 4:
 					panelCentral.informacion.append("Etapa #4");
 					getPanelCentral().showNextCard(5);
-					pc.apuestaPc(Jugador.getBote());
+				//	pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
 					ronda++;
 					break;
+
                 case 5:
                 	if (controlUnit.winner() == Jugador.getUsername()){
                 		JOptionPane.showMessageDialog(null, "Ganaste!");
@@ -188,10 +196,12 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	    	}
 	  
 	 }
-	
 
 
 
+	public static int getBet() {
+		return bet;
+	}
 
 	public static PanelCentral getPanelCentral() {
 		return panelCentral;
@@ -229,7 +239,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	@Override
 	public void run() {
 		try {
-			conexion = new Socket(hostPoker, 12345);
+			conexion = new Socket(hostPoker, 5000);
 
 			entrada = new ObjectInputStream(conexion.getInputStream());
 			salida = new ObjectOutputStream(conexion.getOutputStream());

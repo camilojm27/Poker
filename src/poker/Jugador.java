@@ -49,7 +49,7 @@ public class Jugador extends JOptionPane {
 	}
 
 	public static void realizarApuestaFija() {
-		bote = ControlUnit.getApuestaActual();
+		bote = GUIPrincipal.getBet();
 		apuestaActual= bote + getBote();
 		setDinero(dinero - bote);
 		try {

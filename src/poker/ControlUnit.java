@@ -491,7 +491,7 @@ else{
 
     	if(GUIPrincipal.getRonda() == 2) {
 
-    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + GUIPrincipal.getBet());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
             GUIPrincipal.gameStage(GUIPrincipal.entrada.readInt());
@@ -500,7 +500,7 @@ else{
 
     	if(GUIPrincipal.getRonda() == 3) {
 
-    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + GUIPrincipal.getBet());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(3);
@@ -511,7 +511,7 @@ else{
 
     	if(GUIPrincipal.getRonda() == 4) {
 
-    		JOptionPane.showMessageDialog(null, "Apuestas " + getApuestaActual());
+    		JOptionPane.showMessageDialog(null, "Apuestas " + GUIPrincipal.getBet());
     		Jugador.realizarApuestaFija();
         	GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(4);
