@@ -57,12 +57,15 @@ public class Jugador extends JOptionPane {
 			GUIPrincipal.salida.flush();
 			GUIPrincipal.salida.writeInt(apuestaActual);
 			GUIPrincipal.salida.flush();
+
 			//Se le da el turno al otro jugadorM;
 
 
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+
+		GUIPrincipal.bet = apuestaActual;
 	}
 
 	public int realizarApuesta(int stage) {
