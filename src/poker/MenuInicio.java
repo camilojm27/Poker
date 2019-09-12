@@ -145,7 +145,7 @@ public class MenuInicio extends JFrame {
 
 
 						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego, de ser miltijugador indique la cantidad", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, new Object[] {users, "Crear partida", "Unirse a partida", "Jugar 1vs1 contra cortana"}, "Crear partida");
+								JOptionPane.QUESTION_MESSAGE, null, new Object[] {users, "Crear partida", "Unirse a partida"}, "Crear partida");
 
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex()  + 2);//Test
 						System.out.println(ControlUnit.getCantidadJugadores());

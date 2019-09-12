@@ -13,15 +13,13 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Formatter;
-import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Servidor extends JFrame{
+public class Servidor extends ControlUnit{
     public static void main(String[] args) {
 
         EventQueue.invokeLater(new Runnable() {public void run() {
@@ -50,11 +48,12 @@ public class Servidor extends JFrame{
     private ControlUnit controlUnit;
 
     public Servidor() {
-        super("Servidor Juego");
+        //super("Servidor Juego");
         System.out.println("SERVIDOR INICIADO...");
         controlUnit = new ControlUnit();
         baraja = new Baraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
+        PUNTAJES_GLOBALES = new ArrayList<>();
 
         ejecutarJuego = Executors.newFixedThreadPool(cantidadJugadores);
         bloqueoJuego = new ReentrantLock();
@@ -78,16 +77,19 @@ public class Servidor extends JFrame{
         }
         areaSalida = new JTextArea();
         areaSalida.setEditable(false);
-        add(areaSalida, BorderLayout.CENTER);
+        //add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
 
-
+/*
         setSize(300, 300);
         setResizable(true);
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+
+ */
         execute();
     }
 
@@ -153,7 +155,7 @@ public class Servidor extends JFrame{
     public ArrayList<Boolean> winner(){
 
 
-        ArrayList<Boolean> salida = null;
+        ArrayList<Boolean> salida = new ArrayList<>();
 
         for (Servidor.Jugador jugador : jugadores) {
             jugador.puntajeJugador = makePuntaje(jugador.cartas);
@@ -174,7 +176,7 @@ public class Servidor extends JFrame{
     }
     public ArrayList<Integer> makePuntaje(ArrayList<Carta> barajaJugador){
         Carta aux;
-        ArrayList<Integer>puntajeJugador = null;
+        ArrayList<Integer>puntajeJugador = new ArrayList<>();
 
 
         for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
@@ -184,7 +186,7 @@ public class Servidor extends JFrame{
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
                 cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
                 cartasComunitarias.remove(cartaComunitaria + 1);
-                puntajeJugador.add(controlUnit.ranking(cartasComunitarias));
+                puntajeJugador.add(ranking(cartasComunitarias));
                 cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
@@ -287,6 +289,8 @@ public class Servidor extends JFrame{
                         entradaTEMP = jugadores[i].entrada;
                         //Se envia la etapa #2
                         System.out.println("Empieza la etapa #2");
+                        mostrarMensaje("Etapa 2");
+
                         salidaTEMP.writeInt(2);
                         salidaTEMP.flush();
 
@@ -304,6 +308,8 @@ public class Servidor extends JFrame{
                         entradaTEMP = jugadores[i].entrada;
 
                         System.out.println("Empieza la etapa #3");
+                        mostrarMensaje("Etapa 3");
+
                         salidaTEMP.writeInt(3);
                         salidaTEMP.flush();
 
@@ -322,12 +328,15 @@ public class Servidor extends JFrame{
                         entradaTEMP = jugadores[i].entrada;
                         //Se envia la etapa #2
                         System.out.println("Empieza la etapa #4");
+                        mostrarMensaje("Etapa 4");
+
                         salidaTEMP.writeInt(4);
                         salidaTEMP.flush();
 
-                        dinero = entradaTEMP.readInt();
-                        apuestaIndividual = entradaTEMP.readInt();
-                        apuestaActual += apuestaIndividual;
+                        System.out.println("Salida dinero");
+                      //  dinero = entradaTEMP.readInt();
+                       // apuestaIndividual = entradaTEMP.readInt();
+                        //apuestaActual += apuestaIndividual;
 
                         printCambios(dinero, apuestaIndividual, i);
                     }
@@ -335,6 +344,8 @@ public class Servidor extends JFrame{
                     //Se elige ganador
                     for (int i = 0; i < cantidadJugadores; i++) {
 
+                        System.out.println("Etapa 5 ");
+                        mostrarMensaje("Etapa 5");
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
                         salidaTEMP.writeInt(5);

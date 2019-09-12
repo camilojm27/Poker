@@ -128,7 +128,7 @@ public class ControlUnit {
     }
 
 
-    public String winner(){
+    public String winnerOLD(){
         puntajeCortana = new ArrayList<>();
         puntajeJugador = new ArrayList<>();
         //Jugador2
@@ -465,8 +465,8 @@ else{
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(4);
-
-
+            GUIPrincipal.gameStage(GUIPrincipal.entrada.readInt());
+/*
 			GUIPrincipal.getPanelCentral().removeAL();
 			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername()) {
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
@@ -483,6 +483,9 @@ else{
 
 			}
 
+
+
+ */
 
 
 			return;

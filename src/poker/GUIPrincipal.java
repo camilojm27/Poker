@@ -95,7 +95,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	 * Start game.
 	 */
 	public void startGame() {
-			//sonidos = new Sonidos(Sonidos.secondSong);
+			sonidos = new Sonidos(Sonidos.secondSong);
 		this.run();
 
 					//gameStage(1);
@@ -177,6 +177,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					break;
 
 				case 4:
+
 					panelCentral.informacion.append("Etapa #4");
 					getPanelCentral().showNextCard(5);
 				//	pc.apuestaPc(Jugador.getBote());
