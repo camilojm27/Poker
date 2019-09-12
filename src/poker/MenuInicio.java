@@ -56,7 +56,7 @@ public class MenuInicio extends JFrame {
  		//private JCheckBox uniseaPartida, crearPartida;
 
 		PanelInicio(){
-            //sonidos = new Sonidos(Sonidos.firstSong);
+            sonidos = new Sonidos(Sonidos.firstSong);
 			this.setLayout(null);
 			this.setBackground(Color.lightGray);
 			this.setPreferredSize(GUIPrincipal.sizeGame);
@@ -137,7 +137,7 @@ public class MenuInicio extends JFrame {
 				if(arg0.getSource() == start) {
 
 					numPlayers = users.getSelectedIndex();
-				//	sonidos.stop();
+					sonidos.stop();
 				//	JOptionPane.showMessageDialog(null, "Clicked START");
 					if (username.isValid()){
                         Jugador.setUsername(username.getText());

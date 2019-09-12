@@ -516,8 +516,7 @@ else{
         	GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
-			GUIPrincipal.controlUnit.winner();
-			if(GUIPrincipal.controlUnit.winner() == jugador.getName()) {
+			if(GUIPrincipal.entrada.readBoolean()) {
 
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");

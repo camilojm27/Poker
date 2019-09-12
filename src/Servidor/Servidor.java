@@ -12,6 +12,7 @@ import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Formatter;
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -20,7 +21,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Servidor extends ControlUnit {
+public class Servidor extends JFrame{
     public static void main(String[] args) {
 
         EventQueue.invokeLater(new Runnable() {public void run() {
@@ -40,14 +41,18 @@ public class Servidor extends ControlUnit {
     private Condition[] turnos = new Condition[cantidadJugadores];
     private Jugador[] jugadores;
     private ServerSocket servidor;
-    private ArrayList<Carta> cartas, cartasComunitarias;
+    private ArrayList<Carta> cartasComunitarias;
     private Baraja baraja;
     private  int apuestaActual = 0;
     private String[] nombres;
+    private ArrayList<Boolean> ganador;
+    private ArrayList<Integer> PUNTAJES_GLOBALES;
+    private ControlUnit controlUnit;
 
     public Servidor() {
-        //super("Servidor Juego");
+        super("Servidor Juego");
         System.out.println("SERVIDOR INICIADO...");
+        controlUnit = new ControlUnit();
         baraja = new Baraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
 
@@ -73,16 +78,16 @@ public class Servidor extends ControlUnit {
         }
         areaSalida = new JTextArea();
         areaSalida.setEditable(false);
-        //add(areaSalida, BorderLayout.CENTER);
+        add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
-        //ventana = this;
 
-        //setSize(300, 300);
-        //setResizable(true);
-        //setLocationRelativeTo(null);
-        //setVisible(true);
-        //setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setSize(300, 300);
+        setResizable(true);
+        setLocationRelativeTo(null);
+        setVisible(true);
+        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         execute();
     }
 
@@ -118,6 +123,74 @@ public class Servidor extends ControlUnit {
          */
 
     }
+    private int mayorPuntaje(){
+        for (Servidor.Jugador jugador : jugadores) {
+
+            for (int puntaje = 0; puntaje < jugador.puntajeJugador.size(); puntaje++) {
+                jugador.playerScore += jugador.puntajeJugador.get(puntaje);
+            }
+            PUNTAJES_GLOBALES.add(jugador.playerScore);
+
+            System.out.println("Puntaje JUgador = " + jugador.playerScore);
+        }
+        Collections.sort(PUNTAJES_GLOBALES);
+        PUNTAJES_GLOBALES.forEach(puntaje -> System.out.println(puntaje));
+
+
+        for (Servidor.Jugador jugador : jugadores) {
+            if (jugador.playerScore == PUNTAJES_GLOBALES.get(0)) {
+
+                return jugador.numeroJugador++;
+            }
+        }
+
+
+        return -1;
+    }
+
+
+
+    public ArrayList<Boolean> winner(){
+
+
+        ArrayList<Boolean> salida = null;
+
+        for (Servidor.Jugador jugador : jugadores) {
+            jugador.puntajeJugador = makePuntaje(jugador.cartas);
+
+        }
+        int ganador = mayorPuntaje();
+        for (int i = 0; i < cantidadJugadores; i++) {
+            if (i == ganador){
+                salida.add(true);
+            }
+            else {
+                salida.add(false);
+            }
+        }
+
+        return salida;
+
+    }
+    public ArrayList<Integer> makePuntaje(ArrayList<Carta> barajaJugador){
+        Carta aux;
+        ArrayList<Integer>puntajeJugador = null;
+
+
+        for (int cartaComunitaria = 0; cartaComunitaria < 5; cartaComunitaria++) {
+            aux = cartasComunitarias.get(cartaComunitaria);
+
+
+            for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
+                cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
+                cartasComunitarias.remove(cartaComunitaria + 1);
+                puntajeJugador.add(controlUnit.ranking(cartasComunitarias));
+                cartasComunitarias.remove(cartaComunitaria);
+                cartasComunitarias.add(cartaComunitaria, aux);
+            }
+        }
+        return puntajeJugador;
+    }
 
     private void mostrarMensaje(final String mensajeAMostrar) {
 
@@ -140,9 +213,14 @@ public class Servidor extends ControlUnit {
         private  int miApuesta;
         private  int bote = 0;
         int apuestaIndividual = 0;
+        private ArrayList<Carta> cartas;
+        private ArrayList<Integer> puntajeJugador;
+        private int playerScore;
+
         public Jugador(Socket socket, int numero) {
             numeroJugador = numero;
             conexion = socket;
+            cartas = baraja.repartirBarajaJugadores();
 
             try {
                 salida = new ObjectOutputStream(conexion.getOutputStream());
@@ -160,7 +238,7 @@ public class Servidor extends ControlUnit {
         public void run() {
 
             System.out.println("Jugador # " + jugadoresConectados + " conectado");
-            //mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
+            mostrarMensaje( "Jugador " + jugadoresConectados + " conectado\n" );
 
             try {
 
@@ -188,7 +266,6 @@ public class Servidor extends ControlUnit {
                         salidaTEMP.flush();
                         salidaTEMP.writeObject(nombres);
                         salidaTEMP.flush();
-                        cartas = baraja.repartirBarajaJugadores();
                         cartas.forEach(carta -> System.out.println(carta.getId() + carta.getTipo())  );
                         salidaTEMP.writeObject(cartas);
                         salidaTEMP.flush();
@@ -258,8 +335,15 @@ public class Servidor extends ControlUnit {
                         printCambios(dinero, apuestaIndividual, i);
                     }
 
+                    //Se elige ganador
+                    for (int i = 0; i < cantidadJugadores; i++) {
+                        ganador = winner();
+                        salidaTEMP = jugadores[i].salida;
+                        entradaTEMP = jugadores[i].entrada;
 
-
+                        salidaTEMP.writeBoolean(ganador.get(i));
+                        salidaTEMP.flush();
+                    }
 
 
                    //
