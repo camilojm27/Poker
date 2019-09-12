@@ -465,6 +465,8 @@ else{
     		GUIPrincipal.getJugador().realizarApuesta(3);
 			GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(4);
+
+
 			GUIPrincipal.getPanelCentral().removeAL();
 			if(GUIPrincipal.controlUnit.winner() == Jugador.getUsername()) {
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
@@ -480,6 +482,8 @@ else{
 				victoria(2);
 
 			}
+
+
 
 			return;
 		}
@@ -522,6 +526,7 @@ else{
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
 				JOptionPane.showMessageDialog(null, "El jugador 1 gana");
 				GUIPrincipal.getPanelCentral().turnCards("pc");
+                GUIPrincipal.gameStage(GUIPrincipal.entrada.readInt());
 				victoria(1);
 
 			}

@@ -334,9 +334,14 @@ public class Servidor extends JFrame{
 
                     //Se elige ganador
                     for (int i = 0; i < cantidadJugadores; i++) {
-                        ganador = winner();
+
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
+                        salidaTEMP.writeInt(5);
+                        salidaTEMP.flush();
+                        ganador = winner();
+
+
 
                         salidaTEMP.writeBoolean(ganador.get(i));
                         salidaTEMP.flush();
