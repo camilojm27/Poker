@@ -62,7 +62,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
         setLocationRelativeTo(null);
         setVisible(true);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+//f
 
 
         startGame();
