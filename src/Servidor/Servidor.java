@@ -217,9 +217,6 @@ public class Servidor extends ControlUnit {
                         apuestaIndividual = entradaTEMP.readInt();
                         apuestaActual += apuestaIndividual;
 
-                        salidaTEMP.writeInt(apuestaActual);
-                        salidaTEMP.flush();
-
                         printCambios(dinero, apuestaIndividual, i);
 
                     }
@@ -228,7 +225,7 @@ public class Servidor extends ControlUnit {
 
                         salidaTEMP = jugadores[i].salida;
                         entradaTEMP = jugadores[i].entrada;
-                        //Se envia la etapa #2
+
                         System.out.println("Empieza la etapa #3");
                         salidaTEMP.writeInt(3);
                         salidaTEMP.flush();
