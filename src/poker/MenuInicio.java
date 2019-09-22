@@ -8,11 +8,10 @@ package poker;
 import Fonts.Fuentes;
 import Servidor.Servidor;
 
+import javax.swing.*;
 import java.awt.*;
-
 import java.awt.event.MouseListener;
 import java.util.Random;
-import javax.swing.*;
 
 public class MenuInicio extends JFrame {
 
@@ -51,8 +50,8 @@ public class MenuInicio extends JFrame {
  		private JButton start;
  		private JButton exit;
  		private JLabel titleBar;
- 		private Random random  = new Random();;
- 		private Sonidos sonidos;
+		private Random random = new Random();
+		private Sonidos sonidos;
  		//private JCheckBox uniseaPartida, crearPartida;
 
 		PanelInicio(){
@@ -144,8 +143,8 @@ public class MenuInicio extends JFrame {
                         System.out.println(Jugador.getUsername());
 
 
-						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego, de ser miltijugador indique la cantidad", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
-								JOptionPane.QUESTION_MESSAGE, null, new Object[] {users, "Crear partida", "Unirse a partida"}, "Crear partida");
+						int modoDeJUego = JOptionPane.showOptionDialog(null, "Indique el modo de juego", "Modo de juego", JOptionPane.YES_NO_CANCEL_OPTION,
+								JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Unirse a partida"}, "Unirse a partida");
 
 						ControlUnit.setCantidadJugadores(users.getSelectedIndex()  + 2);//Test
 						System.out.println(ControlUnit.getCantidadJugadores());

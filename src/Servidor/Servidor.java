@@ -19,7 +19,7 @@ import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-public class Servidor extends ControlUnit{
+public class Servidor extends JFrame {
     public static void main(String[] args) {
 
         EventQueue.invokeLater(new Runnable() {public void run() {
@@ -32,7 +32,7 @@ public class Servidor extends ControlUnit{
 
     private JTextArea areaSalida;
 
-    public static final int cantidadJugadores = 1;
+    public static final int cantidadJugadores = 6;
     public  int jugadoresConectados = 0;
     private ExecutorService ejecutarJuego;
     private Lock bloqueoJuego;
@@ -48,8 +48,8 @@ public class Servidor extends ControlUnit{
     private ControlUnit controlUnit;
 
     public Servidor() {
-        //super("Servidor Juego");
-        System.out.println("SERVIDOR INICIADO...");
+        super("Servidor Juego");
+        System.out.println("SERVIDOR INICIADO... esperando " + cantidadJugadores + " Jugadores ");
         controlUnit = new ControlUnit();
         baraja = new Baraja();
         cartasComunitarias = baraja.repartirCartasComunitarias();
@@ -77,11 +77,11 @@ public class Servidor extends ControlUnit{
         }
         areaSalida = new JTextArea();
         areaSalida.setEditable(false);
-        //add(areaSalida, BorderLayout.CENTER);
+        add(areaSalida, BorderLayout.CENTER);
         areaSalida.setText("Esperando " + cantidadJugadores + " jugadores \n");
 
 
-/*
+
         setSize(300, 300);
         setResizable(true);
         setLocationRelativeTo(null);
@@ -89,7 +89,7 @@ public class Servidor extends ControlUnit{
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
 
- */
+
         execute();
     }
 
@@ -140,9 +140,10 @@ public class Servidor extends ControlUnit{
 
 
         for (Servidor.Jugador jugador : jugadores) {
-            if (jugador.playerScore == PUNTAJES_GLOBALES.get(0)) {
-
-                return jugador.numeroJugador++;
+            System.out.println("PUntajes globales : " + PUNTAJES_GLOBALES);
+            if (jugador.playerScore == PUNTAJES_GLOBALES.get(PUNTAJES_GLOBALES.size() - 1)) {
+                System.out.println("Player Score = " + jugador.playerScore);
+                return jugador.numeroJugador;
             }
         }
 
@@ -162,6 +163,7 @@ public class Servidor extends ControlUnit{
 
         }
         int ganador = mayorPuntaje();
+        System.out.println("EL ganodor es el #  " + ganador);
         for (int i = 0; i < cantidadJugadores; i++) {
             if (i == ganador){
                 salida.add(true);
@@ -186,7 +188,7 @@ public class Servidor extends ControlUnit{
             for (int cartaJugador = 0; cartaJugador < 2; cartaJugador++) {
                 cartasComunitarias.add(cartaComunitaria, barajaJugador.get(cartaJugador));
                 cartasComunitarias.remove(cartaComunitaria + 1);
-                puntajeJugador.add(ranking(cartasComunitarias));
+                puntajeJugador.add(controlUnit.ranking(cartasComunitarias));
                 cartasComunitarias.remove(cartaComunitaria);
                 cartasComunitarias.add(cartaComunitaria, aux);
             }
@@ -351,7 +353,7 @@ public class Servidor extends ControlUnit{
                         salidaTEMP.writeInt(5);
                         salidaTEMP.flush();
                         ganador = winner();
-
+                        ganador.forEach(ganador -> System.out.println(ganador));
 
 
                         salidaTEMP.writeBoolean(ganador.get(i));

@@ -5,19 +5,14 @@
  */
 package poker;
 //https://stackoverflow.com/questions/11570356/jframe-in-full-screen-java
-import sun.nio.ch.SocketAdaptor;
 
+import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.Socket;
-import java.net.SocketImpl;
 import java.util.ArrayList;
-import java.util.Formatter;
-import java.util.Scanner;
-
-import javax.swing.*;
 
 // TODO: Auto-generated Javadoc
 
@@ -157,7 +152,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					break;
 
 				case 2:
-					panelCentral.informacion.append("Etapa #2");
+					PanelCentral.informacion.append("Etapa #2");
 					getPanelCentral().showNextCard(1);
 					getPanelCentral().showNextCard(2);
 					getPanelCentral().showNextCard(3);
@@ -168,7 +163,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 					
 				case 3:
 
-					panelCentral.informacion.append("Etapa #3");
+					PanelCentral.informacion.append("Etapa #3");
 					panelCentral.addAL();
 					getPanelCentral().showNextCard(4);
 				//	pc.apuestaPc(Jugador.getBote());
@@ -178,11 +173,13 @@ public class GUIPrincipal extends JFrame implements Runnable{
 
 				case 4:
 
-					panelCentral.informacion.append("Etapa #4");
+					PanelCentral.informacion.append("Etapa #4");
 					getPanelCentral().showNextCard(5);
 				//	pc.apuestaPc(Jugador.getBote());
 					getPanelCentral().updateUI();
+
 					ronda++;
+					gameStage(5);
 					break;
 
                 case 5:
@@ -209,7 +206,7 @@ public class GUIPrincipal extends JFrame implements Runnable{
 	}
 
 	public void setPanelCentral(PanelCentral panelCentral) {
-		this.panelCentral = panelCentral;
+		GUIPrincipal.panelCentral = panelCentral;
 	}
 	
 	public static Jugador getJugador() {

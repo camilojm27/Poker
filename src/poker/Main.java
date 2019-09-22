@@ -5,12 +5,14 @@
  */
 package poker;
 
-import java.awt.EventQueue;
-import javax.swing.UIManager;
+import javax.swing.*;
+import java.awt.*;
 
 // TODO: Auto-generated Javadoc
 //Compilar con la ultima version de JDK para que funcione la musica :D
-//Compilar con oracle 8 JDK si no compila
+//Compilar con oracle 8 JDK si no compila, para jugarlo con menos clientes utilice la variable cantidad jugadores en la clase servidor
+//Para hacer pruebas fuera de local Host EN la clase menu inicio linea 163 escribe la ip deseada
+//El juego no inicia hasta que esten los 6 jugadores (interfaz bloqueada)
 
 /**
  * The Class Main.

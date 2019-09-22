@@ -7,11 +7,10 @@ package poker;
 
 //import org.jetbrains.annotations.Contract;
 
+import javax.swing.*;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
-
-import javax.swing.JOptionPane;
 
 public class ControlUnit {
     public static int cantidadJugadores;
@@ -122,9 +121,7 @@ public class ControlUnit {
         }
         System.out.println("Punatje JUgador = " + playerScore);
         System.out.println("Punatje Cortana = " + cortanaScore);
-        if (playerScore <= cortanaScore){
-            return false;
-        }else return true;
+        return playerScore > cortanaScore;
     }
 
 
@@ -290,12 +287,9 @@ else{
             return true;
         } else if (mano.get(2).getId() == mano.get(3).getId()) {
             return true;
-        } else if (mano.get(3).getId() == mano.get(4).getId()) {
-            return true;
-        }
+        } else return mano.get(3).getId() == mano.get(4).getId();
 
 
-        return false;
     }
 
 
@@ -303,13 +297,8 @@ else{
 	private boolean twoPair(ArrayList<Carta> mano) {
         Collections.sort(mano);
 
-        if (mano.get(0).getId() == mano.get(1).getId() & mano.get(2).getId() == mano.get(3).getId()
-                & mano.get(1).getId() != mano.get(3).getId() & mano.get(3).getId() != mano.get(4).getId()) {
-            return true;
-        }
-
-
-        return false;
+        return mano.get(0).getId() == mano.get(1).getId() & mano.get(2).getId() == mano.get(3).getId()
+                & mano.get(1).getId() != mano.get(3).getId() & mano.get(3).getId() != mano.get(4).getId();
     }
 
     @SuppressWarnings("unchecked")
@@ -402,13 +391,8 @@ else{
 	private boolean royalFlushStraight(ArrayList<Carta> mano) {
 
         Collections.sort(mano);
-        if (mano.get(0).getId() == "10" & mano.get(1).getId() == "J" &
-                mano.get(2).getId() == "Q" & mano.get(3).getId() == "K" & mano.get(4).getId() == "A") {
-
-            return true;
-        }
-
-        return false;
+        return mano.get(0).getId() == "10" & mano.get(1).getId() == "J" &
+                mano.get(2).getId() == "Q" & mano.get(3).getId() == "K" & mano.get(4).getId() == "A";
     }
 
     @SuppressWarnings("unchecked")
@@ -420,10 +404,7 @@ else{
             if (mano.get(i).getIdValue() == mano.get(i + 1).getIdValue() - 1)
                 flushStraightValue++;
         }
-        if (flushStraightValue == mano.size() - 1)
-            return true;
-
-        return false;
+        return flushStraightValue == mano.size() - 1;
     }
 
     private boolean sameType(ArrayList<Carta> mano) {
@@ -434,9 +415,7 @@ else{
                 sameValue++;
 
         }
-        if (sameValue == mano.size() - 1)
-            return true;
-        return false;
+        return sameValue == mano.size() - 1;
     }
 
     public  void checkSubir() throws IOException {
@@ -523,7 +502,7 @@ else{
         	GUIPrincipal.getPanelLateral().updateUI();
 			//GUIPrincipal.gameStage(4);
 			GUIPrincipal.getPanelCentral().removeAL();
-			if(GUIPrincipal.entrada.readBoolean()) {
+			/*if(false) {
 
 				GUIPrincipal.getPanelCentral().turnCards("pNormal");
 				GUIPrincipal.getPanelCentral().turnCards("cNormal");
@@ -540,7 +519,7 @@ else{
 				JOptionPane.showMessageDialog(null, "Cortana gana");
 				GUIPrincipal.getPanelCentral().turnCards("pc");
 				victoria(2);
-			}
+			}*/
 
 			return;
 		}
